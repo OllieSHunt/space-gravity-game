@@ -3,6 +3,7 @@ import pygame
 # Import other files from this project
 import config
 from entities.player import Player
+from entities.wall import Wall
 
 # Setup stuff
 pygame.init()
@@ -15,7 +16,8 @@ clock = pygame.time.Clock()
 # NOTE: Please only put objects in this list that inherit from the Entity class
 #       defined in the entity.py file
 entities = [
-    Player()
+    Player(),
+    Wall(pygame.Rect(0, 45, 70, 5)),
 ]
 
 running = True
@@ -32,10 +34,8 @@ while running:
             running = False
 
     # fill the screen with a color to wipe away anything from last frame
-    screen.fill("black")
-    
-    #TEMP?
-    main_surface.fill("gray")
+    screen.fill("darkgrey")
+    main_surface.fill("black")
 
     # Render and update each entity
     for entity in entities:
