@@ -17,7 +17,7 @@ clock = pygame.time.Clock()
 #       defined in the entity.py file
 entities = [
     Player(),
-    Wall(pygame.Rect(0, 45, 70, 5)),
+    Wall(pygame.Rect(0, 45, 70, 5)), # The floor
 ]
 
 running = True
