@@ -6,8 +6,8 @@ from entities.player import Player
 
 # Setup stuff
 pygame.init()
-#screen = pygame.display.set_mode((config.CANVAS_SIZE_X, config.CANVAS_SIZE_Y), pygame.RESIZABLE)
-screen = pygame.display.set_mode((config.CANVAS_SIZE_X, config.CANVAS_SIZE_Y))
+screen = pygame.display.set_mode((700, 500), pygame.RESIZABLE)
+main_surface = pygame.Surface((config.CANVAS_SIZE_X, config.CANVAS_SIZE_Y))
 clock = pygame.time.Clock()
 
 # This list will keep track of all things in the game. e.g. the player, etc...
@@ -33,17 +33,31 @@ while running:
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("black")
+    
+    #TEMP?
+    main_surface.fill("gray")
 
     # Render and update each entity
     for entity in entities:
         entity.update(entities, events)
-        entity.draw(screen)
+        entity.draw(main_surface)
+
+    # Scale the game screen
+    scale_multiplyer = screen.get_size()[1] / config.CANVAS_SIZE_Y
+    
+    scaled_main_surface = pygame.transform.scale(
+        main_surface,
+        (config.CANVAS_SIZE_X * scale_multiplyer, config.CANVAS_SIZE_Y * scale_multiplyer)
+    )
+
+    # blit() puts the main_surface onto the centre of the screen
+    screen.blit(
+        scaled_main_surface,
+        ((screen.get_size()[0] / 2) - (scaled_main_surface.get_size()[0] / 2), 0)
+    )
 
     # flip() draws to the screen
     pygame.display.flip()
-
-    # Clear the screen ready for the next frame
-    screen.fill("darkgray")
 
     # limit FPS
     clock.tick(config.FPS_TARGET)
