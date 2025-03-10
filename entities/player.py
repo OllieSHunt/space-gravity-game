@@ -3,6 +3,7 @@ import pygame
 import config
 
 from entities.entity import Entity
+from entities.wall import Wall
 
 class Player(Entity):
     # This is run when the class is first created
@@ -34,7 +35,14 @@ class Player(Entity):
             self.velocity.y += config.GRAVITY_STRENGTH
         
         # Stop the player from going throug walls
-        #if self.rect... TODO
+        for entity in entities:
+            # Move player to see if they will collide with the other entity
+            #posible_position = self.rect.position
+            #posible_position.x += config.PLAYER_MOVE_SPEED
+        
+            # If other entity is not self AND other is of type wall AND rects overlap
+            if entity != self and isinstance(entity, Wall) and self.rect.colliderect(entity.rect):
+                print("Collision!")
         
         # Update the play's position based on the current velocity
         self.rect.x += self.velocity.x
