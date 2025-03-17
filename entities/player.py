@@ -3,30 +3,31 @@ import pymunk
 
 import config
 
-from entities.entity import Entity
+from entities.physics_entity import PhysicsEntity
 from entities.wall import Wall
 
-class Player(Entity):
+class Player(PhysicsEntity):
     # This is run when the class is first created
     def __init__(self, space: pymunk.Space, start_pos: pygame.Vector2 = pygame.Vector2(0, 0)):
-        # Call constructor of parent class
-        Entity.__init__(self, start_pos)
-
-        # Set up physics stuff using pymunk
-        self.body = pymunk.Body()
-        self.body.position = (start_pos.x + (self.rect.width / 2), start_pos.y + (self.rect.height / 2))
-        self.poly = pymunk.Poly.create_box(self.body, size=(self.rect.width, self.rect.height))
-        self.poly.mass = 1
-        self.poly.friction = 0.5
-        space.add(self.body, self.poly)
-
         self.moving_left = False
         self.moving_right = False
 
+        # We need to know the size of the sprite for the PyhsicsEntity constructor.
+        # 
+        # The load_sprite function is called again during the Entity constructor, but I
+        # think that the performance impact from loading the sprite twice is probalby
+        # very small.
+        rect = self.load_sprite().get_rect()
+        rect.x = start_pos.x
+        rect.y = start_pos.y
+
+        # Call constructor of parent class
+        PhysicsEntity.__init__(self, space, rect, 1, 0.5, pymunk.Body.DYNAMIC)
+
     # Inherated from the Entity class
     def update(self, entities, events, space):
-        self.body.angle = 0
-        self.body.angular_velocity = 0
+        # self.body.angle = 0
+        # self.body.angular_velocity = 0
 
         for event in events:
             if event.type == pygame.KEYDOWN:
@@ -46,14 +47,6 @@ class Player(Entity):
             self.body.apply_force_at_local_point((-config.PLAYER_MOVE_SPEED, 0))
         if self.moving_right:
             self.body.apply_force_at_local_point((config.PLAYER_MOVE_SPEED, 0))
-
-    def draw(self, other_surface: pygame.Surface):
-        # Update the sprites position
-        self.rect.x = self.body.position.x - (self.rect.width / 2)
-        self.rect.y = self.body.position.y - (self.rect.height / 2)
-        
-
-        super().draw(other_surface)
 
     # Inherated from the Entity class
     def load_sprite(self):
