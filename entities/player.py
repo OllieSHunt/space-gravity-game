@@ -7,7 +7,6 @@ from entities.physics_entity import PhysicsEntity
 from entities.wall import Wall
 
 class Player(PhysicsEntity):
-    # This is run when the class is first created
     def __init__(self, space: pymunk.Space, start_pos: pygame.Vector2 = pygame.Vector2(0, 0)):
         self.moving_left = False
         self.moving_right = False
@@ -27,6 +26,7 @@ class Player(PhysicsEntity):
     # Inherated from the Entity class
     def update(self, entities, events, space):
         for event in events:
+            # Handle relevent key presses
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     self.moving_left = True
@@ -40,6 +40,7 @@ class Player(PhysicsEntity):
                 elif event.key == pygame.K_RIGHT:
                     self.moving_right = False
         
+        # Move the player
         if self.moving_left:
             self.body.apply_force_at_local_point((-config.PLAYER_MOVE_SPEED, 0))
         if self.moving_right:

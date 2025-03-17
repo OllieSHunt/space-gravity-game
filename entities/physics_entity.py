@@ -5,8 +5,6 @@ import pymunk
 from entities.entity import Entity
 
 class PhysicsEntity(Entity):
-    # This is run when the class is first created
-    #
     # For what the "body_type" paramiter is, see this link:
     # https://www.pymunk.org/en/latest/pymunk.html#pymunk.Body
     def __init__(self, space: pymunk.Space, rect: pygame.Rect, mass: float, friction: float, body_type: int):
@@ -23,6 +21,7 @@ class PhysicsEntity(Entity):
         # Call constructor of parent class
         Entity.__init__(self, pygame.Vector2(rect.x, rect.y))
 
+    # Inherated from the Entity class
     def draw(self, other_surface: pygame.Surface):
         # Moves the pygame sprite to the same location as the pymunk physics body
         self.update_sprite_pos()

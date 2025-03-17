@@ -4,7 +4,6 @@ import pymunk
 from entities.physics_entity import PhysicsEntity
 
 class Wall(PhysicsEntity):
-    # This is run when the class is first created
     def __init__(self, space: pymunk.Space, rect: pygame.Rect):
         # Call constructor of parent class
         PhysicsEntity.__init__(self, space, rect, 1, 0.8, pymunk.Body.STATIC)

@@ -4,7 +4,6 @@ import pygame
 # player. You can inherit it from another class to create a new type of
 # entity.
 class Entity(pygame.sprite.Sprite):
-    # This is run when the class is first created
     def __init__(self, start_pos: pygame.Vector2 = pygame.Vector2(0, 0)):
         # Call the parent class (Sprite) constructor
         pygame.sprite.Sprite.__init__(self)
