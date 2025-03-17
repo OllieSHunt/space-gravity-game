@@ -1,4 +1,6 @@
 import pygame
+import pymunk
+import pymunk.pygame_util
 
 # Import other files from this project
 import config
@@ -10,14 +12,19 @@ pygame.init()
 screen = pygame.display.set_mode((700, 500), pygame.RESIZABLE)
 main_surface = pygame.Surface((config.CANVAS_SIZE_X, config.CANVAS_SIZE_Y))
 clock = pygame.time.Clock()
+space = pymunk.Space()
+space.gravity = (0, config.GRAVITY_STRENGTH)
 
 # This list will keep track of all things in the game. e.g. the player, etc...
 #
 # NOTE: Please only put objects in this list that inherit from the Entity class
 #       defined in the entity.py file
 entities = [
-    Player(),
-    Wall(pygame.Rect(0, 45, 70, 5)), # The floor
+    Player(space, start_pos=pygame.Vector2(20, 0)),
+    Wall(space, pygame.Rect(0, 45, 70, 5)), # The floor
+    Wall(space, pygame.Rect(0, 0, 5, 100)),
+    Wall(space, pygame.Rect(65, 0, 5, 100)),
+    Wall(space, pygame.Rect(0, 25, 40, 5)),
 ]
 
 running = True
@@ -39,9 +46,13 @@ while running:
 
     # Render and update each entity
     for entity in entities:
-        entity.update(entities, events)
+        entity.update(entities, events, space)
         entity.draw(main_surface)
 
+    # Update physics
+    space.step(1 / config.FPS_TARGET)
+    space.debug_draw(pymunk.pygame_util.DrawOptions(main_surface))
+    
     # Scale the game screen
     scale_multiplyer = screen.get_size()[1] / config.CANVAS_SIZE_Y
     
@@ -55,6 +66,7 @@ while running:
         scaled_main_surface,
         ((screen.get_size()[0] / 2) - (scaled_main_surface.get_size()[0] / 2), 0)
     )
+
 
     # flip() draws to the screen
     pygame.display.flip()

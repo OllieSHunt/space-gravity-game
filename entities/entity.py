@@ -26,7 +26,8 @@ class Entity(pygame.sprite.Sprite):
     # Arguments:
     # entities = a list of all other entities in the game
     # events   = a list of all events (e.g. button presses)
-    def update(self, entities, events):
+    # space    = pymunk.Space
+    def update(self, entities, events, space):
         pass
 
     # Overwrite this to define a sprite for this type of entity

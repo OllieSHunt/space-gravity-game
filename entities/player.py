@@ -1,4 +1,5 @@
 import pygame
+import pymunk
 
 import config
 
@@ -7,46 +8,52 @@ from entities.wall import Wall
 
 class Player(Entity):
     # This is run when the class is first created
-    def __init__(self, start_pos: pygame.Vector2 = pygame.Vector2(0, 0)):
-        self.velocity = pygame.Vector2()
-        self.gravity = True
-    
+    def __init__(self, space: pymunk.Space, start_pos: pygame.Vector2 = pygame.Vector2(0, 0)):
         # Call constructor of parent class
         Entity.__init__(self, start_pos)
 
+        # Set up physics stuff using pymunk
+        self.body = pymunk.Body()
+        self.body.position = (start_pos.x + (self.rect.width / 2), start_pos.y + (self.rect.height / 2))
+        self.poly = pymunk.Poly.create_box(self.body, size=(self.rect.width, self.rect.height))
+        self.poly.mass = 1
+        self.poly.friction = 0.5
+        space.add(self.body, self.poly)
+
+        self.moving_left = False
+        self.moving_right = False
+
     # Inherated from the Entity class
-    def update(self, entities, events):
+    def update(self, entities, events, space):
+        self.body.angle = 0
+        self.body.angular_velocity = 0
+
         for event in events:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    self.velocity.x -= config.PLAYER_MOVE_SPEED
+                    self.moving_left = True
                 elif event.key == pygame.K_RIGHT:
-                    self.velocity.x += config.PLAYER_MOVE_SPEED
+                    self.moving_right = True
                 elif event.key == pygame.K_SPACE:
-                    self.velocity.y -= config.PLAYER_JUMP_FORCE
+                    self.body.apply_impulse_at_local_point((0, -config.PLAYER_JUMP_FORCE))
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
-                    self.velocity.x += config.PLAYER_MOVE_SPEED
+                    self.moving_left = False
                 elif event.key == pygame.K_RIGHT:
-                    self.velocity.x -= config.PLAYER_MOVE_SPEED
+                    self.moving_right = False
         
-        # Apply gravity
-        if self.gravity:
-            self.velocity.y += config.GRAVITY_STRENGTH
+        if self.moving_left:
+            self.body.apply_force_at_local_point((-config.PLAYER_MOVE_SPEED, 0))
+        if self.moving_right:
+            self.body.apply_force_at_local_point((config.PLAYER_MOVE_SPEED, 0))
+
+    def draw(self, other_surface: pygame.Surface):
+        # Update the sprites position
+        self.rect.x = self.body.position.x - (self.rect.width / 2)
+        self.rect.y = self.body.position.y - (self.rect.height / 2)
         
-        # Stop the player from going throug walls
-        for entity in entities:
-            # Move player to see if they will collide with the other entity
-            #posible_position = self.rect.position
-            #posible_position.x += config.PLAYER_MOVE_SPEED
-        
-            # If other entity is not self AND other is of type wall AND rects overlap
-            if entity != self and isinstance(entity, Wall) and self.rect.colliderect(entity.rect):
-                print("Collision!")
-        
-        # Update the play's position based on the current velocity
-        self.rect.x += self.velocity.x
-        self.rect.y += self.velocity.y
+
+        super().draw(other_surface)
 
     # Inherated from the Entity class
     def load_sprite(self):
