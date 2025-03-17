@@ -11,7 +11,7 @@ class Wall(PhysicsEntity):
         
     # Inherated from the Entity class
     def load_sprite(self):
-        # Create an sprite from a shape
-        square = pygame.Surface((self.rect.width, self.rect.height))
+        # Create the sprite based of the size of the physics body
+        square = pygame.Surface(self.get_size())
         square.fill("lightgrey")
-        return square.convert()
+        return square.convert_alpha()

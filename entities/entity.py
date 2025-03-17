@@ -12,14 +12,11 @@ class Entity(pygame.sprite.Sprite):
         # Load the sprite from file
         self.image = self.load_sprite()
 
-        # Find the images rect and set its position
-        self.rect = self.image.get_rect()
-        self.rect.x = start_pos.x
-        self.rect.y = start_pos.y
+        self.position = start_pos
 
     # Draw this entity to another surface
     def draw(self, other_surface: pygame.Surface):
-        other_surface.blit(self.image, self.rect)
+        other_surface.blit(self.image, self.position)
 
     # Overwrite when inheriting to change the entity's position, etc...
     #
@@ -35,9 +32,9 @@ class Entity(pygame.sprite.Sprite):
     # This function should return a pygame Surface
     def load_sprite(self):
         # Load a .png file
-        # return pygame.image.load('assets/place-holder.png').convert()
+        # return pygame.image.load('assets/place-holder.png').convert_alpha()
 
         # Create an sprite from a shape
         square = pygame.Surface((8, 8))
         square.fill("white")
-        return square.convert()
+        return square.convert_alpha()

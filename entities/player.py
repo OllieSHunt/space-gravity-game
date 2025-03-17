@@ -28,6 +28,7 @@ class Player(PhysicsEntity):
     def update(self, entities, events, space):
         # self.body.angle = 0
         # self.body.angular_velocity = 0
+        # self.image = pygame.transform.rotate(self.image, 1)
 
         for event in events:
             if event.type == pygame.KEYDOWN:
@@ -53,4 +54,4 @@ class Player(PhysicsEntity):
         # Create an sprite from a shape
         square = pygame.Surface((4, 4))
         square.fill("white")
-        return square.convert()
+        return square.convert_alpha()

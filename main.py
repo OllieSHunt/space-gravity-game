@@ -27,6 +27,9 @@ entities = [
     Wall(space, pygame.Rect(0, 25, 40, 5)),
 ]
 
+# Debug mode enables the rendering of hitboxes and stuff
+debug_mode = False
+
 running = True
 while running:
     # Iterate over all events
@@ -39,6 +42,10 @@ while running:
         # Handle events that are relevent to the whole program
         if event.type == pygame.QUIT:
             running = False
+        if event.type == pygame.KEYDOWN:
+            # Toggle debug mode
+            if event.key == pygame.K_BACKQUOTE:
+                debug_mode = not debug_mode
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("darkgrey")
@@ -51,8 +58,20 @@ while running:
 
     # Update physics
     space.step(1 / config.FPS_TARGET)
-    space.debug_draw(pymunk.pygame_util.DrawOptions(main_surface))
+
+    # Draw physics bodies
+    if debug_mode:
+        space.debug_draw(pymunk.pygame_util.DrawOptions(main_surface))
     
+    # TEMP
+    square = pygame.Surface((8, 8))
+    square.fill("red")
+    square = square.convert_alpha()
+    square = pygame.transform.rotate(square, 45)
+    # s_rect = 
+    main_surface.blit(square, (0, 0))
+    # END OF TEMP
+
     # Scale the game screen
     scale_multiplyer = screen.get_size()[1] / config.CANVAS_SIZE_Y
     
