@@ -5,41 +5,50 @@ import pymunk
 from entities.entity import Entity
 
 class PhysicsEntity(Entity):
-    # For what the "body_type" paramiter is, see this link:
-    # https://www.pymunk.org/en/latest/pymunk.html#pymunk.Body
-    def __init__(self, space: pymunk.Space, rect: pygame.Rect, mass: float, friction: float, body_type: int):
-        # Create physics body and polygon
+    # For an example of how to use inhereit this calass, see player.py
+    def __init__(self,
+                 space: pymunk.Space,
+                 start_pos: pygame.Vector2,
+                 collision_box: pygame.Rect,
+                 mass: float,
+                 friction: float,
+                 body_type: int
+             ):
+        # Create physics body
         self.body = pymunk.Body(body_type=body_type)
-        self.body.position = (rect.x + (rect.width / 2), rect.y + (rect.height / 2))
-        self.poly = pymunk.Poly.create_box(self.body, size=(rect.width, rect.height))
-        self.poly.mass = mass
+        self.body.position = (start_pos.x + (collision_box.width / 2), start_pos.y + (collision_box.height / 2))
+        self.body.center_of_gravity = pymunk.vec2d.Vec2d(
+            collision_box.centerx,
+            collision_box.centery,
+        )
+
+        # Create a polygon and atatch it to the box
+        self.poly = pymunk.Poly.create_box(self.body, size=(collision_box.width, collision_box.height))
         self.poly.friction = friction
+        self.poly.mass = mass
 
         # Add body and poly to the pymunk Space
         space.add(self.body, self.poly)
 
+        self.sprite_offset = pygame.Vector2(collision_box.top, collision_box.left)
+
         # Call constructor of parent class
-        Entity.__init__(self, pygame.Vector2(rect.x, rect.y))
+        Entity.__init__(self, start_pos)
 
     # Inherated from the Entity class
     def draw(self, other_surface: pygame.Surface):
         # Moves the pygame sprite to the same location as the pymunk physics body
-        self.update_sprite_pos()
+        self.position = self.body.position - (self.get_size() / 2)
 
-        # Rotate the pygame sprite
-        # https://www.geeksforgeeks.org/radians-to-degrees/
+        # Rotate the pygame sprite to match the physics body
         rotation = (180 / math.pi) * self.body.angle # ratians -> degrees
         rotated_image = pygame.transform.rotate(self.image, -rotation)
 
         other_surface.blit(rotated_image, self.position)
 
-    # Moves the pygame sprite to the same location as the pymunk physics body
-    def update_sprite_pos(self):
-        self.position = self.body.position - (self.get_size() / 2)
-
     # Calculate the size of this physics body
     def get_size(self) -> pygame.Vector2:
         return pygame.Vector2(
-            self.poly.bb.right - self.poly.bb.left,
-            self.poly.bb.top - self.poly.bb.bottom,
+            (self.poly.bb.right - self.poly.bb.left) + self.sprite_offset.x,
+            (self.poly.bb.top - self.poly.bb.bottom) + self.sprite_offset.y,
         )

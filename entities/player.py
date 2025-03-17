@@ -11,17 +11,18 @@ class Player(PhysicsEntity):
         self.moving_left = False
         self.moving_right = False
 
-        # Work out the physics box size from the players sprite
-        # 
-        # The load_sprite function is called again during the Entity constructor, but I
-        # think that the performance impact from loading the sprite twice is probalby
-        # very small.
-        rect = self.load_sprite().get_rect()
-        rect.x = start_pos.x
-        rect.y = start_pos.y
+        # The player's collision box and its position relative to the sprite
+        collision_box = pygame.Rect((2, 2), (8, 8))
 
         # Call constructor of parent class
-        PhysicsEntity.__init__(self, space, rect, 1, 0.5, pymunk.Body.DYNAMIC)
+        PhysicsEntity.__init__(self,
+                               space=space,
+                               start_pos=start_pos,
+                               collision_box=collision_box,
+                               mass=1,
+                               friction=0.5,
+                               body_type=pymunk.Body.DYNAMIC
+                           )
 
     # Inherated from the Entity class
     def update(self):
@@ -50,7 +51,4 @@ class Player(PhysicsEntity):
 
     # Inherated from the Entity class
     def load_sprite(self):
-        # Create an sprite from a shape
-        square = pygame.Surface((4, 8))
-        square.fill("white")
-        return square.convert_alpha()
+        return pygame.image.load('assets/player/player_idle.png').convert_alpha()
