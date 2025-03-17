@@ -12,7 +12,7 @@ class Player(PhysicsEntity):
         self.moving_left = False
         self.moving_right = False
 
-        # We need to know the size of the sprite for the PyhsicsEntity constructor.
+        # Work out the physics box size from the players sprite
         # 
         # The load_sprite function is called again during the Entity constructor, but I
         # think that the performance impact from loading the sprite twice is probalby
@@ -26,10 +26,6 @@ class Player(PhysicsEntity):
 
     # Inherated from the Entity class
     def update(self, entities, events, space):
-        # self.body.angle = 0
-        # self.body.angular_velocity = 0
-        # self.image = pygame.transform.rotate(self.image, 1)
-
         for event in events:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
@@ -52,6 +48,6 @@ class Player(PhysicsEntity):
     # Inherated from the Entity class
     def load_sprite(self):
         # Create an sprite from a shape
-        square = pygame.Surface((4, 4))
+        square = pygame.Surface((4, 8))
         square.fill("white")
         return square.convert_alpha()

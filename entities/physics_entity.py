@@ -1,3 +1,4 @@
+import math
 import pygame
 import pymunk
 
@@ -23,8 +24,15 @@ class PhysicsEntity(Entity):
         Entity.__init__(self, pygame.Vector2(rect.x, rect.y))
 
     def draw(self, other_surface: pygame.Surface):
+        # Moves the pygame sprite to the same location as the pymunk physics body
         self.update_sprite_pos()
-        super().draw(other_surface)
+
+        # Rotate the pygame sprite
+        # https://www.geeksforgeeks.org/radians-to-degrees/
+        rotation = (180 / math.pi) * self.body.angle # ratians -> degrees
+        rotated_image = pygame.transform.rotate(self.image, -rotation)
+
+        other_surface.blit(rotated_image, self.position)
 
     # Moves the pygame sprite to the same location as the pymunk physics body
     def update_sprite_pos(self):

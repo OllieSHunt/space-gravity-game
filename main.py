@@ -63,15 +63,6 @@ while running:
     if debug_mode:
         space.debug_draw(pymunk.pygame_util.DrawOptions(main_surface))
     
-    # TEMP
-    square = pygame.Surface((8, 8))
-    square.fill("red")
-    square = square.convert_alpha()
-    square = pygame.transform.rotate(square, 45)
-    # s_rect = 
-    main_surface.blit(square, (0, 0))
-    # END OF TEMP
-
     # Scale the game screen
     scale_multiplyer = screen.get_size()[1] / config.CANVAS_SIZE_Y
     
