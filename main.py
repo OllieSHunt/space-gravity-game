@@ -65,7 +65,8 @@ while running:
 
     # Render and update each entity
     for entity in entities:
-        entity.update(events)
+        entity.handle_events(events)
+        entity.update()
         entity.draw(main_surface)
 
     # Update physics

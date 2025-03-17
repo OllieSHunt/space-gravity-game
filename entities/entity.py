@@ -17,13 +17,14 @@ class Entity(pygame.sprite.Sprite):
     def draw(self, other_surface: pygame.Surface):
         other_surface.blit(self.image, self.position)
 
-    # Overwrite when inheriting to change the entity's position, etc...
-    #
-    # Arguments:
-    # entities = a list of all other entities in the game
-    # events   = a list of all events (e.g. button presses)
-    # space    = pymunk.Space
-    def update(self, events):
+    # Overwrite when inheriting this class to do any stuff that needs doing
+    # each frame.
+    def update(self):
+        pass
+
+    # Overwirte this when inheriting this class if your entity needs to recive
+    # any events.
+    def handle_events(self, events):
         pass
 
     # Overwrite this to define a sprite for this type of entity
