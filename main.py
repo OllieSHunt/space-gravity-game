@@ -4,6 +4,7 @@ import pymunk.pygame_util
 
 # Import other files from this project
 import config
+from custom_events import *
 from entities.player import Player
 from entities.wall import Wall
 
@@ -19,13 +20,18 @@ space.gravity = (0, config.GRAVITY_STRENGTH)
 #
 # NOTE: Please only put objects in this list that inherit from the Entity class
 #       defined in the entity.py file
-entities = [
+entities = []
+
+# TEMP CODE START
+x = [
     Player(space, start_pos=pygame.Vector2(20, 0)),
-    Wall(space, pygame.Rect(0, 45, 70, 5)), # The floor
+    Wall(space, pygame.Rect(0, 45, 70, 5)),
     Wall(space, pygame.Rect(0, 0, 5, 100)),
     Wall(space, pygame.Rect(65, 0, 5, 100)),
     Wall(space, pygame.Rect(0, 25, 40, 5)),
 ]
+pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": x}))
+# TEMP CODE END
 
 # Debug mode enables the rendering of hitboxes and stuff
 debug_mode = False
@@ -42,7 +48,13 @@ while running:
         # Handle events that are relevent to the whole program
         if event.type == pygame.QUIT:
             running = False
-        if event.type == pygame.KEYDOWN:
+
+        elif event.type == SPAWN_ENTITIES_EVENT:
+            # Spawn all new entities
+            for new_entity in event.dict.get("entities"):
+                entities.append(new_entity)
+
+        elif event.type == pygame.KEYDOWN:
             # Toggle debug mode
             if event.key == pygame.K_BACKQUOTE:
                 debug_mode = not debug_mode
@@ -53,7 +65,7 @@ while running:
 
     # Render and update each entity
     for entity in entities:
-        entity.update(entities, events, space)
+        entity.update(events)
         entity.draw(main_surface)
 
     # Update physics

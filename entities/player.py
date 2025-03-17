@@ -24,7 +24,7 @@ class Player(PhysicsEntity):
         PhysicsEntity.__init__(self, space, rect, 1, 0.5, pymunk.Body.DYNAMIC)
 
     # Inherated from the Entity class
-    def update(self, entities, events, space):
+    def update(self, events):
         for event in events:
             # Handle relevent key presses
             if event.type == pygame.KEYDOWN:
