@@ -5,6 +5,7 @@ import config
 
 from entities.physics_entity import PhysicsEntity
 from entities.wall import Wall
+from animation import AnimationPlayer
 
 class Player(PhysicsEntity):
     def __init__(self, space: pymunk.Space, start_pos: pygame.Vector2 = pygame.Vector2(0, 0)):
@@ -43,6 +44,7 @@ class Player(PhysicsEntity):
                     self.moving_right = True
                 elif event.key == pygame.K_SPACE:
                     self.body.apply_impulse_at_local_point((0, -config.PLAYER_JUMP_FORCE))
+                    self.anim_player.swith_animation("player_push")
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
                     self.moving_left = False
@@ -50,5 +52,15 @@ class Player(PhysicsEntity):
                     self.moving_right = False
 
     # Inherated from the Entity class
+    def draw(self, other_surface: pygame.Surface):
+        # Animation stuff
+        if self.anim_player.next_if_ready():
+            self.image = self.anim_player.get_frame()
+
+        # Call this same meathod in the parent class
+        super().draw(other_surface)
+
+    # Inherated from the Entity class
     def load_sprite(self):
-        return pygame.image.load('assets/player/player_idle.png').convert_alpha()
+        self.anim_player = AnimationPlayer('assets/player', 12, playing="player_idle")
+        return self.anim_player.get_frame()
