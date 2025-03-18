@@ -40,11 +40,15 @@ class Player(PhysicsEntity):
 
         # Move the player
         if self.moving_left:
-            self.body.apply_force_at_local_point((-config.PLAYER_MOVE_SPEED, 0))
+            vector = -self.body.rotation_vector.normalized() * config.PLAYER_MOVE_SPEED
+            vector = pymunk.Vec2d(vector.x, vector.y * -1)
+            self.body.apply_force_at_local_point(vector)
 
         # Move the player
         if self.moving_right:
-            self.body.apply_force_at_local_point((config.PLAYER_MOVE_SPEED, 0))
+            vector = self.body.rotation_vector.normalized() * config.PLAYER_MOVE_SPEED
+            vector = pymunk.Vec2d(vector.x, vector.y * -1)
+            self.body.apply_force_at_local_point(vector)
 
         # Handle jumps
         if self.starting_jump and self.collision_normal != None:
@@ -61,16 +65,16 @@ class Player(PhysicsEntity):
         for event in events:
             # Handle relevent key presses
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
+                if event.key == pygame.K_LEFT or event.key == pygame.K_a:
                     self.moving_left = True
-                elif event.key == pygame.K_RIGHT:
+                elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                     self.moving_right = True
-                elif event.key == pygame.K_SPACE:
+                elif event.key == pygame.K_UP or event.key == pygame.K_SPACE or event.key == pygame.K_w:
                     self.starting_jump = True
             elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT:
+                if event.key == pygame.K_LEFT or event.key == pygame.K_a:
                     self.moving_left = False
-                elif event.key == pygame.K_RIGHT:
+                elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                     self.moving_right = False
 
     # Inherated from the Entity class
