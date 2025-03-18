@@ -41,7 +41,7 @@ class PhysicsEntity(Entity):
         self.position = self.body.position - (self.get_size() / 2)
 
         # Rotate the pygame sprite to match the physics body
-        rotation = (180 / math.pi) * self.body.angle # ratians -> degrees
+        rotation = (180 / math.pi) * self.body.angle # radians -> degrees
         rotated_image = pygame.transform.rotate(self.image, -rotation)
 
         other_surface.blit(rotated_image, self.position)
