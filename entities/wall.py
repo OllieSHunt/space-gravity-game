@@ -13,7 +13,7 @@ class Wall(PhysicsEntity):
                                start_pos=pygame.Vector2(rect.x, rect.y),
                                collision_box=collision_box,
                                mass=1,
-                               friction=0.8,
+                               friction=1,
                                body_type=pymunk.Body.STATIC
                            )
         

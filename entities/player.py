@@ -28,8 +28,8 @@ class Player(PhysicsEntity):
                                space=space,
                                start_pos=start_pos,
                                collision_box=collision_box,
-                               mass=1,
-                               friction=0.5,
+                               mass=10,
+                               friction=0.8,
                                body_type=pymunk.Body.DYNAMIC
                            )
 
@@ -40,13 +40,13 @@ class Player(PhysicsEntity):
 
         # Move the player
         if self.moving_left:
-            vector = -self.body.rotation_vector.normalized() * config.PLAYER_MOVE_SPEED
+            vector = -self.body.rotation_vector.normalized() * config.PLAYER_MOVE_FORCE
             vector = pymunk.Vec2d(vector.x, vector.y * -1)
             self.body.apply_force_at_local_point(vector)
 
         # Move the player
         if self.moving_right:
-            vector = self.body.rotation_vector.normalized() * config.PLAYER_MOVE_SPEED
+            vector = self.body.rotation_vector.normalized() * config.PLAYER_MOVE_FORCE
             vector = pymunk.Vec2d(vector.x, vector.y * -1)
             self.body.apply_force_at_local_point(vector)
 
