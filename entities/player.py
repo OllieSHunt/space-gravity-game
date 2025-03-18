@@ -50,7 +50,7 @@ class Player(PhysicsEntity):
         if self.starting_jump and self.collision_normal != None:
             vector = -self.collision_normal.rotated(-self.body.angle) * config.PLAYER_JUMP_FORCE
             self.body.apply_impulse_at_local_point(vector)
-            self.anim_player.swith_animation("player_push")
+            self.anim_player.swith_animation("player_push", return_when_done=True)
         self.starting_jump = False
 
         # Reset the collision normal
@@ -84,7 +84,8 @@ class Player(PhysicsEntity):
 
     # Inherated from the Entity class
     def load_sprite(self):
-        self.anim_player = AnimationPlayer('assets/player', 12, playing="player_idle")
+        self.anim_player = AnimationPlayer('assets/player', 12)
+        self.anim_player.swith_animation("player_idle")
         return self.anim_player.get_frame()
 
     # I call this every time this object collides with something using the

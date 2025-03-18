@@ -14,12 +14,14 @@ class AnimationPlayer:
     # path         = the path a folder full of sprite sheets
     # sprite_width = the width of each sprite in the sprite sheets
     # playing      = the animation to start playing strate away
-    def __init__(self, folder: str, sprite_width: int, playing=None, frame_delay=100):
+    def __init__(self, folder: str, sprite_width: int, frame_delay=1000):
         self.sprite_width = sprite_width
-        self.playing = playing
+        self.current_anim = None
+        self.prev_anim = None
         self.frame = 0
         self.last_frame_advance = pygame.time.get_ticks()
         self.frame_delay = frame_delay
+        self.return_when_done = False
 
         # Where all the sprite sheets are sotred
         # {"name": Surface}
@@ -60,14 +62,14 @@ class AnimationPlayer:
 
     # Get the current frame
     def get_frame(self) -> pygame.Surface:
-        if self.playing == None or self.playing == "":
+        if self.current_anim == None or self.current_anim == "":
             raise Exception("You forgot to start an animation")
 
         # Get the sprite sheet
-        sprite_sheet = self.sprite_sheets.get(self.playing)
+        sprite_sheet = self.sprite_sheets.get(self.current_anim)
 
         if sprite_sheet == None:
-            raise Exception("Could not find animation '" + str(self.playing) + "'.")
+            raise Exception("Could not find animation '" + str(self.current_anim) + "'.")
 
         # Get the width of the sprite sheet and work out how many sprites are in it
         width = sprite_sheet.get_width()
@@ -78,7 +80,10 @@ class AnimationPlayer:
 
         # Reset the animatino if it finishes
         if self.frame >= total_sprites:
-            self.frame = 0
+            self.reset()
+
+            # Without this, an extra frame of animation gets played.
+            return self.get_frame()
 
         # Extract the current frame from the sprite sheet
         return sprite_sheet.subsurface((self.frame * self.sprite_width,
@@ -90,6 +95,23 @@ class AnimationPlayer:
     # Switch whih animation is currently playing
     #
     # The animation names are desided by the file name of the sprite sheet
-    def swith_animation(self, animation: str):
+    #
+    # If return_when_done is set, then the animation will return to the
+    # previous one instead of looping.
+    def swith_animation(self, animation: str, return_when_done=False):
         self.frame = 0
-        self.playing = animation
+        self.return_when_done = return_when_done
+        self.prev_anim = self.current_anim
+        self.current_anim = animation
+
+    # Reset this animation back to the start.
+    #
+    # If self.return_when_done is True, then this will return to the previous
+    # animation instead.
+    def reset(self):
+        self.frame = 0
+
+        if self.return_when_done:
+            self.return_when_done = False
+            self.current_anim = self.prev_anim
+            self.prev_anim = None
