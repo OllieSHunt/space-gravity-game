@@ -17,11 +17,10 @@ class AnimationPlayer:
     def __init__(self, folder: str, sprite_width: int, frame_delay=100):
         self.sprite_width = sprite_width
         self.current_anim = None
-        self.prev_anim = None
         self.frame = 0
         self.last_frame_advance = 0
         self.frame_delay = frame_delay
-        self.return_when_done = False
+        self.switch_when_done = None
 
         # Where all the sprite sheets are sotred
         # {"name": Surface}
@@ -96,25 +95,23 @@ class AnimationPlayer:
     #
     # The animation names are desided by the file name of the sprite sheet
     #
-    # If return_when_done is set, then the animation will return to the
-    # previous one instead of looping.
-    def swith_animation(self, animation: str, return_when_done=False):
+    # If switch_when_done is set, then the animation will switch to the
+    # specified animation instead of looping.
+    def swith_animation(self, animation: str, switch_when_done: str = None):
         self.frame = 0
         self.last_frame_advance = 0
 
-        self.return_when_done = return_when_done
-        self.prev_anim = self.current_anim
+        self.switch_when_done = switch_when_done
         self.current_anim = animation
 
     # Reset this animation back to the start.
     #
-    # If self.return_when_done is True, then this will return to the previous
-    # animation instead.
+    # If self.switch_when_done is True, then this will switch to that animation
+    # instead.
     def reset(self):
         self.frame = 0
         self.last_frame_advance = 0
 
-        if self.return_when_done:
-            self.return_when_done = False
-            self.current_anim = self.prev_anim
-            self.prev_anim = None
+        if self.switch_when_done != None:
+            self.current_anim = self.switch_when_done
+            self.switch_when_done = None

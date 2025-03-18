@@ -50,7 +50,7 @@ class Player(PhysicsEntity):
         if self.starting_jump and self.collision_normal != None:
             vector = -self.collision_normal.rotated(-self.body.angle) * config.PLAYER_JUMP_FORCE
             self.body.apply_impulse_at_local_point(vector)
-            self.anim_player.swith_animation("player_push", return_when_done=True)
+            self.anim_player.swith_animation("player_push", switch_when_done="player_idle")
         self.starting_jump = False
 
         # Reset the collision normal
