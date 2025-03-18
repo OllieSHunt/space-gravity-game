@@ -14,12 +14,12 @@ class AnimationPlayer:
     # path         = the path a folder full of sprite sheets
     # sprite_width = the width of each sprite in the sprite sheets
     # playing      = the animation to start playing strate away
-    def __init__(self, folder: str, sprite_width: int, frame_delay=1000):
+    def __init__(self, folder: str, sprite_width: int, frame_delay=100):
         self.sprite_width = sprite_width
         self.current_anim = None
         self.prev_anim = None
         self.frame = 0
-        self.last_frame_advance = pygame.time.get_ticks()
+        self.last_frame_advance = 0
         self.frame_delay = frame_delay
         self.return_when_done = False
 
@@ -100,6 +100,8 @@ class AnimationPlayer:
     # previous one instead of looping.
     def swith_animation(self, animation: str, return_when_done=False):
         self.frame = 0
+        self.last_frame_advance = 0
+
         self.return_when_done = return_when_done
         self.prev_anim = self.current_anim
         self.current_anim = animation
@@ -110,6 +112,7 @@ class AnimationPlayer:
     # animation instead.
     def reset(self):
         self.frame = 0
+        self.last_frame_advance = 0
 
         if self.return_when_done:
             self.return_when_done = False
