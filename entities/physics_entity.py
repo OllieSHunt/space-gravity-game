@@ -30,7 +30,7 @@ class PhysicsEntity(Entity):
         # Add body and poly to the pymunk Space
         space.add(self.body, self.poly)
 
-        self.sprite_offset = pygame.Vector2(collision_box.top, collision_box.left)
+        self.sprite_offset = pygame.Vector2(collision_box.left, collision_box.top)
 
         # Call constructor of parent class
         Entity.__init__(self, start_pos)
@@ -41,7 +41,7 @@ class PhysicsEntity(Entity):
         self.position = self.body.position - (self.get_size() / 2)
 
         # Rotate the pygame sprite to match the physics body
-        rotation = (180 / math.pi) * self.body.angle # radians -> degrees
+        rotation = math.degrees(self.body.angle)
         rotated_image = pygame.transform.rotate(self.image, -rotation)
 
         other_surface.blit(rotated_image, self.position)

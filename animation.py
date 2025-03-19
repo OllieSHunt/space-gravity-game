@@ -70,8 +70,9 @@ class AnimationPlayer:
         if sprite_sheet == None:
             raise Exception("Could not find animation '" + str(self.current_anim) + "'.")
 
-        # Get the width of the sprite sheet and work out how many sprites are in it
+        # Get the width/height of the sprite sheet and work out how many sprites are in it
         width = sprite_sheet.get_width()
+        height = sprite_sheet.get_height()
         total_sprites = width / self.sprite_width
 
         if not total_sprites.is_integer():
@@ -88,7 +89,7 @@ class AnimationPlayer:
         return sprite_sheet.subsurface((self.frame * self.sprite_width,
                                          0,
                                          self.sprite_width,
-                                         self.sprite_width,
+                                         height,
                                         ))
 
     # Switch whih animation is currently playing

@@ -5,8 +5,10 @@ import pymunk.pygame_util
 # Import other files from this project
 import config
 from custom_events import *
+
 from entities.player import Player
 from entities.wall import Wall
+from entities.gravity_button import GravityButton
 
 # Setup stuff
 pygame.init()
@@ -29,6 +31,8 @@ x = [
     Wall(space, pygame.Rect(0, 0, 5, 100)),
     Wall(space, pygame.Rect(65, 0, 5, 100)),
     Wall(space, pygame.Rect(0, 25, 40, 5)),
+    Wall(space, pygame.Rect(0, 0, 70, 1)),
+    GravityButton(space, start_pos=pygame.Vector2(15, 19), rotation=270),
 ]
 pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": x}))
 # TEMP CODE END
