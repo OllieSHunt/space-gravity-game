@@ -28,12 +28,24 @@ class Player(PhysicsEntity):
                                body_type=pymunk.Body.DYNAMIC
                            )
 
+        # Create a polygon and atatch it to the box
+        # This polygon is a sensor that is a bit bigger than the main one.
+        # It is used to check if the player is near a wall and can push of it.
+        self.sensor_poly = pymunk.Poly(self.body, [
+                                           (-5, -2),
+                                           (-2, -5),
+                                           (2, -5),
+                                           (5, -2),
+                                           (5, 2),
+                                           (2, 5),
+                                           (-2, 5),
+                                           (-5, 2),
+                                       ])
+        self.sensor_poly.sensor = True
+        space.add(self.sensor_poly)
+
     # Inherated from the Entity class
     def update(self):
-        # Call function for every collision to get the normal
-        collision_normals = []
-        self.body.each_arbiter(lambda arbiter: collision_normals.append(arbiter.normal))
-
         # Move the player
         if self.moving_left:
             self.body.angular_velocity = -config.PLAYER_ROTATE_SPEED
@@ -44,14 +56,14 @@ class Player(PhysicsEntity):
 
         # Handle jumps
         if self.starting_jump:
+            collision_normal = self.get_sensor_normal()
+
             # If touching a wall:
-            if len(collision_normals) != 0:
-                # 1. Combine all the collision normals into one vector
-                # 2. Rotate that vector to be relative to the way the player is facing
-                # 3. Scale the vector to config.PLAYER_JUMP_FORCE
-                # 4. Apply the vector to the player's pyhsics body
-                combind_collision_normal = functools.reduce(lambda x, y: x+y, collision_normals).normalized()
-                vector = -combind_collision_normal.rotated(-self.body.angle).scale_to_length(config.PLAYER_JUMP_FORCE)
+            if collision_normal != None:
+                # 1. Rotate the vector to be relative to the way the player is facing
+                # 2. Scale the vector to config.PLAYER_JUMP_FORCE
+                # 3. Apply the vector to the player's pyhsics body
+                vector = -collision_normal.rotated(-self.body.angle).scale_to_length(config.PLAYER_JUMP_FORCE)
                 self.body.apply_impulse_at_local_point(vector)
 
             # Start the jump animation
@@ -90,3 +102,25 @@ class Player(PhysicsEntity):
         self.anim_player = AnimationPlayer('assets/player', 12)
         self.anim_player.swith_animation("player_idle")
         return self.anim_player.get_frame()
+
+    # This returns the combined normal of all the shapes in contact with self.sensor_poly
+    #
+    # It will return None if there are no collisions
+    def get_sensor_normal(self) -> pymunk.Vec2d:
+        # Get the pymunk Space that this entity is in
+        space = self.sensor_poly.space
+
+        # Get colliding shapes
+        shape_queries = space.shape_query(self.sensor_poly)
+
+        collision_vector = pymunk.Vec2d(0, 0)
+
+        # Add all the normal vectors together
+        for shape_query in shape_queries:
+            collision_vector += shape_query.contact_point_set.normal
+
+        # Retrun None if no collisions, else return normalised vector
+        if collision_vector == pymunk.Vec2d(0, 0):
+            return None
+        else:
+            return collision_vector.normalized()
