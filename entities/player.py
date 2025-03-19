@@ -1,4 +1,5 @@
 import math
+import functools
 import pygame
 import pymunk
 
@@ -13,12 +14,6 @@ class Player(PhysicsEntity):
         self.moving_left = False
         self.moving_right = False
         self.starting_jump = False
-
-        # The normal of the last collision
-        #
-        # Set at the start of the update function
-        # Reset at the end of the update function
-        self.collision_normal = None
 
         # The player's collision box and its position relative to the sprite
         collision_box = pygame.Rect((2, 2), (8, 8))
@@ -36,7 +31,8 @@ class Player(PhysicsEntity):
     # Inherated from the Entity class
     def update(self):
         # Call function for every collision to get the normal
-        self.body.each_arbiter(self.get_collision_normal)
+        collision_normals = []
+        self.body.each_arbiter(lambda arbiter: collision_normals.append(arbiter.normal))
 
         # Move the player
         if self.moving_left:
@@ -47,14 +43,19 @@ class Player(PhysicsEntity):
             self.body.angular_velocity = config.PLAYER_ROTATE_SPEED
 
         # Handle jumps
-        if self.starting_jump and self.collision_normal != None:
-            vector = -self.collision_normal.rotated(-self.body.angle) * config.PLAYER_JUMP_FORCE
+        if self.starting_jump and len(collision_normals) != 0:
+            # 1. Combine all the collision normals into one vector
+            # 2. Rotate that vector to be relative to the way the player is facing
+            # 3. Scale the vector to config.PLAYER_JUMP_FORCE
+            # 4. Apply the vector to the player's pyhsics body
+            combind_collision_normal = functools.reduce(lambda x, y: x+y, collision_normals).normalized()
+            vector = -combind_collision_normal.rotated(-self.body.angle).scale_to_length(config.PLAYER_JUMP_FORCE)
             self.body.apply_impulse_at_local_point(vector)
-            self.anim_player.swith_animation("player_push", switch_when_done="player_idle")
-        self.starting_jump = False
 
-        # Reset the collision normal
-        self.collision_normal = None
+            # Start the jump animation
+            self.anim_player.swith_animation("player_push", switch_when_done="player_idle")
+
+        self.starting_jump = False
 
     # Inherated from the Entity class
     def handle_events(self, events):
@@ -87,8 +88,3 @@ class Player(PhysicsEntity):
         self.anim_player = AnimationPlayer('assets/player', 12)
         self.anim_player.swith_animation("player_idle")
         return self.anim_player.get_frame()
-
-    # I call this every time this object collides with something using the
-    # Body.each_arbiter meathod.
-    def get_collision_normal(self, arbiter):
-        self.collision_normal = arbiter.normal

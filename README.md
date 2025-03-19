@@ -1,5 +1,4 @@
 # Dependencies
-- Python programming language
-- Math library
-- Pygame library
-- Pymunk library
+- Python 3
+- Pygame
+- Pymunk
