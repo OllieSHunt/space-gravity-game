@@ -40,15 +40,11 @@ class Player(PhysicsEntity):
 
         # Move the player
         if self.moving_left:
-            vector = -self.body.rotation_vector.normalized() * config.PLAYER_MOVE_FORCE
-            vector = pymunk.Vec2d(vector.x, vector.y * -1)
-            self.body.apply_force_at_local_point(vector)
-
+            self.body.angular_velocity = -config.PLAYER_ROTATE_SPEED
+            
         # Move the player
         if self.moving_right:
-            vector = self.body.rotation_vector.normalized() * config.PLAYER_MOVE_FORCE
-            vector = pymunk.Vec2d(vector.x, vector.y * -1)
-            self.body.apply_force_at_local_point(vector)
+            self.body.angular_velocity = config.PLAYER_ROTATE_SPEED
 
         # Handle jumps
         if self.starting_jump and self.collision_normal != None:
