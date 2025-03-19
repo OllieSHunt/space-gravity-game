@@ -23,7 +23,7 @@ class Player(PhysicsEntity):
                                space=space,
                                start_pos=start_pos,
                                collision_box=collision_box,
-                               mass=10,
+                               mass=15,
                                friction=0.8,
                                body_type=pymunk.Body.DYNAMIC
                            )
@@ -43,14 +43,16 @@ class Player(PhysicsEntity):
             self.body.angular_velocity = config.PLAYER_ROTATE_SPEED
 
         # Handle jumps
-        if self.starting_jump and len(collision_normals) != 0:
-            # 1. Combine all the collision normals into one vector
-            # 2. Rotate that vector to be relative to the way the player is facing
-            # 3. Scale the vector to config.PLAYER_JUMP_FORCE
-            # 4. Apply the vector to the player's pyhsics body
-            combind_collision_normal = functools.reduce(lambda x, y: x+y, collision_normals).normalized()
-            vector = -combind_collision_normal.rotated(-self.body.angle).scale_to_length(config.PLAYER_JUMP_FORCE)
-            self.body.apply_impulse_at_local_point(vector)
+        if self.starting_jump:
+            # If touching a wall:
+            if len(collision_normals) != 0:
+                # 1. Combine all the collision normals into one vector
+                # 2. Rotate that vector to be relative to the way the player is facing
+                # 3. Scale the vector to config.PLAYER_JUMP_FORCE
+                # 4. Apply the vector to the player's pyhsics body
+                combind_collision_normal = functools.reduce(lambda x, y: x+y, collision_normals).normalized()
+                vector = -combind_collision_normal.rotated(-self.body.angle).scale_to_length(config.PLAYER_JUMP_FORCE)
+                self.body.apply_impulse_at_local_point(vector)
 
             # Start the jump animation
             self.anim_player.swith_animation("player_push", switch_when_done="player_idle")
