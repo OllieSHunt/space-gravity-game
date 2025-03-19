@@ -10,7 +10,7 @@ class PhysicsEntity(Entity):
                  space: pymunk.Space,
                  start_pos: pygame.Vector2,
                  collision_box: pygame.Rect,
-                 mass: float,
+                 density: float,
                  friction: float,
                  body_type: int
              ):
@@ -25,7 +25,7 @@ class PhysicsEntity(Entity):
         # Create a polygon and atatch it to the box
         self.poly = pymunk.Poly.create_box(self.body, size=(collision_box.width, collision_box.height))
         self.poly.friction = friction
-        self.poly.mass = mass
+        self.poly.density = density
 
         # Add body and poly to the pymunk Space
         space.add(self.body, self.poly)

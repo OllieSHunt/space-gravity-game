@@ -23,7 +23,7 @@ class Player(PhysicsEntity):
                                space=space,
                                start_pos=start_pos,
                                collision_box=collision_box,
-                               mass=15,
+                               density=1,
                                friction=0.8,
                                body_type=pymunk.Body.DYNAMIC
                            )
