@@ -4,11 +4,8 @@ import pymunk.pygame_util
 
 # Import other files from this project
 import config
+import entitiy_bundles
 from custom_events import *
-
-from entities.player import Player
-from entities.wall import Wall
-from entities.gravity_button import GravityButton
 
 # Setup stuff
 pygame.init()
@@ -24,18 +21,8 @@ space.gravity = (0, config.GRAVITY_STRENGTH)
 #       defined in the entity.py file
 entities = []
 
-# TEMP CODE START
-x = [
-    Player(space, start_pos=pygame.Vector2(20, 0)),
-    Wall(space, pygame.Rect(0, 45, 70, 5)),
-    Wall(space, pygame.Rect(0, 0, 5, 100)),
-    Wall(space, pygame.Rect(65, 0, 5, 100)),
-    Wall(space, pygame.Rect(0, 25, 40, 5)),
-    Wall(space, pygame.Rect(0, 0, 70, 1)),
-    GravityButton(space, start_pos=pygame.Vector2(15, 19), rotation=270),
-]
-pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": x}))
-# TEMP CODE END
+# Spawn entities required for level 1
+pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": entitiy_bundles.level_1(space)}))
 
 # Debug mode enables the rendering of hitboxes and stuff
 debug_mode = False
