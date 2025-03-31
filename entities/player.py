@@ -30,10 +30,6 @@ class Player(PhysicsEntity):
 
     # Inherated from the Entity class
     def update(self):
-        # Call function for every collision to get the normal
-        collision_normals = []
-        self.body.each_arbiter(lambda arbiter: collision_normals.append(arbiter.normal))
-
         # Move the player
         if self.moving_left:
             self.body.angular_velocity = -config.PLAYER_ROTATE_SPEED
@@ -44,6 +40,10 @@ class Player(PhysicsEntity):
 
         # Handle jumps
         if self.starting_jump:
+            # Call function for every collision to get the normal
+            collision_normals = []
+            self.body.each_arbiter(lambda arbiter: collision_normals.append(arbiter.normal))
+
             # If touching a wall:
             if len(collision_normals) != 0:
                 # 1. Combine all the collision normals into one vector
