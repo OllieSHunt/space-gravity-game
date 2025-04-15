@@ -1,4 +1,5 @@
 import math
+import random
 import functools
 import pygame
 import pymunk
@@ -30,6 +31,9 @@ class Player(PhysicsEntity):
 
     # Inherated from the Entity class
     def update(self):
+        # Chance to play random idle animation
+        self.play_random_idle()
+
         # Move the player
         if self.moving_left:
             self.body.angular_velocity = -config.PLAYER_ROTATE_SPEED
@@ -90,3 +94,21 @@ class Player(PhysicsEntity):
         self.anim_player = AnimationPlayer('assets/player', 12)
         self.anim_player.swith_animation("player_idle")
         return self.anim_player.get_frame()
+
+    # This has a chance of playing a random one-off idle animation.
+    # e.g. blinking, yawning, etc...
+    def play_random_idle(self):
+        idle_chance = 512
+        idle_anims = [
+            "player_blink",
+            "player_yawn",
+            "player_spin",
+        ]
+
+        # Only do idle animations when the player is in the idle state
+        if self.anim_player.current_anim == "player_idle":
+            # Deside whether to play an idle animation or not
+            if random.randint(0, idle_chance) == 0:
+                # Choose and swith to a random idle animation
+                anim = random.choice(idle_anims)
+                self.anim_player.swith_animation(anim, "player_idle")
