@@ -30,25 +30,32 @@ debug_mode = False
 # TEST: start
 
 import tile_set
+import tile_map
 
-tile_set = tile_set.TileSet("assets/tilesets/template_tileset.png", 4, 4)
+tile_set1 = tile_set.TileSet("assets/tilesets/template_tileset.png", 4, 4)
+tile_set2 = tile_set.TileSet("assets/tilesets/ship_tileset.png", 4, 4)
 
-asdf = [
-    tile_set.get_by_id(0),
-    tile_set.get_by_id(-1),
-    tile_set.get_by_id(1),
-    tile_set.get_by_id(2),
-    tile_set.get_by_id(3),
-    tile_set.get_by_id(4),
-    tile_set.get_by_id(5),
-    tile_set.get_by_id(6),
-]
+# asdf = [
+#     tile_set.get_by_id(0),
+#     tile_set.get_by_id(-1),
+#     tile_set.get_by_id(1),
+#     tile_set.get_by_id(2),
+#     tile_set.get_by_id(3),
+#     tile_set.get_by_id(4),
+#     tile_set.get_by_id(5),
+#     tile_set.get_by_id(6),
+# ]
+
+tile_map = tile_map.TileMap({
+    "assets/tilemaps/test_map/test_map_Tile Layer 1.csv": tile_set1,
+    "assets/tilemaps/test_map/test_map_test.csv": tile_set2,
+})
 
 while True:
     pygame.event.get()
 
-    for (i, qwerty) in enumerate(asdf):
-        main_surface.blit(qwerty, (i*tile_set.tile_width, i*tile_set.tile_height))
+    # for (i, qwerty) in enumerate(asdf):
+        # main_surface.blit(qwerty, (i*tile_set.tile_width, i*tile_set.tile_height))
 
     scale_multiplyer = screen.get_size()[1] / config.CANVAS_SIZE_Y
     
