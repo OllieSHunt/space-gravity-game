@@ -8,12 +8,7 @@ from tile_map import TileMap
 
 def level_1(space: pymunk.Space):
     return [
-        TileMap(space, "assets/tilemaps/test_map.tmx"),
         Player(space, start_pos=pygame.Vector2(20, 0)),
         GravityButton(space, start_pos=pygame.Vector2(15, 19), rotation=270),
-        # Wall(space, pygame.Rect(0, 45, 70, 5)),
-        # Wall(space, pygame.Rect(0, 0, 5, 100)),
-        # Wall(space, pygame.Rect(65, 0, 5, 100)),
-        # Wall(space, pygame.Rect(0, 25, 40, 5)),
-        # Wall(space, pygame.Rect(0, 0, 70, 1)),
+        TileMap(space, "assets/tilemaps/level1.tmx"),
     ]

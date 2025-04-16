@@ -15,7 +15,7 @@ class TileMap(Entity):
     #
     # NOTE: Tile maps do not currently support having their tiles changed after creation
     def __init__(self, space: pymunk.Space, path: str):
-        self.tiled_map = pytmx.util_pygame.load_pygame("assets/tilemaps/test_map.tmx")
+        self.tiled_map = pytmx.util_pygame.load_pygame(path)
 
         self.load_collision_shapes(space)
 
@@ -24,13 +24,16 @@ class TileMap(Entity):
 
     # Inherated from the Entity class
     def load_sprite(self) -> pygame.Surface:
-        surface = pygame.Surface((config.CANVAS_SIZE_X, config.CANVAS_SIZE_Y))
+        # Create an empty surface
+        surface = pygame.Surface((
+            self.tiled_map.width * self.tiled_map.tilewidth,
+            self.tiled_map.height * self.tiled_map.tileheight
+        ), pygame.SRCALPHA)
 
         # Draw each tile in the tile map
         for layer in self.tiled_map:
             for x, y, image in layer.tiles():
-                width, height = image.get_rect().size
-                surface.blit(image, (x * width, y * height))
+                surface.blit(image, (x * self.tiled_map.tilewidth, y * self.tiled_map.tileheight))
 
         return surface
 
@@ -39,24 +42,27 @@ class TileMap(Entity):
     # WARNING: This function is *very* inefficint and should be run as little as
     # possible.
     def load_collision_shapes(self, space: pymunk.Space):
+        # TODO: make tiles all one polygon to avoid odd player jumping behaviour and also performance
+        
         # Create a physics body for this tile map
         body = pymunk.Body(body_type=pymunk.Body.STATIC)
         space.add(body)
         
         # Get collider shapes for each tile
         for gid, colliders in self.tiled_map.get_tile_colliders():
-            tile = self.tiled_map.get_tile_properties_by_gid(gid)
-            width = tile["width"]
-            height = tile["height"]
-
             # Find the all the places there is an instance of this tile
             for x, y, z in self.tiled_map.get_tile_locations_by_gid(gid):
                 # For each of this tiles colliders...
                 for collider in colliders:
+                    collider_offset = pymunk.Transform.translation(
+                        x * self.tiled_map.tilewidth,
+                        y * self.tiled_map.tileheight
+                    )
+
                     # Create a polygon for this collider and add it to the pymunk Space
                     poly = pymunk.Poly(
-                                       body,
-                                       vertices=collider.apply_transformations(),
-                                       transform=pymunk.Transform.translation(x * width, y * height),
-                                   )
+                        body,
+                        vertices=collider.apply_transformations(),
+                        transform=collider_offset,
+                    )
                     space.add(poly)

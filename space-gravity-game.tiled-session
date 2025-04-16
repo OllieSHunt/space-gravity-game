@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "assets/tilemaps/ship_tileset.tsx",
+    "activeFile": "assets/tilemaps/level1.tmx",
     "expandedProjectPaths": [
         "assets/tilemaps",
         "assets",
@@ -11,16 +11,24 @@
         "assets/tilesets"
     ],
     "fileStates": {
+        "assets/tilemaps/level1.tmx": {
+            "scale": 3.8949999999999996,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 60.077021822849815,
+                "y": 40.051347881899886
+            }
+        },
         "assets/tilemaps/ship_tileset.tsx": {
             "scaleInDock": 5.5,
             "scaleInEditor": 9.8295
         },
         "assets/tilemaps/test_map.tmx": {
-            "scale": 9.2854,
-            "selectedLayer": 1,
+            "scale": 5.8044,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 80.17963684924722,
-                "y": 37.801279427919106
+                "x": 59.523809523809526,
+                "y": 38.41913031493349
             }
         },
         "assets/tilesets/template_tileset.tsx": {
@@ -36,14 +44,14 @@
     "map.tileWidth": 4,
     "openFiles": [
         "assets/tilesets/template_tileset.tsx",
-        "assets/tilemaps/ship_tileset.tsx",
-        "assets/tilemaps/test_map.tmx"
+        "assets/tilemaps/level1.tmx"
     ],
     "project": "space-gravity-game.tiled-project",
     "recentFiles": [
         "assets/tilesets/template_tileset.tsx",
-        "assets/tilemaps/test_map.tmx",
-        "assets/tilemaps/ship_tileset.tsx"
+        "assets/tilemaps/level1.tmx",
+        "assets/tilemaps/ship_tileset.tsx",
+        "assets/tilemaps/test_map.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

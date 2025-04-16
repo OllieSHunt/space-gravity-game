@@ -3,6 +3,7 @@ import pymunk
 
 from entities.physics_entity import PhysicsEntity
 
+# TODO: is this still needed after implementing tile maps?
 class Wall(PhysicsEntity):
     def __init__(self, space: pymunk.Space, rect: pygame.Rect):
         collision_box = pygame.Rect((0, 0), (rect.width, rect.height))
