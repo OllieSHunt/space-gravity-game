@@ -27,56 +27,6 @@ pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": entitiy_
 # Debug mode enables the rendering of hitboxes and stuff
 debug_mode = False
 
-# TEST: start
-
-import tile_set
-import tile_map
-
-tile_set1 = tile_set.TileSet("assets/tilesets/template_tileset.png", 4, 4)
-tile_set2 = tile_set.TileSet("assets/tilesets/ship_tileset.png", 4, 4)
-
-# asdf = [
-#     tile_set.get_by_id(0),
-#     tile_set.get_by_id(-1),
-#     tile_set.get_by_id(1),
-#     tile_set.get_by_id(2),
-#     tile_set.get_by_id(3),
-#     tile_set.get_by_id(4),
-#     tile_set.get_by_id(5),
-#     tile_set.get_by_id(6),
-# ]
-
-tile_map = tile_map.TileMap({
-    "assets/tilemaps/test_map/test_map_Tile Layer 1.csv": tile_set1,
-    "assets/tilemaps/test_map/test_map_test.csv": tile_set2,
-})
-
-while True:
-    pygame.event.get()
-
-    # for (i, qwerty) in enumerate(asdf):
-        # main_surface.blit(qwerty, (i*tile_set.tile_width, i*tile_set.tile_height))
-
-    scale_multiplyer = screen.get_size()[1] / config.CANVAS_SIZE_Y
-    
-    scaled_main_surface = pygame.transform.scale(
-        main_surface,
-        (config.CANVAS_SIZE_X * scale_multiplyer, config.CANVAS_SIZE_Y * scale_multiplyer)
-    )
-
-    # blit() puts the main_surface onto the centre of the screen
-    screen.blit(
-        scaled_main_surface,
-        ((screen.get_size()[0] / 2) - (scaled_main_surface.get_size()[0] / 2), 0)
-    )
-    
-    pygame.display.flip()
-    clock.tick(config.FPS_TARGET)
-
-exit(0)
-
-# TEST: end
-
 running = True
 while running:
     # Iterate over all events

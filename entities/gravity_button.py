@@ -32,7 +32,7 @@ class GravityButton(SensorEntity):
         super().draw(other_surface)
 
     # Inherated from the Entity class
-    def load_sprite(self):
+    def load_sprite(self) -> pygame.Surface:
         self.anim_player = AnimationPlayer('assets/physics_button', 4)
         self.anim_player.swith_animation("physics_button_idle")
         return self.anim_player.get_frame()

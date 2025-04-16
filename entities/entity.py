@@ -30,7 +30,7 @@ class Entity(pygame.sprite.Sprite):
     # Overwrite this to define a sprite for this type of entity
     #
     # This function should return a pygame Surface
-    def load_sprite(self):
+    def load_sprite(self) -> pygame.Surface:
         # Load a .png file
         # return pygame.image.load('assets/place-holder.png').convert_alpha()
 

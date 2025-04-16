@@ -24,8 +24,8 @@ class TileSet:
         sheet_height = int(sheet_height)
 
         # Split the sprite sheet up into tiles (using pygame subsurfaces)
-        for x in range(0, sheet_width):
-            for y in range(0, sheet_height):
+        for y in range(0, sheet_height):
+            for x in range(0, sheet_width):
                 # Work out where this tile is in the sprite sheet
                 subsurface_rect = pygame.Rect(
                     x * tile_width,
@@ -39,5 +39,7 @@ class TileSet:
 
     # Takes an ID and returns a pygame subsurface of a tile matching this ID
     def get_by_id(self, id: int):
-        id += 1
-        return self.tiles[id]
+        if id == -1:
+            return self.tiles[0]
+        else:
+            return self.tiles[id]

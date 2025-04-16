@@ -1,12 +1,13 @@
 import pygame
 import os
 
+from entities.entity import Entity
 from tile_set import TileSet
+import config
 import utils
 
 # A collection of tiles.
-# See tile_set.py
-class TileMap:
+class TileMap(Entity):
     # This function needs the path to a tile map file and a tile set to render.
     #
     # I am using the Tiled editor to make tile maps: https://www.mapeditor.org/
@@ -34,6 +35,20 @@ class TileMap:
             layer = TileMapLayer(tile_set, csv_data)
             self.layers.append(layer)
 
+        # Call constructor of parent class
+        Entity.__init__(self)
+
+    # Inherated from the Entity class
+    def load_sprite(self) -> pygame.Surface:
+        # Create an image as big as the main screen
+        image = pygame.Surface((config.CANVAS_SIZE_X, config.CANVAS_SIZE_Y))
+        
+        # Draw each layer
+        for layer in self.layers:
+            layer.draw(image)
+
+        return image
+
 # This class represents one layer in a TileMap
 #
 # It is not intened to be used directly. You should use TileMap instead.
@@ -43,7 +58,16 @@ class TileMapLayer:
         self.layer_data = layer_data
         self.tile_set = tile_set
 
-        # TEMP
-        print(self.layer_data[0])
-        print(self.tile_set)
-        print("")
+    # Draws this tile map layer onto a pygame surface
+    #
+    # NOTE: This meathod is not the most efficient, you should avoid calling it
+    # too often.
+    def draw(self, surface: pygame.Surface):
+        # other_surface.blit(self.image, self.position)
+
+        for y, row in enumerate(self.layer_data):
+            for x, tile_id in enumerate(row):
+                tile_sprite = self.tile_set.get_by_id(tile_id)
+                tile_pos = (x * tile_sprite.get_width(), y * tile_sprite.get_height())
+
+                surface.blit(tile_sprite, tile_pos)
