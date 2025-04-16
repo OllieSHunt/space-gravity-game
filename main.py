@@ -27,6 +27,49 @@ pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": entitiy_
 # Debug mode enables the rendering of hitboxes and stuff
 debug_mode = False
 
+# TEST: start
+
+import tile_set
+
+tile_set = tile_set.TileSet("assets/tilesets/template_tileset.png", 4, 4)
+
+asdf = [
+    tile_set.get_by_id(0),
+    tile_set.get_by_id(-1),
+    tile_set.get_by_id(1),
+    tile_set.get_by_id(2),
+    tile_set.get_by_id(3),
+    tile_set.get_by_id(4),
+    tile_set.get_by_id(5),
+    tile_set.get_by_id(6),
+]
+
+while True:
+    pygame.event.get()
+
+    for (i, qwerty) in enumerate(asdf):
+        main_surface.blit(qwerty, (i*tile_set.tile_width, i*tile_set.tile_height))
+
+    scale_multiplyer = screen.get_size()[1] / config.CANVAS_SIZE_Y
+    
+    scaled_main_surface = pygame.transform.scale(
+        main_surface,
+        (config.CANVAS_SIZE_X * scale_multiplyer, config.CANVAS_SIZE_Y * scale_multiplyer)
+    )
+
+    # blit() puts the main_surface onto the centre of the screen
+    screen.blit(
+        scaled_main_surface,
+        ((screen.get_size()[0] / 2) - (scaled_main_surface.get_size()[0] / 2), 0)
+    )
+    
+    pygame.display.flip()
+    clock.tick(config.FPS_TARGET)
+
+exit(0)
+
+# TEST: end
+
 running = True
 while running:
     # Iterate over all events

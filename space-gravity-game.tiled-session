@@ -17,7 +17,7 @@
         },
         "assets/tilemaps/test_map.tmx": {
             "scale": 4.963749999999999,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
                 "x": 60.13598589775876,
                 "y": 40.09065726517251
