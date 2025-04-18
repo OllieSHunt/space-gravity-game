@@ -34,12 +34,12 @@ class GravityButton(SensorEntity):
     # Inherated from the Entity class
     def load_sprite(self) -> pygame.Surface:
         self.anim_player = AnimationPlayer('assets/physics_button', 4)
-        self.anim_player.swith_animation("physics_button_idle")
+        self.anim_player.switch_animation("physics_button_idle")
         return self.anim_player.get_frame()
 
     # Inherated from the SensorEntity class
     def sensor_just_activated(self):
-        self.anim_player.swith_animation("physics_button_pressed")
+        self.anim_player.switch_animation("physics_button_pressed")
 
         space = self.poly.space
 
@@ -51,4 +51,4 @@ class GravityButton(SensorEntity):
 
     # Inherated from the SensorEntity class
     def sensor_just_deactivated(self):
-        self.anim_player.swith_animation("physics_button_idle")
+        self.anim_player.switch_animation("physics_button_idle")

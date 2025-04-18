@@ -98,7 +98,7 @@ class AnimationPlayer:
     #
     # If switch_when_done is set, then the animation will switch to the
     # specified animation instead of looping.
-    def swith_animation(self, animation: str, switch_when_done: str = None):
+    def switch_animation(self, animation: str, switch_when_done: str = None):
         self.frame = 0
         self.last_frame_advance = 0
 

@@ -59,7 +59,7 @@ class Player(PhysicsEntity):
                 self.body.apply_impulse_at_local_point(vector)
 
             # Start the jump animation
-            self.anim_player.swith_animation("player_push", switch_when_done="player_idle")
+            self.anim_player.switch_animation("player_push", switch_when_done="player_idle")
 
         self.starting_jump = False
 
@@ -92,7 +92,7 @@ class Player(PhysicsEntity):
     # Inherated from the Entity class
     def load_sprite(self) -> pygame.Surface:
         self.anim_player = AnimationPlayer('assets/player', 12)
-        self.anim_player.swith_animation("player_idle")
+        self.anim_player.switch_animation("player_idle")
         return self.anim_player.get_frame()
 
     # This has a chance of playing a random one-off idle animation.
@@ -111,4 +111,4 @@ class Player(PhysicsEntity):
             if random.randint(0, idle_chance) == 0:
                 # Choose and swith to a random idle animation
                 anim = random.choice(idle_anims)
-                self.anim_player.swith_animation(anim, "player_idle")
+                self.anim_player.switch_animation(anim, "player_idle")

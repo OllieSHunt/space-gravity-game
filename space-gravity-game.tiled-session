@@ -5,18 +5,24 @@
     },
     "activeFile": "assets/tilemaps/level1.tmx",
     "expandedProjectPaths": [
-        "assets",
-        ".",
+        "assets/electric_hazard",
         "assets/tilesets",
-        "assets/tilemaps"
+        "assets/tilemaps",
+        ".",
+        "assets"
     ],
     "fileStates": {
+        "assets/electric_hazard/electric_hazard.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 16,
+            "scaleInEditor": 56.9268
+        },
         "assets/tilemaps/level1.tmx": {
             "scale": 4.4518,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 47.50887281549036,
-                "y": 132.75528999505818
+                "x": 77.94599937104091,
+                "y": 137.2478548003055
             }
         },
         "assets/tilemaps/ship_tileset.tsx": {
@@ -32,12 +38,13 @@
             }
         },
         "assets/tilesets/template_tileset.tsx": {
-            "scaleInDock": 5.5,
+            "dynamicWrapping": false,
+            "scaleInDock": 16,
             "scaleInEditor": 16.91
         }
     },
     "last.exportedFilePath": "/home/ollie/code/space-gravity-game/assets/tilemaps/test_map",
-    "last.imagePath": "/home/ollie/code/space-gravity-game/assets/tilesets",
+    "last.imagePath": "/home/ollie/code/space-gravity-game/assets/electric_hazard",
     "map.lastUsedExportFilter": "CSV files (*.csv)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 4,
@@ -50,12 +57,13 @@
     "recentFiles": [
         "assets/tilesets/template_tileset.tsx",
         "assets/tilemaps/level1.tmx",
+        "assets/electric_hazard/electric_hazard.tsx",
         "assets/tilemaps/ship_tileset.tsx",
         "assets/tilemaps/test_map.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 4,
+        "height": 7,
         "width": 4
     }
 }

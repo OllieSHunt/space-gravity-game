@@ -22,7 +22,7 @@ space.gravity = (0, config.GRAVITY_STRENGTH)
 entities = []
 
 # Spawn entities required for level 1
-pygame.event.post(pygame.event.Event(LOAD_LEVEL, {"level_callback": entitiy_bundles.level_1}))
+pygame.event.post(pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.level_1}))
 
 # Debug mode enables the rendering of hitboxes and stuff
 debug_mode = False
@@ -45,7 +45,23 @@ while running:
             for new_entity in event.dict.get("entities"):
                 entities.append(new_entity)
 
-        elif event.type == LOAD_LEVEL:
+        elif event.type == DELETE_ENTITIES_EVENT:
+            # Delete a list of entities
+            for doomed_entity in event.dict.get("entities"):
+                entities.remove(doomed_entity)
+
+                # Remove physics body IF the entity has one
+                try:
+                    body = doomed_entity.body
+                except AttributeError:
+                    continue
+
+                # Remove each shape associated with the body
+                for shape in body.shapes:
+                    space.remove(shape)
+                space.remove(body)
+
+        elif event.type == LOAD_LEVEL_EVENT:
             level_callback = event.dict.get("level_callback")
             entities.clear()
             space = pymunk.Space()
@@ -60,7 +76,7 @@ while running:
             if debug_mode:
                 if event.key == pygame.K_1:
                     # Load to level 1
-                    pygame.event.post(pygame.event.Event(LOAD_LEVEL, {"level_callback": entitiy_bundles.level_1}))
+                    pygame.event.post(pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.level_1}))
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("darkgrey")
