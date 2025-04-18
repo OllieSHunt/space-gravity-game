@@ -45,8 +45,6 @@ class TileMap(Entity):
     # WARNING: This function is *very* inefficint and should be run as little as
     # possible.
     def load_collision_shapes(self, space: pymunk.Space):
-        # TODO: make tiles all one polygon to avoid odd player jumping behaviour and also performance
-        
         # Create a physics body for this tile map
         body = pymunk.Body(body_type=pymunk.Body.STATIC)
         space.add(body)
@@ -74,13 +72,17 @@ class TileMap(Entity):
         # Combine all the collision shapes
         union = shapely.union_all(polys)
 
+        # Each polygon needs to be added to the pymunk Space
         for poly in union.geoms:
             points = list(poly.exterior.coords)
             points.reverse()
 
+            # Split each polygon into triangles because pygame can't handle concave polygons
             for polyline in pymunk.autogeometry.convex_decomposition(points, 0.5):
-                print(polyline)
                 pymunk_poly = pymunk.Poly(body, polyline)
+
                 # Set this polygon's debug colour to something random
                 pymunk_poly.color = pygame.Color(int(random() * 255), int(random() * 255), int(random() * 255))
+
+                # Add the polygon to the pymunk Space
                 space.add(pymunk_poly)
