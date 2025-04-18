@@ -84,5 +84,8 @@ class TileMap(Entity):
                 # Set this polygon's debug colour to something random
                 pymunk_poly.color = pygame.Color(int(random() * 255), int(random() * 255), int(random() * 255))
 
+                # Set the friction to stop things from sliding around
+                pymunk_poly.friction = 1
+
                 # Add the polygon to the pymunk Space
                 space.add(pymunk_poly)
