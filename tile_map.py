@@ -77,7 +77,7 @@ class TileMap(Entity):
             points = list(poly.exterior.coords)
             points.reverse()
 
-            # Split each polygon into triangles because pygame can't handle concave polygons
+            # Split each polygon into triangles because pymunk can't handle concave polygons
             for polyline in pymunk.autogeometry.convex_decomposition(points, 0.5):
                 pymunk_poly = pymunk.Poly(body, polyline)
 

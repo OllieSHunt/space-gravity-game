@@ -5,18 +5,18 @@
     },
     "activeFile": "assets/tilemaps/level1.tmx",
     "expandedProjectPaths": [
-        "assets/tilesets",
-        "assets/tilemaps",
+        "assets",
         ".",
-        "assets"
+        "assets/tilesets",
+        "assets/tilemaps"
     ],
     "fileStates": {
         "assets/tilemaps/level1.tmx": {
-            "scale": 2.6333,
+            "scale": 4.4518,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 139.55872859150116,
-                "y": 85.44411954581703
+                "x": 47.50887281549036,
+                "y": 132.75528999505818
             }
         },
         "assets/tilemaps/ship_tileset.tsx": {
