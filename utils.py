@@ -1,8 +1,23 @@
 # This file contains generic stuff that did not fit anyware else
 
+import pymunk
 import os
 import csv
 from typing import Any
+
+import config
+import collision_handlers
+
+# Creates a new pymunk Space and sets it up
+def new_pymunk_space():
+    space = pymunk.Space()
+    space.gravity = (0, config.GRAVITY_STRENGTH)
+
+    # Add collision handler for player hazards
+    hazard_collision_handler = space.add_collision_handler(0, collision_handlers.HAZARD_COLLISION_TYPE)
+    hazard_collision_handler.begin = collision_handlers.handle_hazard_collision
+
+    return space
 
 # Takes the path to a .csv file and returns a 2D array with the .csv's data in.
 #

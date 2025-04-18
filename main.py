@@ -6,14 +6,14 @@ import pymunk.pygame_util
 import config
 import entitiy_bundles
 from custom_events import *
+from utils import new_pymunk_space
 
 # Setup stuff
 pygame.init()
 screen = pygame.display.set_mode((700, 500), pygame.RESIZABLE)
 main_surface = pygame.Surface((config.CANVAS_SIZE_X, config.CANVAS_SIZE_Y))
 clock = pygame.time.Clock()
-space = pymunk.Space()
-space.gravity = (0, config.GRAVITY_STRENGTH)
+space = new_pymunk_space()
 
 # This list will keep track of all things in the game. e.g. the player, etc...
 #
@@ -63,8 +63,12 @@ while running:
 
         elif event.type == LOAD_LEVEL_EVENT:
             level_callback = event.dict.get("level_callback")
+
+            # Reset everything
             entities.clear()
-            space = pymunk.Space()
+            space = new_pymunk_space()
+
+            # Call new level callback to spawn entities
             pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": level_callback(space)}))
 
         elif event.type == pygame.KEYDOWN:

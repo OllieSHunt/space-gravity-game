@@ -7,6 +7,7 @@ from entities.entity import Entity
 from animation import AnimationPlayer
 from custom_events import *
 import config
+import collision_handlers
 
 # A thing that spawns ElectricZap entities
 class ElectricHazard(Entity):
@@ -67,8 +68,8 @@ class ElectricHazard(Entity):
                     self.space,
                     start,
                     end,
-                    2000,
-                    1500,
+                    self.frequency / 2,
+                    self.frequency / 2.5,
                 )
 
                 pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [electric]}))
@@ -119,6 +120,7 @@ class ElectricZap(Entity):
             # Create a collision shape for this body
             segment = pymunk.Segment(self.body, (self.start.x, self.start.y), (self.end.x, self.end.y), 1)
             segment.sensor = True
+            segment.collision_type = collision_handlers.HAZARD_COLLISION_TYPE
             self.body.space.add(segment)
 
         if self.timer >= self.lifetime:
