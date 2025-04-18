@@ -3,3 +3,4 @@
 - Pygame
 - Pymunk
 - pytmx
+- shapely

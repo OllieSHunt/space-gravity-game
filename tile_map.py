@@ -1,6 +1,9 @@
 import pygame
 import pymunk
+import pymunk.autogeometry
 import pytmx
+from random import random
+import shapely
 import os
 
 from entities.entity import Entity
@@ -47,6 +50,8 @@ class TileMap(Entity):
         # Create a physics body for this tile map
         body = pymunk.Body(body_type=pymunk.Body.STATIC)
         space.add(body)
+
+        polys = []
         
         # Get collider shapes for each tile
         for gid, colliders in self.tiled_map.get_tile_colliders():
@@ -54,15 +59,28 @@ class TileMap(Entity):
             for x, y, z in self.tiled_map.get_tile_locations_by_gid(gid):
                 # For each of this tiles colliders...
                 for collider in colliders:
-                    collider_offset = pymunk.Transform.translation(
+                    collider_offset = (
                         x * self.tiled_map.tilewidth,
                         y * self.tiled_map.tileheight
                     )
 
-                    # Create a polygon for this collider and add it to the pymunk Space
-                    poly = pymunk.Poly(
-                        body,
-                        vertices=collider.apply_transformations(),
-                        transform=collider_offset,
-                    )
-                    space.add(poly)
+                    # Get the polygon for this collilder and offset it by the offset
+                    poly = list(map(lambda pos: (pos[0] + collider_offset[0], pos[1] + collider_offset[1]), collider.apply_transformations()))
+
+                    # Convert to a shapely polygon and add to this list
+                    poly = shapely.Polygon(poly)
+                    polys.append(poly)
+
+        # Combine all the collision shapes
+        union = shapely.union_all(polys)
+
+        for poly in union.geoms:
+            points = list(poly.exterior.coords)
+            points.reverse()
+
+            for polyline in pymunk.autogeometry.convex_decomposition(points, 0.5):
+                print(polyline)
+                pymunk_poly = pymunk.Poly(body, polyline)
+                # Set this polygon's debug colour to something random
+                pymunk_poly.color = pygame.Color(int(random() * 255), int(random() * 255), int(random() * 255))
+                space.add(pymunk_poly)
