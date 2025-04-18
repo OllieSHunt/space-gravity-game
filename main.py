@@ -22,7 +22,7 @@ space.gravity = (0, config.GRAVITY_STRENGTH)
 entities = []
 
 # Spawn entities required for level 1
-pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": entitiy_bundles.level_1(space)}))
+pygame.event.post(pygame.event.Event(LOAD_LEVEL, {"level_callback": entitiy_bundles.level_1}))
 
 # Debug mode enables the rendering of hitboxes and stuff
 debug_mode = False
@@ -45,10 +45,22 @@ while running:
             for new_entity in event.dict.get("entities"):
                 entities.append(new_entity)
 
+        elif event.type == LOAD_LEVEL:
+            level_callback = event.dict.get("level_callback")
+            entities.clear()
+            space = pymunk.Space()
+            pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": level_callback(space)}))
+
         elif event.type == pygame.KEYDOWN:
             # Toggle debug mode
             if event.key == pygame.K_BACKQUOTE:
                 debug_mode = not debug_mode
+
+            # Enable additional keybinds when in debug mode
+            if debug_mode:
+                if event.key == pygame.K_1:
+                    # Load to level 1
+                    pygame.event.post(pygame.event.Event(LOAD_LEVEL, {"level_callback": entitiy_bundles.level_1}))
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("darkgrey")
