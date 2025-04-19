@@ -3,12 +3,12 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "assets/tilemaps/level1.tmx",
+    "activeFile": "assets/tilemaps/metal_plate_tileset.tsx",
     "expandedProjectPaths": [
-        "assets/tilesets",
-        ".",
-        "assets/tilemaps",
         "assets/electric_hazard",
+        ".",
+        "assets/tilesets",
+        "assets/tilemaps",
         "assets"
     ],
     "fileStates": {
@@ -18,12 +18,16 @@
             "scaleInEditor": 56.9268
         },
         "assets/tilemaps/level1.tmx": {
-            "scale": 4.4518,
+            "scale": 4.3236,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 67.38847207870974,
-                "y": 118.37908261826675
+                "x": 53.19641039874178,
+                "y": 108.24313072439634
             }
+        },
+        "assets/tilemaps/metal_plate_tileset.tsx": {
+            "scaleInDock": 6.89,
+            "scaleInEditor": 12.1685
         },
         "assets/tilemaps/ship_tileset.tsx": {
             "scaleInDock": 5.5,
@@ -39,31 +43,33 @@
         },
         "assets/tilesets/template_tileset.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 16,
-            "scaleInEditor": 16.91
+            "scaleInDock": 6.89,
+            "scaleInEditor": 13.1004
         }
     },
     "last.exportedFilePath": "/home/ollie/code/space-gravity-game/assets/tilemaps/test_map",
-    "last.imagePath": "/home/ollie/code/space-gravity-game/assets/electric_hazard",
+    "last.imagePath": "/home/ollie/code/space-gravity-game/assets/tilesets",
     "map.lastUsedExportFilter": "CSV files (*.csv)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 4,
     "map.tileWidth": 4,
     "openFiles": [
         "assets/tilesets/template_tileset.tsx",
+        "assets/tilemaps/metal_plate_tileset.tsx",
         "assets/tilemaps/level1.tmx"
     ],
     "project": "space-gravity-game.tiled-project",
     "recentFiles": [
         "assets/tilesets/template_tileset.tsx",
         "assets/tilemaps/level1.tmx",
+        "assets/tilemaps/metal_plate_tileset.tsx",
         "assets/electric_hazard/electric_hazard.tsx",
         "assets/tilemaps/ship_tileset.tsx",
         "assets/tilemaps/test_map.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 7,
+        "height": 4,
         "width": 4
     }
 }

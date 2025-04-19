@@ -14,9 +14,10 @@ def level_1(space: pymunk.Space):
 
     # Spawn entities
     return [
-        Player(space, pygame.Vector2(20, 0)),
-        GravityButton(space, pygame.Vector2(16, 58), 270),
-        ElectricHazard(space, pygame.Vector2(52, 72), 90, pygame.Vector2(100, 136), 4000),
-        ElectricHazard(space, pygame.Vector2(100, 136), 270),
         TileMap(space, "assets/tilemaps/level1.tmx"),
+        Player(space, pygame.Vector2(20, 0)),
+        ElectricHazard(space, pygame.Vector2(7, 64), 90, pygame.Vector2(7, 120), 4000),
+        ElectricHazard(space, pygame.Vector2(7, 120), 270),
+        GravityButton(space, pygame.Vector2(185, 142), 270),
+        GravityButton(space, pygame.Vector2(177, 100), 90),
     ]

@@ -237,8 +237,8 @@
   </objectgroup>
  </tile>
  <wangsets>
-  <wangset name="template_terrain" type="mixed" tile="-1">
-   <wangcolor name="" color="#ff0000" tile="-1" probability="1"/>
+  <wangset name="template_terrain_set" type="mixed" tile="-1">
+   <wangcolor name="template_terrain" color="#ff0000" tile="-1" probability="1"/>
    <wangtile tileid="1" wangid="0,0,1,0,1,0,0,0"/>
    <wangtile tileid="2" wangid="0,0,1,0,1,0,1,0"/>
    <wangtile tileid="3" wangid="0,0,0,0,1,0,1,0"/>
