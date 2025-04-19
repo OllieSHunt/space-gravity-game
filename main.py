@@ -21,8 +21,11 @@ space = new_pymunk_space()
 #       defined in the entity.py file
 entities = []
 
+# A callback to the funcion that sets up the current level
+current_level = entitiy_bundles.level_1
+
 # Spawn entities required for level 1
-pygame.event.post(pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.level_1}))
+pygame.event.post(pygame.event.Event(RESTART_LEVEL_EVENT))
 
 # Debug mode enables the rendering of hitboxes and stuff
 debug_mode = False
@@ -71,6 +74,13 @@ while running:
             # Call new level callback to spawn entities
             pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": level_callback(space)}))
 
+            # Set the current level
+            current_level = level_callback
+
+        elif event.type == RESTART_LEVEL_EVENT:
+            load_level_event = pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": current_level})
+            pygame.event.post(load_level_event)
+
         elif event.type == pygame.KEYDOWN:
             # Toggle debug mode
             if event.key == pygame.K_BACKQUOTE:
@@ -80,7 +90,7 @@ while running:
             if debug_mode:
                 if event.key == pygame.K_1:
                     # Load to level 1
-                    pygame.event.post(pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.level_1}))
+                    pygame.event.post(pygame.event.Event(RESTART_LEVEL_EVENT))
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("darkgrey")

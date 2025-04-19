@@ -4,11 +4,12 @@ import functools
 import pygame
 import pymunk
 
-import config
-
 from entities.physics_entity import PhysicsEntity
 from entities.wall import Wall
 from animation import AnimationPlayer
+from custom_events import *
+import config
+import collision_handlers
 
 class Player(PhysicsEntity):
     def __init__(self, space: pymunk.Space, start_pos: pygame.Vector2 = pygame.Vector2(0, 0)):
@@ -28,6 +29,10 @@ class Player(PhysicsEntity):
                                friction=0.8,
                                body_type=pymunk.Body.DYNAMIC
                            )
+
+        # Set the shape type for each of the player's collision shapes
+        for shape in self.body.shapes:
+            shape.collision_type = collision_handlers.PLAYER_COLLISION_TYPE
 
     # Inherated from the Entity class
     def update(self):

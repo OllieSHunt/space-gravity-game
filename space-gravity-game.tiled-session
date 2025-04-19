@@ -5,10 +5,10 @@
     },
     "activeFile": "assets/tilemaps/level1.tmx",
     "expandedProjectPaths": [
-        "assets/electric_hazard",
         "assets/tilesets",
-        "assets/tilemaps",
         ".",
+        "assets/tilemaps",
+        "assets/electric_hazard",
         "assets"
     ],
     "fileStates": {
@@ -21,8 +21,8 @@
             "scale": 4.4518,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 77.94599937104091,
-                "y": 137.2478548003055
+                "x": 67.38847207870974,
+                "y": 118.37908261826675
             }
         },
         "assets/tilemaps/ship_tileset.tsx": {

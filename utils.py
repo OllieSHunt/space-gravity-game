@@ -6,7 +6,7 @@ import csv
 from typing import Any
 
 import config
-import collision_handlers
+from collision_handlers import *
 
 # Creates a new pymunk Space and sets it up
 def new_pymunk_space():
@@ -14,8 +14,8 @@ def new_pymunk_space():
     space.gravity = (0, config.GRAVITY_STRENGTH)
 
     # Add collision handler for player hazards
-    hazard_collision_handler = space.add_collision_handler(0, collision_handlers.HAZARD_COLLISION_TYPE)
-    hazard_collision_handler.begin = collision_handlers.handle_hazard_collision
+    plr_hzd_handler = space.add_collision_handler(PLAYER_COLLISION_TYPE, HAZARD_COLLISION_TYPE)
+    plr_hzd_handler.begin = handle_player_hazard_collision
 
     return space
 

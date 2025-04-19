@@ -28,6 +28,10 @@ DELETE_ENTITIES_EVENT = pygame.event.custom_type()
 # that should be function that takes one argument which is a pymunk Space.
 #
 # Example:
-# my_event = pygame.event.Event(LOAD_LEVEL, {"level_callback": level_1})
+# my_event = pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": level_1})
 # pygame.event.post(my_event)
 LOAD_LEVEL_EVENT = pygame.event.custom_type()
+
+
+# This event restarts the current level
+RESTART_LEVEL_EVENT = pygame.event.custom_type()
