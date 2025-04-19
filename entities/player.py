@@ -9,13 +9,14 @@ from entities.wall import Wall
 from animation import AnimationPlayer
 from custom_events import *
 import config
-import collision_handlers
+from collision_handlers import *
 
 class Player(PhysicsEntity):
     def __init__(self, space: pymunk.Space, start_pos: pygame.Vector2 = pygame.Vector2(0, 0)):
         self.moving_left = False
         self.moving_right = False
         self.starting_jump = False
+        self.magnet_active = False
 
         # The player's collision box and its position relative to the sprite
         collision_box = pygame.Rect((2, 2), (8, 8))
@@ -30,9 +31,10 @@ class Player(PhysicsEntity):
                                body_type=pymunk.Body.DYNAMIC
                            )
 
-        # Set the shape type for each of the player's collision shapes
+        # Set the shape type and filter for each of the player's collision shapes
         for shape in self.body.shapes:
-            shape.collision_type = collision_handlers.PLAYER_COLLISION_TYPE
+            shape.collision_type = PLAYER_COLLISION_TYPE
+            shape.filter = pymunk.ShapeFilter(categories=PLAYER_OBJECT_CATEGORY)
 
     # Inherated from the Entity class
     def update(self):
@@ -66,6 +68,18 @@ class Player(PhysicsEntity):
             # Start the jump animation
             self.anim_player.switch_animation("player_push", switch_when_done="player_idle")
 
+        if self.magnet_active:
+            # Find the nearest wall
+            # The filter is to exclude the player
+            filter = pymunk.ShapeFilter(mask=pymunk.ShapeFilter.ALL_MASKS() ^ PLAYER_OBJECT_CATEGORY)
+            query = self.body.space.point_query_nearest(self.body.position, 99999, filter)
+
+            if query != None:
+                # Move the player towards found wall
+                direction = (query.point - self.body.position).normalized()
+                force = direction * config.PLAYER_MAGNET_STRENGTH
+                self.body.apply_force_at_local_point(force.rotated(-self.body.angle))
+
         self.starting_jump = False
 
     # Inherated from the Entity class
@@ -79,6 +93,8 @@ class Player(PhysicsEntity):
                     self.moving_right = True
                 elif event.key == pygame.K_UP or event.key == pygame.K_SPACE or event.key == pygame.K_w:
                     self.starting_jump = True
+                elif event.key == pygame.K_e or event.key == pygame.K_RETURN:
+                    self.magnet_active = not self.magnet_active
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_a:
                     self.moving_left = False

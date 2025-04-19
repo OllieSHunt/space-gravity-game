@@ -18,11 +18,11 @@
             "scaleInEditor": 56.9268
         },
         "assets/tilemaps/level1.tmx": {
-            "scale": 4.0376,
-            "selectedLayer": 0,
+            "scale": 5.3605,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 128.4178720031702,
-                "y": 121.85456706954625
+                "x": 131.3310325529335,
+                "y": 153.7170040108199
             }
         },
         "assets/tilemaps/metal_plate_tileset.tsx": {
@@ -46,7 +46,12 @@
             }
         },
         "assets/tilesets/metal_plate_tileset.tsx": {
+            "scaleInDock": 1,
             "scaleInEditor": 8.69
+        },
+        "assets/tilesets/pipe_tileset.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 14.3415
         },
         "assets/tilesets/template_tileset.tsx": {
             "dynamicWrapping": false,
@@ -66,8 +71,9 @@
     ],
     "project": "space-gravity-game.tiled-project",
     "recentFiles": [
-        "assets/tilesets/metal_plate_tileset.tsx",
         "assets/tilemaps/level1.tmx",
+        "assets/tilesets/pipe_tileset.tsx",
+        "assets/tilesets/metal_plate_tileset.tsx",
         "assets/tilemaps/pipe_tileset.tsx",
         "assets/tilemaps/metal_plate_tileset.tsx",
         "assets/tilesets/template_tileset.tsx",

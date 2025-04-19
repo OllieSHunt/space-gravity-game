@@ -20,4 +20,5 @@ def level_1(space: pymunk.Space):
         ElectricHazard(space, pygame.Vector2(7, 120), 270),
         GravityButton(space, pygame.Vector2(185, 142), 270),
         GravityButton(space, pygame.Vector2(177, 100), 90),
+        GravityButton(space, pygame.Vector2(100, 142), 270),
     ]

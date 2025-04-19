@@ -5,7 +5,7 @@ import pygame
 # This event should always be created with an attribute called "entities".
 #
 # Example:
-# my_event = pygame.event.Event(SPAWN_ENTITY_EVENT, {"entities": [
+# my_event = pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
 #     MyNewEntity(...),
 #     MyNewEntity(...),
 #     MyNewEntity(...),
