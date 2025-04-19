@@ -7,6 +7,7 @@ from entities.entity import Entity
 from animation import AnimationPlayer
 from custom_events import *
 import config
+import utils
 import collision_handlers
 
 # A thing that spawns ElectricZap entities
@@ -135,7 +136,7 @@ class ElectricZap(Entity):
 
         # Draw the animation frame repeated between the start and end positions
         current = self.start
-        while current.x < self.end.x and current.y < self.end.y:
+        while True:
             # Calculate the sprite rotation
             # Copied from: https://stackoverflow.com/questions/10473930/how-do-i-find-the-angle-between-2-points-in-pygame
             dx = self.end.x - current.x
@@ -143,7 +144,7 @@ class ElectricZap(Entity):
             rads = math.atan2(-dy,dx)
             degs = math.degrees(rads)
 
-            # Cut of the image if it goes past the destination
+            # Crop the image if it would go past the destination
             dist_to_dest = current.distance_to(self.end)
             len_of_img = self.image.get_width()
             new_len = len_of_img - max(len_of_img - dist_to_dest, 0)
@@ -151,12 +152,24 @@ class ElectricZap(Entity):
 
             # Rotate and draw image
             # https://stackoverflow.com/questions/15098900/how-to-set-the-pivot-point-center-of-rotation-for-pygame-transform-rotate
-            offset = pygame.Vector2(0, croped_image.get_rect().centery)
+            img_rect = croped_image.get_rect()
+            pivot = pygame.Vector2(0, img_rect.centery)
+            pivot_offset = img_rect.center - pivot
+
             rotated_image = pygame.transform.rotate(croped_image, degs)
-            other_surface.blit(rotated_image, (current-offset.rotate(degs)))
+            rotated_offset = pivot_offset.rotate(degs)
+
+            new_rect = rotated_image.get_rect()
+            new_rect = rotated_image.get_rect(center=new_rect.center-pivot_offset)
+
+            other_surface.blit(rotated_image, current + new_rect.topleft)
 
             # Move to next point
             current = current.move_towards(self.end, self.image.get_width())
+
+            # Check if at end of electric beam
+            if current == self.end:
+                break
 
     # Inherated from the Entity class
     def load_sprite(self) -> pygame.Surface:

@@ -16,8 +16,13 @@ def level_1(space: pymunk.Space):
     return [
         TileMap(space, "assets/tilemaps/level1.tmx"),
         Player(space, pygame.Vector2(20, 0)),
-        ElectricHazard(space, pygame.Vector2(7, 64), 90, pygame.Vector2(7, 120), 4000),
-        ElectricHazard(space, pygame.Vector2(7, 120), 270),
+        # ElectricHazard(space, pygame.Vector2(7, 64), 90, pygame.Vector2(7, 120), 4000),
+        # ElectricHazard(space, pygame.Vector2(7, 120), 270),
         GravityButton(space, pygame.Vector2(185, 142), 270),
         GravityButton(space, pygame.Vector2(177, 100), 90),
+
+        # ElectricHazard(space, pygame.Vector2(50, 64), 90, pygame.Vector2(50, 120), 4000),
+        # ElectricHazard(space, pygame.Vector2(70, 64), 90, pygame.Vector2(71, 120), 4000),
+        ElectricHazard(space, pygame.Vector2(90, 64), 90, pygame.Vector2(69, 120), 4000),
+        # ElectricHazard(space, pygame.Vector2(110, 64), 90, pygame.Vector2(80, 64), 4000),
     ]
