@@ -18,6 +18,11 @@ class Player(PhysicsEntity):
         self.starting_jump = False
         self.magnet_active = False
 
+        # Create sprite to point in the direction the magnet is pulling the player
+        self.magnet_image = pygame.image.load("assets/magnet/magnet.png")
+        self.magnet_image_offset = 8
+        self.magnet_image_angle = 0
+
         # The player's collision box and its position relative to the sprite
         collision_box = pygame.Rect((2, 2), (8, 8))
 
@@ -80,6 +85,9 @@ class Player(PhysicsEntity):
                 force = direction * config.PLAYER_MAGNET_STRENGTH
                 self.body.apply_force_at_local_point(force.rotated(-self.body.angle))
 
+                # Point the magnet sprite in the right direction
+                self.magnet_image_angle = direction.angle_degrees
+
         self.starting_jump = False
 
     # Inherated from the Entity class
@@ -109,6 +117,15 @@ class Player(PhysicsEntity):
 
         # Call this same meathod in the parent class
         super().draw(other_surface)
+
+        # Draw the magnet sprite if the magnet is active
+        if self.magnet_active:
+            rotated_magnet = pygame.transform.rotate(self.magnet_image, -self.magnet_image_angle)
+
+            magnet_pos = pymunk.Vec2d(self.magnet_image_offset, 0).rotated_degrees(self.magnet_image_angle)
+            magnet_pos += self.body.position - (rotated_magnet.get_width() / 2, rotated_magnet.get_height() / 2)
+
+            other_surface.blit(rotated_magnet, magnet_pos)
 
     # Inherated from the Entity class
     def load_sprite(self) -> pygame.Surface:
