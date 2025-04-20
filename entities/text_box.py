@@ -2,18 +2,68 @@ import pygame
 import textwrap
 
 from entities.entity import Entity
+from custom_events import *
 import utils
 
 # For displaying text in a box. e.g. NPC dialoge
+#
+# This can display some constant text, or switch texts after a delay. When
+# there is not more text to show, it will delete itself.
 class TextBox(Entity):
-    def __init__(self, text: str, font: pygame.font.Font, max_width: int = 99999, start_pos: pygame.Vector2 = pygame.Vector2(0, 0)):
-        self.text = text
-        self.last_frame_text = "" # This is used for change detection
+    def __init__(self,
+                text: list[str] | str,
+                font: pygame.font.Font,
+                delay: int=None,
+                max_width: int = 99999,
+                pos: pygame.Vector2 = pygame.Vector2(0, 0)
+            ):
         self.font = font
         self.max_width = max_width
 
+        self.delay = delay
+        self.timer_last_tick = pygame.time.get_ticks()
+
+        # all_texts will be set if this box should scroll between several texts
+        self.all_texts = None
+        self.current_text = 0
+
+        self.last_frame_text = "" # This is used for change detection
+
+        # Check if one string was passed or a list of strings
+        if isinstance(text, str):
+            self.text = text
+        else: # Not a str, must be a list[str]
+            self.all_texts = text
+            self.text = text[self.current_text]
+
         # Call constructor of parent class
-        Entity.__init__(self, start_pos)
+        Entity.__init__(self, pos)
+
+    # Inherated from the Entity class
+    def update(self):
+        # If the text box should change after some time
+        if self.delay != None:
+            time = pygame.time.get_ticks()
+            elapsed = time - self.timer_last_tick
+
+            if elapsed >= self.delay:
+                # If there are other texts to show
+                if self.all_texts != None:
+                    self.timer_last_tick = pygame.time.get_ticks()
+
+                    self.current_text += 1
+
+                    if self.current_text < len(self.all_texts):
+                        # Show the next piece of text
+                        self.text = self.all_texts[self.current_text]
+                    else:
+                        # Delete this entity
+                        delete_event = pygame.event.Event(DELETE_ENTITIES_EVENT, {"entities": [self]})
+                        pygame.event.post(delete_event)
+                else:
+                    # Delete this entity
+                    delete_event = pygame.event.Event(DELETE_ENTITIES_EVENT, {"entities": [self]})
+                    pygame.event.post(delete_event)
 
     # Inherated from the Entity class
     def draw(self, other_surface: pygame.Surface):
