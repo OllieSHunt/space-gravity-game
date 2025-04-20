@@ -12,8 +12,6 @@ class TextBox(Entity):
         self.font = font
         self.max_width = max_width
 
-        self.background_sprite_sheet = pygame.image.load("assets/text_box/text_box.png")
-
         # Call constructor of parent class
         Entity.__init__(self, start_pos)
 
