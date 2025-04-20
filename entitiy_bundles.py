@@ -26,5 +26,5 @@ def level_1(space: pymunk.Space):
         AutoPilotNPC(pygame.Vector2(119, 119)),
         # TextBox("I am a text box. At the time of writing this string, I am not actualy a text box yet. But soon I will be a text box. At the moment I am just a string in a text editor.", config.font, max_width=30, pos=pygame.Vector2(50, 50)),
         # TextBox("I am a text box. At the time of writing this string, I am not actualy a text box yet. But soon I will be a text box. At the moment I am just a string in a text editor.", config.font, delay=2000, max_width=30, pos=pygame.Vector2(50, 50)),
-        TextBox(["asdfasdf", "qwerqwer", "zxcvzxcvxzcv", "pouipouipoui"], config.font, delay=2000, max_width=30, pos=pygame.Vector2(50, 50)),
+        TextBox(["asdf asdf", "qwer qwer", "zxcvzx cvxzcv", "j;lklkjlkj;kljlkj;"], config.font, delay=2000, max_width=5, pos=pygame.Vector2(50, 50)),
     ]

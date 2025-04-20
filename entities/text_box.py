@@ -17,6 +17,10 @@ class TextBox(Entity):
                 max_width: int = 99999,
                 pos: pygame.Vector2 = pygame.Vector2(0, 0)
             ):
+        self.border_size = 1
+        self.padding = 1
+        self.line_spaceing = -2
+
         self.font = font
         self.max_width = max_width
 
@@ -32,9 +36,29 @@ class TextBox(Entity):
         # Check if one string was passed or a list of strings
         if isinstance(text, str):
             self.text = text
+
+            # Work out the size of this textbox
+            lines = textwrap.wrap(self.text, self.max_width)
+            self.width, self.height = utils.size_of_text_array(lines, self.line_spaceing, self.font)
+
         else: # Not a str, must be a list[str]
             self.all_texts = text
             self.text = text[self.current_text]
+
+            # Work out the size of this textbox
+            self.width, self.height = 0, 0
+            for each_text in self.all_texts:
+                lines = textwrap.wrap(each_text, self.max_width)
+                width, height = utils.size_of_text_array(lines, self.line_spaceing, self.font)
+
+                if width > self.width:
+                    self.width = width
+                if height > self.height:
+                    self.height = height
+
+        # Account for border and padding in the textbox size
+        self.width += (self.border_size * 2) + (self.padding * 2)
+        self.height += (self.border_size * 2) + (self.padding * 2)
 
         # Call constructor of parent class
         Entity.__init__(self, pos)
@@ -70,7 +94,7 @@ class TextBox(Entity):
         # Only re-render the text when the text changes
         if self.text != self.last_frame_text:
             self.last_frame_text = self.text
-            self.render_text_box(1, 1, -2)
+            self.render_text_box()
 
         other_surface.blit(self.image, self.position)
 
@@ -78,27 +102,27 @@ class TextBox(Entity):
     def load_sprite(self) -> pygame.Surface:
         return pygame.Surface((0, 0))
 
-    def render_text_box(self, border_size, padding, line_spaceing):
-        # Split text into lines
-        lines = textwrap.wrap(self.text, self.max_width)
-
-        # Make an image that is the correct size
-        width, height = utils.size_of_text_array(lines, line_spaceing, self.font)
-        width += (border_size * 2) + (padding * 2)
-        height += (border_size * 2) + (padding * 2)
-        self.image = pygame.Surface((width, height), pygame.SRCALPHA)
+    # This resets self.image to be a blank, text box
+    def clear_textbox(self):
+        self.image = pygame.Surface((self.width, self.height), pygame.SRCALPHA)
 
         # Text background and border
         self.image.fill(pygame.color.Color("black"))
         self.image.fill(pygame.color.Color("white"), (
-            (border_size, border_size),
-            (width - (border_size * 2), height - (border_size * 2)),
+            (self.border_size, self.border_size),
+            (self.width - (self.border_size * 2), self.height - (self.border_size * 2)),
         ))
+
+    def render_text_box(self):
+        self.clear_textbox()
+
+        # Split text into lines
+        lines = textwrap.wrap(self.text, self.max_width)
 
         # Draw each line
         for i, line in enumerate(lines):
             rendered_line = self.font.render(line, False, pygame.color.Color("black"))
-            line_x = border_size + padding
-            line_y = (border_size + padding + (i * (self.font.get_height() + line_spaceing))) + line_spaceing
+            line_x = self.border_size + self.padding
+            line_y = (self.border_size + self.padding + (i * (self.font.get_height() + self.line_spaceing))) + self.line_spaceing
             
             self.image.blit(rendered_line, (line_x, line_y))
