@@ -5,6 +5,7 @@ from entities.player import Player
 from entities.wall import Wall
 from entities.gravity_button import GravityButton
 from entities.electric_hazard import ElectricHazard
+from entities.npcs.autopilot import AutoPilotNPC
 from tile_map import TileMap
 import config
 
@@ -21,4 +22,5 @@ def level_1(space: pymunk.Space):
         GravityButton(space, pygame.Vector2(185, 142), 270),
         GravityButton(space, pygame.Vector2(177, 100), 90),
         GravityButton(space, pygame.Vector2(100, 142), 270),
+        AutoPilotNPC(pygame.Vector2(119, 119))
     ]
