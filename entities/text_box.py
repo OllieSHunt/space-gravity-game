@@ -19,16 +19,16 @@ class TextBox(Entity):
     # Inherated from the Entity class
     def draw(self, other_surface: pygame.Surface):
         # TODO: Only call this when the text changes instead of every frame
-        self.render_text_box(1, 1)
+        self.render_text_box(1, 1, -2)
 
         other_surface.blit(self.image, self.position)
 
-    def render_text_box(self, border_size, padding):
+    def render_text_box(self, border_size, padding, line_spaceing):
         # Split text into lines
         lines = textwrap.wrap(self.text, self.max_width)
 
         # Make an image that is the correct size
-        width, height = utils.size_of_text_array(lines, self.font)
+        width, height = utils.size_of_text_array(lines, line_spaceing, self.font)
         width += (border_size * 2) + (padding * 2)
         height += (border_size * 2) + (padding * 2)
         self.image = pygame.Surface((width, height), pygame.SRCALPHA)
@@ -44,6 +44,6 @@ class TextBox(Entity):
         for i, line in enumerate(lines):
             rendered_line = self.font.render(line, False, pygame.color.Color("black"))
             line_x = border_size + padding
-            line_y = border_size + padding + (i * self.font.get_height())
+            line_y = (border_size + padding + (i * (self.font.get_height() + line_spaceing))) + line_spaceing
             
             self.image.blit(rendered_line, (line_x, line_y))

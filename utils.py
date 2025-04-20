@@ -63,12 +63,12 @@ def angle_between(a: pygame.Vector2, b: pygame.Vector2):
 
 # Returns the amount of text a list of strings would take up if they were drawn
 # one ontop of the other.
-def size_of_text_array(text_arr: list[str], font: pygame.font.Font):
+def size_of_text_array(text_arr: list[str], line_spacing, font: pygame.font.Font):
     width, height = 0, 0
 
     for text in text_arr:
         text_width, text_height = font.size(text)
-        height += text_height
+        height += text_height + line_spacing
 
         if text_width > width:
             width = text_width
