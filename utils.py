@@ -10,7 +10,7 @@ import config
 from collision_handlers import *
 
 # Creates a new pymunk Space and sets it up
-def new_pymunk_space():
+def new_pymunk_space() -> pymunk.Space:
     space = pymunk.Space()
     space.gravity = (0, config.GRAVITY_STRENGTH)
 
@@ -55,7 +55,7 @@ def blit_rotate(surf: pygame.Surface, image: pygame.Surface, origin: pygame.Vect
 # Gets the angle between two pygame vector2s
 # 
 # Copied from: https://stackoverflow.com/questions/10473930/how-do-i-find-the-angle-between-2-points-in-pygame
-def angle_between(a: pygame.Vector2, b: pygame.Vector2):
+def angle_between(a: pygame.Vector2, b: pygame.Vector2) -> float:
     dx = b.x - a.x
     dy = b.y - a.y
     rads = math.atan2(-dy,dx)
@@ -63,7 +63,7 @@ def angle_between(a: pygame.Vector2, b: pygame.Vector2):
 
 # Returns the amount of text a list of strings would take up if they were drawn
 # one ontop of the other.
-def size_of_text_array(text_arr: list[str], line_spacing, font: pygame.font.Font):
+def size_of_text_array(text_arr: list[str], line_spacing, font: pygame.font.Font) -> (int, int):
     width, height = 0, 0
 
     for text in text_arr:
