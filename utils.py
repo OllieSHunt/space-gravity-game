@@ -43,7 +43,7 @@ def parse_csv(csv_path: str) -> list[list[str]] | None:
 # This function was copied from Stackoverflow because maths is hard and I spend
 # 2 days of near non-stop work trying to figure it out for myself.
 # https://stackoverflow.com/questions/15098900/how-to-set-the-pivot-point-center-of-rotation-for-pygame-transform-rotate/69312319#69312319
-def blitRotate(surf: pygame.Surface, image: pygame.Surface, origin: pygame.Vector2, pivot: pygame.Vector2, angle: float):
+def blit_rotate(surf: pygame.Surface, image: pygame.Surface, origin: pygame.Vector2, pivot: pygame.Vector2, angle: float):
     image_rect = image.get_rect(topleft = (origin[0] - pivot[0], origin[1]-pivot[1]))
     offset_center_to_pivot = pygame.math.Vector2(origin) - image_rect.center
     rotated_offset = offset_center_to_pivot.rotate(-angle)
@@ -55,8 +55,22 @@ def blitRotate(surf: pygame.Surface, image: pygame.Surface, origin: pygame.Vecto
 # Gets the angle between two pygame vector2s
 # 
 # Copied from: https://stackoverflow.com/questions/10473930/how-do-i-find-the-angle-between-2-points-in-pygame
-def angleBetween(a: pygame.Vector2, b: pygame.Vector2):
+def angle_between(a: pygame.Vector2, b: pygame.Vector2):
     dx = b.x - a.x
     dy = b.y - a.y
     rads = math.atan2(-dy,dx)
     return math.degrees(rads)
+
+# Returns the amount of text a list of strings would take up if they were drawn
+# one ontop of the other.
+def size_of_text_array(text_arr: list[str], font: pygame.font.Font):
+    width, height = 0, 0
+
+    for text in text_arr:
+        text_width, text_height = font.size(text)
+        height += text_height
+
+        if text_width > width:
+            width = text_width
+
+    return (width, height)

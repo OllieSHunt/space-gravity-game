@@ -15,6 +15,9 @@ main_surface = pygame.Surface((config.CANVAS_SIZE_X, config.CANVAS_SIZE_Y))
 clock = pygame.time.Clock()
 space = new_pymunk_space()
 
+# Load fonts
+config.font = pygame.font.Font('assets/PoppkornRegular-MzKY.ttf', 8)
+
 # This list will keep track of all things in the game. e.g. the player, etc...
 #
 # NOTE: Please only put objects in this list that inherit from the Entity class

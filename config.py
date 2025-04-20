@@ -1,3 +1,7 @@
+# Fonts to be initalised later into proper Font objects in main.py AFTER pygame.init() is called
+
+font = None
+
 FPS_TARGET = 60
 
 CANVAS_SIZE_X = 288

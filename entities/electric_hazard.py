@@ -138,7 +138,7 @@ class ElectricZap(Entity):
         current = self.start
         while True:
             # Calculate the sprite rotation
-            angle = utils.angleBetween(current, self.end)
+            angle = utils.angle_between(current, self.end)
 
             # Crop the image if it would go past the destination
             dist_to_dest = current.distance_to(self.end)
@@ -148,7 +148,7 @@ class ElectricZap(Entity):
 
             # Rotate and draw image
             pivot = pygame.Vector2(0, croped_image.get_rect().centery - 1)
-            utils.blitRotate(other_surface, croped_image, current, pivot, angle)
+            utils.blit_rotate(other_surface, croped_image, current, pivot, angle)
 
             # Move to next point
             current = current.move_towards(self.end, self.image.get_width())
