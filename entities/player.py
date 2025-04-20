@@ -112,8 +112,8 @@ class Player(PhysicsEntity):
     # Inherated from the Entity class
     def draw(self, other_surface: pygame.Surface):
         # Animation stuff
-        if self.anim_player.next_if_ready():
-            self.image = self.anim_player.get_frame()
+        self.image = self.anim_player.get_frame()
+        self.anim_player.next_if_ready()
 
         # Call this same meathod in the parent class
         super().draw(other_surface)
@@ -136,7 +136,7 @@ class Player(PhysicsEntity):
     # This has a chance of playing a random one-off idle animation.
     # e.g. blinking, yawning, etc...
     def play_random_idle(self):
-        idle_chance = 512
+        idle_chance = 300
         idle_anims = [
             "player_blink",
             "player_yawn",

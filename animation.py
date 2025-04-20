@@ -18,9 +18,10 @@ class AnimationPlayer:
         self.sprite_width = sprite_width
         self.current_anim = None
         self.frame = 0
-        self.last_frame_advance = 0
+        self.last_frame_advance = pygame.time.get_ticks()
         self.frame_delay = frame_delay
         self.switch_when_done = None
+        self.reached_end = False
 
         # Where all the sprite sheets are sotred
         # {"name": Surface}
@@ -54,7 +55,11 @@ class AnimationPlayer:
         elapsed = time - self.last_frame_advance
 
         if elapsed >= self.frame_delay:
-            self.next()
+            if self.reached_end:
+                self.reset()
+            else:
+                self.next()
+
             return True
         else:
             return False
@@ -78,12 +83,14 @@ class AnimationPlayer:
         if not total_sprites.is_integer():
             raise Exception("Sprite sheet width not divisible by " + str(self.sprite_width))
 
-        # Reset the animatino if it finishes
-        if self.frame >= total_sprites:
-            self.reset()
+        # If this is the last frame...
+        if self.frame == total_sprites - 1:
+            self.reached_end = True
 
-            # Without this, an extra frame of animation gets played.
-            return self.get_frame()
+        # Handle going passed the end of the animation
+        if self.frame >= total_sprites:
+            self.frame = total_sprites - 1
+            self.reached_end = True
 
         # Extract the current frame from the sprite sheet
         return sprite_sheet.subsurface((self.frame * self.sprite_width,
@@ -99,8 +106,9 @@ class AnimationPlayer:
     # If switch_when_done is set, then the animation will switch to the
     # specified animation instead of looping.
     def switch_animation(self, animation: str, switch_when_done: str = None):
+        self.reached_end = False
         self.frame = 0
-        self.last_frame_advance = 0
+        self.last_frame_advance = pygame.time.get_ticks()
 
         self.switch_when_done = switch_when_done
         self.current_anim = animation
@@ -110,8 +118,9 @@ class AnimationPlayer:
     # If self.switch_when_done is True, then this will switch to that animation
     # instead.
     def reset(self):
+        self.reached_end = False
         self.frame = 0
-        self.last_frame_advance = 0
+        self.last_frame_advance = pygame.time.get_ticks()
 
         if self.switch_when_done != None:
             self.current_anim = self.switch_when_done

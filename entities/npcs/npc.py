@@ -21,8 +21,8 @@ class NPC(Entity):
     # Inherated from the Entity class
     def draw(self, other_surface: pygame.Surface):
         # Animation stuff
-        if self.anim_player.next_if_ready():
-            self.image = self.anim_player.get_frame()
+        self.image = self.anim_player.get_frame()
+        self.anim_player.next_if_ready()
 
         # Call this same meathod in the parent class
         super().draw(other_surface)

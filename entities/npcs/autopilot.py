@@ -8,8 +8,7 @@ class AutoPilotNPC(NPC):
         self.sprite_folder = "assets/npcs/autopilot"
         self.sprite_width = 25
         self.default_anim = "autopilot_idle"
-        # self.idle_chance = 512
-        self.idle_chance = 10
+        self.idle_chance = 200
         self.idle_anims = [
             "autopilot_blink",
             "autopilot_yawn",
