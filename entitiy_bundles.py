@@ -7,7 +7,9 @@ from entities.gravity_button import GravityButton
 from entities.electric_hazard import ElectricHazard
 from entities.npcs.autopilot import AutoPilotNPC
 from entities.text_box import TextBox
+from entities.timer import TimerEntity
 from tile_map import TileMap
+from custom_events import *
 import config
 
 def level_1(space: pymunk.Space):
@@ -26,5 +28,8 @@ def level_1(space: pymunk.Space):
         AutoPilotNPC(pygame.Vector2(119, 119)),
         # TextBox("I am a text box. At the time of writing this string, I am not actualy a text box yet. But soon I will be a text box. At the moment I am just a string in a text editor.", config.font, max_width=30, pos=pygame.Vector2(50, 50)),
         # TextBox("I am a text box. At the time of writing this string, I am not actualy a text box yet. But soon I will be a text box. At the moment I am just a string in a text editor.", config.font, delay=2000, max_width=30, pos=pygame.Vector2(50, 50)),
-        TextBox(["asdf asdf", "qwer qwer", "zxcvzx cvxzcv", "j;lklkjlkj;kljlkj;"], config.font, delay=2000, max_width=5, pos=pygame.Vector2(50, 50)),
+        # TextBox(["asdf asdf", "qwer qwer", "zxcvzx cvxzcv", "j;lklkjlkj;kljlkj;"], config.font, delay=2000, max_width=5, pos=pygame.Vector2(50, 50)),
+        TimerEntity(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+            TextBox("I am a text box. At the time of writing this string, I am not actualy a text box yet. But soon I will be a text box. At the moment I am just a string in a text editor.", config.font, delay=20000, max_width=30, pos=pygame.Vector2(50, 50)),
+        ]}), 3000)
     ]

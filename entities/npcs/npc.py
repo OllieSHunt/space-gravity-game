@@ -2,6 +2,7 @@ import pygame
 import random
 
 from entities.entity import Entity
+from entities.text_box import TextBox
 from animation import AnimationPlayer
 
 # When inherating this class, you need to define the following in the contructor:
