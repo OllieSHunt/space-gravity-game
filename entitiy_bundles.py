@@ -73,7 +73,7 @@ def level_1(space: pymunk.Space):
                             "...and toggle gravity using these blue buttons.",
                             "Please hurry and fix the thruster.",
                         ], config.font, 5000, 30, (40, 110))
-                    ]})), 60000),
+                    ]})), 120000),
                 ]})), 18000),
             ]})), 45000),
         ]})), 4000),

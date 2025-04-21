@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="72" height="41" tilewidth="4" tileheight="4" infinite="0" nextlayerid="7" nextobjectid="1">
  <tileset firstgid="1" source="../tilesets/metal_plate_tileset.tsx"/>
- <tileset firstgid="169" source="glass_tileset.tsx"/>
+ <tileset firstgid="169" source="../tilesets/glass_tileset.tsx"/>
  <tileset firstgid="265" source="../tilesets/pipe_tileset.tsx"/>
  <layer id="2" name="Background" width="72" height="41">
   <data encoding="csv">

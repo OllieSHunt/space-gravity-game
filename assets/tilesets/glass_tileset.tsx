@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.11.2" name="glass_tileset" tilewidth="4" tileheight="4" tilecount="96" columns="24">
+<tileset version="1.10" tiledversion="1.11.2" name="glass_tileset" tilewidth="4" tileheight="4" tilecount="264" columns="24">
  <image source="../tilesets/glass_tileset.png" width="96" height="16"/>
  <tile id="1">
   <objectgroup draworder="index" id="2">

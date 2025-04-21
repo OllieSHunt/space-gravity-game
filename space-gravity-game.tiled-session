@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "assets/tilemaps/level1.tmx",
+    "activeFile": "assets/tilemaps/glass_tileset.tsx",
     "expandedProjectPaths": [
         "assets",
         ".",
@@ -19,14 +19,14 @@
         },
         "assets/tilemaps/glass_tileset.tsx": {
             "scaleInDock": 8,
-            "scaleInEditor": 23
+            "scaleInEditor": 8.9405
         },
         "assets/tilemaps/level1.tmx": {
-            "scale": 3,
-            "selectedLayer": 1,
+            "scale": 3.2204,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 90,
-                "y": 93
+                "x": 143.7709601291765,
+                "y": 81.9773941125326
             }
         },
         "assets/tilemaps/metal_plate_tileset.tsx": {
@@ -81,15 +81,16 @@
     "map.tileWidth": 4,
     "map.width": 72,
     "openFiles": [
-        "assets/tilemaps/level1.tmx"
+        "assets/tilemaps/level1.tmx",
+        "assets/tilemaps/glass_tileset.tsx"
     ],
     "project": "space-gravity-game.tiled-project",
     "recentFiles": [
         "assets/tilemaps/level1.tmx",
         "assets/tilemaps/glass_tileset.tsx",
         "assets/tilesets/template_tileset.tsx",
-        "assets/tilesets/metal_plate_tileset.tsx",
         "assets/tilesets/pipe_tileset.tsx",
+        "assets/tilesets/metal_plate_tileset.tsx",
         "assets/tilemaps/pipe_tileset.tsx",
         "assets/tilemaps/metal_plate_tileset.tsx",
         "assets/electric_hazard/electric_hazard.tsx",
