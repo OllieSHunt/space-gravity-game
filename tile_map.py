@@ -72,6 +72,10 @@ class TileMap(Entity):
         # Combine all the collision shapes
         union = shapely.union_all(polys)
 
+        # The next bit of this funcion expects union to be of type MultiPolygon
+        if isinstance(union, shapely.Polygon):
+            union = shapely.MultiPolygon([union])
+
         # Each polygon needs to be added to the pymunk Space
         for poly in union.geoms:
             points = list(poly.exterior.coords)
