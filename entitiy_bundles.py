@@ -9,6 +9,7 @@ from entities.npcs.autopilot import AutoPilotNPC
 from entities.text_box import TextBox
 from entities.timer import TimerEntity
 from entities.background import StarBackground
+from entities.arrow import Arrow
 from tile_map import TileMap
 from custom_events import *
 import config
@@ -51,6 +52,9 @@ def level_1(space: pymunk.Space):
                     "I'm sure the pasengers won't mind a few switches in gravity...",
                     "...as long as you don't do it too offten.",
                 ], config.font, 5000, 30, (40, 110)),
+
+                # Spawn arrow pointing at gravity button
+                Arrow(pygame.Vector2(74, 86)),
 
                 # Nested timer to add pauses
                 TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
