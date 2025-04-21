@@ -68,6 +68,9 @@
             "scaleInDock": 1,
             "scaleInEditor": 14.3415
         },
+        "assets/tilesets/signs_tileset.tsx": {
+            "scaleInEditor": 13.97
+        },
         "assets/tilesets/template_tileset.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 6.89,
@@ -89,6 +92,7 @@
     ],
     "project": "space-gravity-game.tiled-project",
     "recentFiles": [
+        "assets/tilesets/signs_tileset.tsx",
         "assets/tilemaps/level1.tmx",
         "assets/tilemaps/glass_tileset.tsx",
         "assets/tilesets/template_tileset.tsx",
