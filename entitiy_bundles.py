@@ -22,6 +22,7 @@ def level_1(space: pymunk.Space):
         StarBackground(),
         TileMap(space, "assets/tilemaps/level1.tmx"),
         AutoPilotNPC(pygame.Vector2(49, 75)),
+
         GravityButton(space, pygame.Vector2(80, 98), 270),
 
         # Wait a few seconds before spawning the player
@@ -43,6 +44,7 @@ def level_1(space: pymunk.Space):
                 "...",
             ], config.font, 5000, 30, (40, 110)),
 
+            # Nested timer to add pauses
             TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
                 TextBox([
                     "You may need to use these blue gravity buttons assist you.",
@@ -50,12 +52,24 @@ def level_1(space: pymunk.Space):
                     "...as long as you don't do it too offten.",
                 ], config.font, 5000, 30, (40, 110)),
 
+                # Nested timer to add pauses
                 TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
                     TextBox([
                         "Oh, and one more thing...",
                         "Don't forget about your magnet atachment!",
                         "You can activate it by pressing [ENTER]",
-                    ], config.font, 5000, 30, (40, 110))
+                    ], config.font, 5000, 30, (40, 110)),
+
+                    # Give the player another prompt if they are stuck
+                    TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                        TextBox([
+                            "Your still here?",
+                            "Remember, our pasengers are counting on you!",
+                            "You can use [ENTER] to toggle you magnet...",
+                            "...and toggle gravity using these blue buttons.",
+                            "Please hurry and fix the thruster.",
+                        ], config.font, 5000, 30, (40, 110))
+                    ]})), 60000),
                 ]})), 18000),
             ]})), 45000),
         ]})), 4000),
