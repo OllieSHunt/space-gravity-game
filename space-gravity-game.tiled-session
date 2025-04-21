@@ -57,6 +57,9 @@
                 "y": 38.41913031493349
             }
         },
+        "assets/tilesets/glass_tileset.tsx": {
+            "scaleInDock": 1
+        },
         "assets/tilesets/metal_plate_tileset.tsx": {
             "scaleInDock": 5.1549,
             "scaleInEditor": 16.56
