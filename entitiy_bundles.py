@@ -23,6 +23,7 @@ def level_1(space: pymunk.Space):
         TileMap(space, "assets/tilemaps/level1.tmx"),
         AutoPilotNPC(pygame.Vector2(49, 75)),
         Player(space, pygame.Vector2(163, 0)),
+        GravityButton(space, pygame.Vector2(246, 94), 270),
 
         # ElectricHazard(space, pygame.Vector2(7, 64), 90, pygame.Vector2(7, 120), 4000),
         # ElectricHazard(space, pygame.Vector2(7, 120), 270),
