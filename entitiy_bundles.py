@@ -22,18 +22,41 @@ def level_1(space: pymunk.Space):
         StarBackground(),
         TileMap(space, "assets/tilemaps/level1.tmx"),
         AutoPilotNPC(pygame.Vector2(49, 75)),
-        Player(space, pygame.Vector2(163, 0)),
-        GravityButton(space, pygame.Vector2(246, 94), 270),
+        GravityButton(space, pygame.Vector2(80, 98), 270),
 
-        # ElectricHazard(space, pygame.Vector2(7, 64), 90, pygame.Vector2(7, 120), 4000),
-        # ElectricHazard(space, pygame.Vector2(7, 120), 270),
-        # GravityButton(space, pygame.Vector2(185, 142), 270),
-        # GravityButton(space, pygame.Vector2(177, 100), 90),
-        # GravityButton(space, pygame.Vector2(100, 142), 270),
-        # # TextBox("I am a text box. At the time of writing this string, I am not actualy a text box yet. But soon I will be a text box. At the moment I am just a string in a text editor.", config.font, max_width=30, pos=pygame.Vector2(50, 50)),
-        # # TextBox("I am a text box. At the time of writing this string, I am not actualy a text box yet. But soon I will be a text box. At the moment I am just a string in a text editor.", config.font, delay=2000, max_width=30, pos=pygame.Vector2(50, 50)),
-        # # TextBox(["asdf asdf", "qwer qwer", "zxcvzx cvxzcv", "j;lklkjlkj;kljlkj;"], config.font, delay=2000, max_width=5, pos=pygame.Vector2(50, 50)),
-        # TimerEntity(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
-        #     TextBox("I am a text box. At the time of writing this string, I am not actualy a text box yet. But soon I will be a text box. At the moment I am just a string in a text editor.", config.font, delay=20000, max_width=30, pos=pygame.Vector2(50, 50)),
-        # ]}), 3000)
+        # Wait a few seconds before spawning the player
+        TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+            Player(space, pygame.Vector2(163, -100)),
+        ]})), 2000),
+
+        # Spawn dialogue for the autopilot after a delay
+        TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+            TextBox([
+                "Oh!",
+                "Hello there robot 3742.",
+                "...",
+                "As your here, could you do me a favour?",
+                "As you can see, we're moving rather slowly at the moment.",
+                "This is due to a malfunctioning thruster.",
+                "Do you think you could fix it for me?",
+                "Our pasengers are counting on you so please hurry.",
+                "...",
+            ], config.font, 5000, 30, (40, 110)),
+
+            TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                TextBox([
+                    "You may need to use these blue gravity buttons assist you.",
+                    "I'm sure the pasengers won't mind a few switches in gravity...",
+                    "...as long as you don't do it too offten.",
+                ], config.font, 5000, 30, (40, 110)),
+
+                TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                    TextBox([
+                        "Oh, and one more thing...",
+                        "Don't forget about your magnet atachment!",
+                        "You can activate it by pressing [ENTER]",
+                    ], config.font, 5000, 30, (40, 110))
+                ]})), 18000),
+            ]})), 45000),
+        ]})), 4000),
     ]

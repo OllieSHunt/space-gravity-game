@@ -122,7 +122,7 @@ class TextBox(Entity):
         # Draw each line
         for i, line in enumerate(lines):
             rendered_line = self.font.render(line, False, pygame.color.Color("black"))
-            line_x = self.border_size + self.padding
-            line_y = (self.border_size + self.padding + (i * (self.font.get_height() + self.line_spaceing))) + self.line_spaceing
+            line_x = (self.border_size + self.padding) + (((self.image.get_width() - (self.border_size + self.padding)) / 2) - (rendered_line.get_width() / 2))
+            line_y = ((self.border_size + self.padding + (i * (self.font.get_height() + self.line_spaceing))) + self.line_spaceing)
             
             self.image.blit(rendered_line, (line_x, line_y))
