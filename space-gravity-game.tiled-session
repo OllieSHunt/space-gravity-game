@@ -25,16 +25,16 @@
             "scale": 3.9078,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 143.55903577460464,
-                "y": 49.13250422232459
+                "x": 143.431086544859,
+                "y": 48.876605762833314
             }
         },
         "assets/tilemaps/level2.tmx": {
             "scale": 4.4928,
-            "selectedLayer": 1,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 193.64316239316238,
-                "y": 112.17948717948718
+                "x": 152.24358974358972,
+                "y": 90.58938746438746
             }
         },
         "assets/tilemaps/metal_plate_tileset.tsx": {
@@ -66,7 +66,7 @@
             }
         },
         "assets/tilesets/furniture_tileset.tsx": {
-            "scaleInDock": 1,
+            "scaleInDock": 2.9626,
             "scaleInEditor": 8
         },
         "assets/tilesets/glass_tileset.tsx": {
@@ -105,18 +105,18 @@
     ],
     "project": "space-gravity-game.tiled-project",
     "recentFiles": [
-        "assets/tilesets/furniture_tileset.tsx",
+        "assets/tilesets/pipe_tileset.tsx",
         "assets/tilemaps/level1.tmx",
+        "assets/tilemaps/level2.tmx",
+        "assets/tilesets/furniture_tileset.tsx",
         "assets/tilesets/signs_tileset.tsx",
         "assets/tilemaps/glass_tileset.tsx",
         "assets/tilesets/template_tileset.tsx",
-        "assets/tilesets/pipe_tileset.tsx",
         "assets/tilesets/metal_plate_tileset.tsx",
         "assets/tilemaps/pipe_tileset.tsx",
         "assets/tilemaps/metal_plate_tileset.tsx",
         "assets/electric_hazard/electric_hazard.tsx",
-        "assets/tilemaps/ship_tileset.tsx",
-        "assets/tilemaps/test_map.tmx"
+        "assets/tilemaps/ship_tileset.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

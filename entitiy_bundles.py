@@ -106,6 +106,7 @@ def level_3(space: pymunk.Space):
     # Spawn entities
     return [
         StarBackground(),
+        TileMap(space, "assets/tilemaps/level3.tmx"),
 
         # Invisable walls before the start of the level
         InvisibleWall(space, pygame.Rect(224, -130, 8, 130)),
