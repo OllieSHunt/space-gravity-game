@@ -74,3 +74,33 @@ def size_of_text_array(text_arr: list[str], line_spacing, font: pygame.font.Font
             width = text_width
 
     return (width, height)
+
+# In main.py, there are the `screen` and `main_surface` variables.
+#
+# `screen` is a surface that represents the visible window. `main_surface` is
+# the pixelated world that the game exists in. This funcion converts between
+# the coordinate systems for both surfaces.
+def screen_to_world(pos: pygame.Vector2, screen: pygame.Surface) -> pygame.Vector2:
+    scale_multiplyer = get_screen_to_world_multiplyer(screen)
+
+    # Calculate the size of the borders around the edge of the screen
+    bezel_x = ((screen.get_size()[0] / scale_multiplyer) - (config.CANVAS_SIZE_X)) / 2
+    bezel_y = ((screen.get_size()[1] / scale_multiplyer) - (config.CANVAS_SIZE_Y)) / 2
+
+    return pygame.Vector2(
+        (pos[0] / scale_multiplyer) - bezel_x,
+        (pos[1] / scale_multiplyer) - bezel_y,
+    )
+
+# See `pygame.mouse.get_pos()` comment
+def get_screen_to_world_multiplyer(screen: pygame.Surface) -> float:
+    return min(
+        screen.get_size()[0] / config.CANVAS_SIZE_X,
+        screen.get_size()[1] / config.CANVAS_SIZE_Y,
+    )
+
+# Searches through a list and returns the first instance of a specific type
+def find_first_of_type(list_of_stuff: list[Any], type) -> Any:
+    for thing in list_of_stuff:
+        if isinstance(thing, type):
+            return thing

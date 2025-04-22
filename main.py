@@ -5,15 +5,16 @@ import pymunk.pygame_util
 # Import other files from this project
 import config
 import entitiy_bundles
+import utils
 from custom_events import *
-from utils import new_pymunk_space
+from entities.player import Player
 
 # Setup stuff
 pygame.init()
 screen = pygame.display.set_mode((700, 500), pygame.RESIZABLE)
 main_surface = pygame.Surface((config.CANVAS_SIZE_X, config.CANVAS_SIZE_Y))
 clock = pygame.time.Clock()
-space = new_pymunk_space()
+space = utils.new_pymunk_space()
 
 # Load fonts
 config.font = pygame.font.Font('assets/PoppkornRegular-MzKY.ttf', 8)
@@ -72,7 +73,7 @@ while running:
 
             # Reset everything
             entities.clear()
-            space = new_pymunk_space()
+            space = utils.new_pymunk_space()
 
             # Call new level callback to spawn entities
             pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": level_callback(space)}))
@@ -91,6 +92,13 @@ while running:
 
             # Enable additional keybinds when in debug mode
             if debug_mode:
+                if event.key == pygame.K_0:
+                    # Teleport to the mouse cursor
+                    pos = utils.screen_to_world(pygame.mouse.get_pos(), screen)
+                    player = utils.find_first_of_type(entities, Player)
+                    if player != None:
+                        player.body.position = pymunk.Vec2d(pos.x, pos.y)
+
                 if event.key == pygame.K_1:
                     # Load to level 1
                     pygame.event.post(pygame.event.Event(RESTART_LEVEL_EVENT))
@@ -113,7 +121,7 @@ while running:
         space.debug_draw(pymunk.pygame_util.DrawOptions(main_surface))
     
     # Scale the game screen
-    scale_multiplyer = screen.get_size()[1] / config.CANVAS_SIZE_Y
+    scale_multiplyer = utils.get_screen_to_world_multiplyer(screen)
     
     scaled_main_surface = pygame.transform.scale(
         main_surface,
@@ -123,7 +131,10 @@ while running:
     # blit() puts the main_surface onto the centre of the screen
     screen.blit(
         scaled_main_surface,
-        ((screen.get_size()[0] / 2) - (scaled_main_surface.get_size()[0] / 2), 0)
+        (
+            (screen.get_size()[0] / 2) - (scaled_main_surface.get_size()[0] / 2),
+            (screen.get_size()[1] / 2) - (scaled_main_surface.get_size()[1] / 2),
+        )
     )
 
 
