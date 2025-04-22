@@ -100,7 +100,9 @@ def get_screen_to_world_multiplyer(screen: pygame.Surface) -> float:
     )
 
 # Searches through a list and returns the first instance of a specific type
-def find_first_of_type(list_of_stuff: list[Any], type) -> Any:
+def find_first_of_type(list_of_stuff: list[Any], type) -> Any | None:
     for thing in list_of_stuff:
         if isinstance(thing, type):
             return thing
+
+    return None
