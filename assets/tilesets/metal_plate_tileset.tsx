@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.11.2" name="metal_plate_tileset" tilewidth="4" tileheight="4" tilecount="168" columns="24">
- <image source="metal_plate_tileset.png" width="96" height="28"/>
+<tileset version="1.10" tiledversion="1.11.2" name="metal_plate_tileset" tilewidth="4" tileheight="4" tilecount="312" columns="24">
+ <image source="metal_plate_tileset.png" width="96" height="36"/>
  <tile id="1">
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="0" width="4" height="4"/>
@@ -271,10 +271,68 @@
   </objectgroup>
  </tile>
  <tile id="161" probability="0.2"/>
+ <tile id="168">
+  <objectgroup draworder="index" id="2">
+   <object id="2" x="0" y="4">
+    <polygon points="0,0 4,-4 4,0"/>
+   </object>
+  </objectgroup>
+ </tile>
+ <tile id="169">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0">
+    <polygon points="0,0 4,4 0,4"/>
+   </object>
+  </objectgroup>
+ </tile>
+ <tile id="170">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="4" y="0">
+    <polygon points="0,0 -4,4 0,4"/>
+   </object>
+  </objectgroup>
+ </tile>
+ <tile id="171">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0">
+    <polygon points="0,0 4,4 0,4"/>
+   </object>
+  </objectgroup>
+ </tile>
+ <tile id="192">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0">
+    <polygon points="0,0 4,4 4,0"/>
+   </object>
+  </objectgroup>
+ </tile>
+ <tile id="193">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0">
+    <polygon points="0,0 4,0 0,4"/>
+   </object>
+  </objectgroup>
+ </tile>
+ <tile id="194">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0">
+    <polygon points="0,0 4,4 4,0"/>
+   </object>
+  </objectgroup>
+ </tile>
+ <tile id="195">
+  <objectgroup draworder="index" id="2">
+   <object id="1" x="0" y="0">
+    <polygon points="0,0 4,0 0,4"/>
+   </object>
+  </objectgroup>
+ </tile>
  <wangsets>
   <wangset name="rusty_metal" type="mixed" tile="-1">
    <wangcolor name="foreground" color="#ff0000" tile="-1" probability="1"/>
    <wangcolor name="background" color="#00ff00" tile="-1" probability="1"/>
+   <wangcolor name="slopes_foreground" color="#0000ff" tile="-1" probability="1"/>
+   <wangcolor name="slopes_background" color="#ff7700" tile="-1" probability="1"/>
    <wangtile tileid="1" wangid="0,0,1,0,1,0,0,0"/>
    <wangtile tileid="2" wangid="0,0,1,0,1,0,1,0"/>
    <wangtile tileid="3" wangid="0,0,0,0,1,0,1,0"/>
@@ -379,6 +437,22 @@
    <wangtile tileid="149" wangid="1,1,1,1,1,1,1,1"/>
    <wangtile tileid="160" wangid="2,2,2,2,2,2,2,2"/>
    <wangtile tileid="161" wangid="2,2,2,2,2,2,2,2"/>
+   <wangtile tileid="168" wangid="0,0,0,3,0,0,0,0"/>
+   <wangtile tileid="169" wangid="0,0,0,0,0,3,0,0"/>
+   <wangtile tileid="170" wangid="0,0,0,3,0,0,0,0"/>
+   <wangtile tileid="171" wangid="0,0,0,0,0,3,0,0"/>
+   <wangtile tileid="180" wangid="0,0,0,4,0,0,0,0"/>
+   <wangtile tileid="181" wangid="0,0,0,0,0,4,0,0"/>
+   <wangtile tileid="182" wangid="0,0,0,4,0,0,0,0"/>
+   <wangtile tileid="183" wangid="0,0,0,0,0,4,0,0"/>
+   <wangtile tileid="192" wangid="0,3,0,0,0,0,0,0"/>
+   <wangtile tileid="193" wangid="0,0,0,0,0,0,0,3"/>
+   <wangtile tileid="194" wangid="0,3,0,0,0,0,0,0"/>
+   <wangtile tileid="195" wangid="0,0,0,0,0,0,0,3"/>
+   <wangtile tileid="204" wangid="0,4,0,0,0,0,0,0"/>
+   <wangtile tileid="205" wangid="0,0,0,0,0,0,0,4"/>
+   <wangtile tileid="206" wangid="0,4,0,0,0,0,0,0"/>
+   <wangtile tileid="207" wangid="0,0,0,0,0,0,0,4"/>
   </wangset>
  </wangsets>
 </tileset>
