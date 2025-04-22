@@ -22,11 +22,19 @@
             "scaleInEditor": 8.9405
         },
         "assets/tilemaps/level1.tmx": {
-            "scale": 2.7723,
-            "selectedLayer": 3,
+            "scale": 3.9078,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 176.38783681419758,
-                "y": 66.01017205930093
+                "x": 143.81493423409592,
+                "y": 83.67879625364657
+            }
+        },
+        "assets/tilemaps/level2.tmx": {
+            "scale": 4.4928,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 42.73504273504273,
+                "y": 73.22827635327634
             }
         },
         "assets/tilemaps/metal_plate_tileset.tsx": {
@@ -97,8 +105,8 @@
     ],
     "project": "space-gravity-game.tiled-project",
     "recentFiles": [
-        "assets/tilemaps/level1.tmx",
         "assets/tilesets/furniture_tileset.tsx",
+        "assets/tilemaps/level1.tmx",
         "assets/tilesets/signs_tileset.tsx",
         "assets/tilemaps/glass_tileset.tsx",
         "assets/tilesets/template_tileset.tsx",

@@ -99,9 +99,11 @@ while running:
                     if player != None:
                         player.body.position = pymunk.Vec2d(pos.x, pos.y)
 
-                if event.key == pygame.K_1:
-                    # Load to level 1
-                    pygame.event.post(pygame.event.Event(RESTART_LEVEL_EVENT))
+                # Keys 1-9 take you to a specific level
+                elif event.key == pygame.K_1:
+                    pygame.event.post(pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.level_1}))
+                elif event.key == pygame.K_2:
+                    pygame.event.post(pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.level_2}))
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("darkgrey")

@@ -83,10 +83,12 @@ def level_1(space: pymunk.Space):
     ]
 
 def level_2(space: pymunk.Space):
-    # Set gravity
-    space.gravity = (0, config.GRAVITY_STRENGTH)
-
     # Spawn entities
     return [
         StarBackground(),
+        TileMap(space, "assets/tilemaps/level2.tmx"),
+
+        # LevelTransition(level_3, space, pygame.Rect(0, 0, 20, 8), pygame.Vector2(228, config.CANVAS_SIZE_Y + 4)),
+
+        Player(space, pygame.Vector2(0, 68)),
     ]
