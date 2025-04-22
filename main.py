@@ -95,6 +95,7 @@ while running:
                 if event.key == pygame.K_0:
                     # Teleport to the mouse cursor
                     pos = utils.screen_to_world(pygame.mouse.get_pos(), screen)
+                    print(pos)
                     player = utils.find_first_of_type(entities, Player)
                     if player != None:
                         player.body.position = pymunk.Vec2d(pos.x, pos.y)
@@ -104,6 +105,8 @@ while running:
                     pygame.event.post(pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.level_1}))
                 elif event.key == pygame.K_2:
                     pygame.event.post(pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.level_2}))
+                elif event.key == pygame.K_3:
+                    pygame.event.post(pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.level_3}))
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("darkgrey")

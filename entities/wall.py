@@ -3,7 +3,10 @@ import pymunk
 
 from entities.physics_entity import PhysicsEntity
 
-# TODO: is this still needed after implementing tile maps?
+# Stops the player from going places.
+#
+# Most of the time, I will be using the tile map instead. But this might still
+# be useful, so I will keep it.
 class Wall(PhysicsEntity):
     def __init__(self, space: pymunk.Space, rect: pygame.Rect):
         collision_box = pygame.Rect((0, 0), (rect.width, rect.height))

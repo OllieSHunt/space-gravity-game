@@ -3,6 +3,7 @@ import pymunk
 
 from entities.player import Player
 from entities.wall import Wall
+from entities.invisible_wall import InvisibleWall
 from entities.gravity_button import GravityButton
 from entities.electric_hazard import ElectricHazard
 from entities.npcs.autopilot import AutoPilotNPC
@@ -25,7 +26,12 @@ def level_1(space: pymunk.Space):
         TileMap(space, "assets/tilemaps/level1.tmx"),
         AutoPilotNPC(pygame.Vector2(49, 75)),
 
-        LevelTransition(level_2, space, pygame.Rect(0, 0, 8, 20), pygame.Vector2(config.CANVAS_SIZE_X + 4, 56)),
+        # Invisable walls before the start of the level
+        InvisibleWall(space, pygame.Rect(152, -130, 8, 130)),
+        InvisibleWall(space, pygame.Rect(176, -130, 8, 130)),
+        InvisibleWall(space, pygame.Rect(152, -130, 32, 8)),
+
+        LevelTransition(level_2, space, pygame.Rect(0, 0, 8, 24), pygame.Vector2(config.CANVAS_SIZE_X + 4, 56)),
 
         GravityButton(space, pygame.Vector2(80, 98), 270),
 
@@ -88,7 +94,23 @@ def level_2(space: pymunk.Space):
         StarBackground(),
         TileMap(space, "assets/tilemaps/level2.tmx"),
 
-        # LevelTransition(level_3, space, pygame.Rect(0, 0, 20, 8), pygame.Vector2(228, config.CANVAS_SIZE_Y + 4)),
+        # Invisable wall at the start of the level
+        InvisibleWall(space, pygame.Rect(-12, 56, 8, 24)),
+
+        LevelTransition(level_3, space, pygame.Rect(0, 0, 20, 8), pygame.Vector2(228, config.CANVAS_SIZE_Y + 4)),
 
         Player(space, pygame.Vector2(0, 68)),
+    ]
+
+def level_3(space: pymunk.Space):
+    # Spawn entities
+    return [
+        StarBackground(),
+
+        # Invisable walls before the start of the level
+        InvisibleWall(space, pygame.Rect(224, -130, 8, 130)),
+        InvisibleWall(space, pygame.Rect(244, -130, 8, 130)),
+        InvisibleWall(space, pygame.Rect(224, -130, 24, 8)),
+
+        Player(space, pygame.Vector2(231, -100)),
     ]
