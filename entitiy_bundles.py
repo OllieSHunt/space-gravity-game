@@ -12,6 +12,7 @@ from entities.timer import TimerEntity
 from entities.background import StarBackground
 from entities.arrow import Arrow
 from entities.level_transition import LevelTransition
+from entities.hazzard_box import HazardBox
 from tile_map import TileMap
 from custom_events import *
 import config
@@ -156,6 +157,11 @@ def level_4(space: pymunk.Space):
 
         ElectricHazard(space, pygame.Vector2(196, 46), 180, pygame.Vector2(76, 32), 4500),
         ElectricHazard(space, pygame.Vector2(76, 32), 45),
+
+        # This kills the player if they fall into the bottomless pit
+        HazardBox(space, pygame.Rect(0, config.CANVAS_SIZE_Y + 100, config.CANVAS_SIZE_X, 16)),
+        InvisibleWall(space, pygame.Rect(0, config.CANVAS_SIZE_Y, 32, 120)),
+        InvisibleWall(space, pygame.Rect(216, config.CANVAS_SIZE_Y, 32, 120)),
 
         LevelTransition(level_4, space, pygame.Rect(0, 0, 8, 22), pygame.Vector2(config.CANVAS_SIZE_X + 4, 76)),
 
