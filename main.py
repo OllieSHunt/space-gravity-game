@@ -107,6 +107,8 @@ while running:
                     pygame.event.post(pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.level_2}))
                 elif event.key == pygame.K_3:
                     pygame.event.post(pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.level_3}))
+                elif event.key == pygame.K_4:
+                    pygame.event.post(pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.level_4}))
 
     # fill the screen with a color to wipe away anything from last frame
     screen.fill("darkgrey")
@@ -141,7 +143,6 @@ while running:
             (screen.get_size()[1] / 2) - (scaled_main_surface.get_size()[1] / 2),
         )
     )
-
 
     # flip() draws to the screen
     pygame.display.flip()

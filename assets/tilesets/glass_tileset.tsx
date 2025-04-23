@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.11.2" name="glass_tileset" tilewidth="4" tileheight="4" tilecount="264" columns="24">
- <image source="../tilesets/glass_tileset.png" width="96" height="16"/>
+<tileset version="1.10" tiledversion="1.11.2" name="glass_tileset" tilewidth="4" tileheight="4" tilecount="144" columns="24">
+ <image source="glass_tileset.png" width="96" height="24"/>
  <tile id="1">
   <objectgroup draworder="index" id="2">
    <object id="1" x="0" y="0" width="4" height="4"/>

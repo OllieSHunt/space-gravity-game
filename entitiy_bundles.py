@@ -113,5 +113,51 @@ def level_3(space: pymunk.Space):
         InvisibleWall(space, pygame.Rect(244, -130, 8, 130)),
         InvisibleWall(space, pygame.Rect(224, -130, 24, 8)),
 
+        # These hazards are in the order you find them in the level
+
+        ElectricHazard(space, pygame.Vector2(206, 16), 90, pygame.Vector2(206, 36), 4700),
+        ElectricHazard(space, pygame.Vector2(206, 36), 270),
+
+        ElectricHazard(space, pygame.Vector2(181, 24), 90, pygame.Vector2(181, 44), 4200),
+        ElectricHazard(space, pygame.Vector2(181, 44), 270),
+
+        GravityButton(space, pygame.Vector2(119, 114), 270),
+
+        ElectricHazard(space, pygame.Vector2(124, 80), 180, pygame.Vector2(104, 96), 4000),
+        ElectricHazard(space, pygame.Vector2(104, 96), 0),
+
+        ElectricHazard(space, pygame.Vector2(124, 60), 180, pygame.Vector2(104, 76), 4500),
+        ElectricHazard(space, pygame.Vector2(104, 76), 0),
+
+        GravityButton(space, pygame.Vector2(84, 66), 270),
+
+        LevelTransition(level_4, space, pygame.Rect(0, 0, 32, 8), pygame.Vector2(32, config.CANVAS_SIZE_Y + 4)),
+
         Player(space, pygame.Vector2(231, -100)),
+    ]
+
+def level_4(space: pymunk.Space):
+    # Spawn entities
+    return [
+        StarBackground(),
+        TileMap(space, "assets/tilemaps/level4.tmx"),
+
+        # Invisable walls before the start of the level
+        InvisibleWall(space, pygame.Rect(24, -130, 8, 130)),
+        InvisibleWall(space, pygame.Rect(56, -130, 8, 130)),
+        InvisibleWall(space, pygame.Rect(24, -130, 40, 8)),
+
+        GravityButton(space, pygame.Vector2(28, 102), 270),
+        GravityButton(space, pygame.Vector2(208, 60), 90),
+        GravityButton(space, pygame.Vector2(272, 90), 270),
+
+        ElectricHazard(space, pygame.Vector2(191, 55), 225, pygame.Vector2(136, 24), 5000),
+        ElectricHazard(space, pygame.Vector2(136, 24), 90),
+
+        ElectricHazard(space, pygame.Vector2(196, 46), 180, pygame.Vector2(76, 32), 4500),
+        ElectricHazard(space, pygame.Vector2(76, 32), 45),
+
+        LevelTransition(level_4, space, pygame.Rect(0, 0, 8, 22), pygame.Vector2(config.CANVAS_SIZE_X + 4, 76)),
+
+        Player(space, pygame.Vector2(40, -100)),
     ]

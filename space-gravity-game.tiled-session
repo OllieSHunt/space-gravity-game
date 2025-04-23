@@ -22,27 +22,35 @@
             "scaleInEditor": 8.9405
         },
         "assets/tilemaps/level1.tmx": {
-            "scale": 2.5501,
+            "scale": 6.5478,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 205.28606721305044,
-                "y": 65.87976942080702
+                "x": 24.20660374476924,
+                "y": 85.06673997373164
             }
         },
         "assets/tilemaps/level2.tmx": {
             "scale": 6.112,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 147.66034031413614,
-                "y": 158.2133507853403
+                "x": 187.17277486910996,
+                "y": 123.85471204188481
             }
         },
         "assets/tilemaps/level3.tmx": {
-            "scale": 5.152,
+            "scale": 3.9781,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 93.0092255096654,
+                "y": 107.08629747869584
+            }
+        },
+        "assets/tilemaps/level4.tmx": {
+            "scale": 2.7189,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 123.73835403726709,
-                "y": 69.29347826086956
+                "x": 92.68454154253557,
+                "y": 80.54728015006069
             }
         },
         "assets/tilemaps/metal_plate_tileset.tsx": {
@@ -78,7 +86,8 @@
             "scaleInEditor": 8
         },
         "assets/tilesets/glass_tileset.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 6.0777,
+            "scaleInEditor": 12.3859
         },
         "assets/tilesets/metal_plate_tileset.tsx": {
             "scaleInDock": 5.1549,
@@ -115,18 +124,18 @@
     ],
     "project": "space-gravity-game.tiled-project",
     "recentFiles": [
-        "assets/tilemaps/level1.tmx",
-        "assets/tilesets/metal_plate_tileset.tsx",
-        "assets/tilemaps/level3.tmx",
         "assets/tilemaps/level2.tmx",
+        "assets/tilesets/metal_plate_tileset.tsx",
+        "assets/tilemaps/level1.tmx",
+        "assets/tilesets/glass_tileset.tsx",
+        "assets/tilemaps/level3.tmx",
         "assets/tilesets/pipe_tileset.tsx",
         "assets/tilesets/furniture_tileset.tsx",
         "assets/tilesets/signs_tileset.tsx",
         "assets/tilemaps/glass_tileset.tsx",
         "assets/tilesets/template_tileset.tsx",
         "assets/tilemaps/pipe_tileset.tsx",
-        "assets/tilemaps/metal_plate_tileset.tsx",
-        "assets/electric_hazard/electric_hazard.tsx"
+        "assets/tilemaps/metal_plate_tileset.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
