@@ -163,7 +163,14 @@ def level_4(space: pymunk.Space):
         InvisibleWall(space, pygame.Rect(0, config.CANVAS_SIZE_Y, 32, 120)),
         InvisibleWall(space, pygame.Rect(216, config.CANVAS_SIZE_Y, 32, 120)),
 
-        LevelTransition(level_4, space, pygame.Rect(0, 0, 8, 22), pygame.Vector2(config.CANVAS_SIZE_X + 4, 76)),
+        LevelTransition(level_5, space, pygame.Rect(0, 0, 8, 22), pygame.Vector2(config.CANVAS_SIZE_X + 4, 76)),
 
         Player(space, pygame.Vector2(40, -100)),
+    ]
+
+def level_5(space: pymunk.Space):
+    # Spawn entities
+    return [
+        StarBackground(),
+        TileMap(space, "assets/tilemaps/level5.tmx"),
     ]
