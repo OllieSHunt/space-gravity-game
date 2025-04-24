@@ -196,18 +196,38 @@ def level_5(space: pymunk.Space):
                 PlayerInteractPoint(
                     space,
                     config.font,
-                    "Press [f] to fix",
+                    "Press [i] to fix",
                     999,
-                    pygame.K_f,
+                    pygame.K_i,
                     lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
                         TimerEntity(rocket_booster.fix, 0),
                         PlayerInteractPoint(
                             space,
                             config.font,
-                            "Press [f] to fix",
+                            "Press [x] to fix",
                             999,
-                            pygame.K_f,
-                            rocket_booster.activate,
+                            pygame.K_x,
+                            lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                                TimerEntity(rocket_booster.activate, 0),
+                                TimerEntity(
+                                    lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                                        TextBox(
+                                            "Thank you for playing!",
+                                            config.font,
+                                            max_width=999,
+                                            pos=pygame.Vector2(157, 88),
+                                        ),
+                                        TimerEntity(
+                                            lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                                            TextBox(
+                                                "You have fixed the main rocket booster and completed the only quest in the game so far",
+                                                config.font,
+                                                max_width=25,
+                                                pos=pygame.Vector2(150, 100),
+                                            ),
+                                        ]})), 1000),
+                                ]})), 1000),
+                            ]})),
                             pygame.Vector2(53, 70)
                         ),
                     ]})),
