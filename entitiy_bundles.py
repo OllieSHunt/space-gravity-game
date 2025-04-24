@@ -183,6 +183,12 @@ def level_5(space: pymunk.Space):
         # Invisable wall at the start of the level
         InvisibleWall(space, pygame.Rect(-12, 76, 8, 24)),
 
+        # Invisable wall under the ship
+        InvisibleWall(space, pygame.Rect(0, config.CANVAS_SIZE_Y, 68, 120)),
+
+        # This kills the player if they fall off the space ship
+        HazardBox(space, pygame.Rect(0, config.CANVAS_SIZE_Y + 100, config.CANVAS_SIZE_X * 100, 16)),
+
         Player(space, pygame.Vector2(0, 88)),
 
         # Nested interaction points to create a small minigame
