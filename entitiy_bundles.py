@@ -223,12 +223,12 @@ def level_5(space: pymunk.Space):
                                             "Thank you for playing!",
                                             config.font,
                                             max_width=999,
-                                            pos=pygame.Vector2(157, 88),
+                                            pos=pygame.Vector2(159, 88),
                                         ),
                                         TimerEntity(
                                             lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
                                             TextBox(
-                                                "You have fixed the main rocket booster and completed the only quest in the game so far",
+                                                "You have fixed the rocket booster and completed the only quest in the game so far",
                                                 config.font,
                                                 max_width=25,
                                                 pos=pygame.Vector2(150, 100),
