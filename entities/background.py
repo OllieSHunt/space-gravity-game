@@ -7,13 +7,13 @@ import config
 # A background image that can optionaly scroll
 class StarBackground(Entity):
     def __init__(self, ship_moving=False):
-        self.set_ship_moving(ship_moving)
-
+        self.stars = []
         self.largest_star_size = pygame.Vector2(8, 8)
         self.background_color = pygame.Color(20, 16, 19)
 
+        self.set_ship_moving(ship_moving)
+
         self.load_star_images()
-        self.stars = []
 
         Entity.__init__(self, (0, 0))
 
@@ -62,6 +62,16 @@ class StarBackground(Entity):
             self.star_spawn_chance = 60 # Lower = higher chance
             self.min_star_speed = 0.03
             self.max_star_speed = 0.06
+
+        self.reset_star_speeds()
+
+    # This adjusts the speeds of all existing stars to be inline with the following variables:
+    # self.min_star_speed
+    # self.max_star_speed
+    def reset_star_speeds(self):
+        for star in self.stars:
+            speed = random.uniform(self.min_star_speed, self.max_star_speed)
+            star.speed = speed
 
     # Spawns some inital stars
     def spawn_inital_stars(self):

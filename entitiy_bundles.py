@@ -171,11 +171,12 @@ def level_4(space: pymunk.Space):
     ]
 
 def level_5(space: pymunk.Space):
+    background = StarBackground()
     rocket_booster = RocketBooster(pygame.Vector2(24, 12))
 
     # Spawn entities
     return [
-        StarBackground(),
+        background,
         rocket_booster,
         TileMap(space, "assets/tilemaps/level5.tmx"),
 
@@ -209,6 +210,7 @@ def level_5(space: pymunk.Space):
                             pygame.K_x,
                             lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
                                 TimerEntity(rocket_booster.activate, 0),
+                                TimerEntity(lambda: background.set_ship_moving(True), 250),
                                 TimerEntity(
                                     lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
                                         TextBox(
