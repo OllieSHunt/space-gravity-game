@@ -14,6 +14,7 @@ from entities.arrow import Arrow
 from entities.level_transition import LevelTransition
 from entities.hazzard_box import HazardBox
 from entities.rocket_booster import RocketBooster
+from entities.player_interact_point import PlayerInteractPoint
 from tile_map import TileMap
 from custom_events import *
 import config
@@ -183,6 +184,36 @@ def level_5(space: pymunk.Space):
 
         Player(space, pygame.Vector2(0, 88)),
 
-        TimerEntity(rocket_booster.fix, 2000),
-        TimerEntity(rocket_booster.activate, 4000),
+        # Nested interaction points to create a small minigame
+        PlayerInteractPoint(
+            space,
+            config.font,
+            "Press [f] to fix",
+            999,
+            pygame.K_f,
+            lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                TimerEntity(rocket_booster.fix, 0),
+                PlayerInteractPoint(
+                    space,
+                    config.font,
+                    "Press [f] to fix",
+                    999,
+                    pygame.K_f,
+                    lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                    TimerEntity(rocket_booster.fix, 0),
+                        PlayerInteractPoint(
+                            space,
+                            config.font,
+                            "Press [f] to fix",
+                            999,
+                            pygame.K_f,
+                            lambda: rocket_booster.activate(),
+                            pygame.Vector2(53, 70)
+                        ),
+                    ]})),
+                    pygame.Vector2(53, 70)
+                ),
+            ]})),
+            pygame.Vector2(53, 70)
+        ),
     ]
