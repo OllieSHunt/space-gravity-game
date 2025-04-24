@@ -227,8 +227,8 @@ def level_5(space: pymunk.Space):
                                                 max_width=25,
                                                 pos=pygame.Vector2(150, 100),
                                             ),
-                                        ]})), 1000),
-                                ]})), 1000),
+                                        ]})), 1500),
+                                ]})), 3000),
                             ]})),
                             pygame.Vector2(53, 70)
                         ),
