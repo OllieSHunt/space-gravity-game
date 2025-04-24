@@ -24,6 +24,10 @@ class RocketBooster(Entity):
         return self.anim_player.get_frame()
 
     # Switch this rocket booster to a fixed sprite
+    def mostly_fix(self):
+        self.anim_player.switch_animation("mostly_fixed_rocket")
+
+    # Switch this rocket booster to a fixed sprite
     def fix(self):
         self.anim_player.switch_animation("fixed_rocket")
 

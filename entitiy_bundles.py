@@ -192,7 +192,7 @@ def level_5(space: pymunk.Space):
             999,
             pygame.K_f,
             lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
-                TimerEntity(rocket_booster.fix, 0),
+                TimerEntity(rocket_booster.mostly_fix, 0),
                 PlayerInteractPoint(
                     space,
                     config.font,
@@ -200,20 +200,20 @@ def level_5(space: pymunk.Space):
                     999,
                     pygame.K_f,
                     lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
-                    TimerEntity(rocket_booster.fix, 0),
+                        TimerEntity(rocket_booster.fix, 0),
                         PlayerInteractPoint(
                             space,
                             config.font,
                             "Press [f] to fix",
                             999,
                             pygame.K_f,
-                            lambda: rocket_booster.activate(),
+                            rocket_booster.activate,
                             pygame.Vector2(53, 70)
                         ),
                     ]})),
-                    pygame.Vector2(53, 70)
+                    pygame.Vector2(24, 82)
                 ),
             ]})),
-            pygame.Vector2(53, 70)
+            pygame.Vector2(44, 74)
         ),
     ]
