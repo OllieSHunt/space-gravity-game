@@ -13,6 +13,7 @@ from entities.background import StarBackground
 from entities.arrow import Arrow
 from entities.level_transition import LevelTransition
 from entities.hazzard_box import HazardBox
+from entities.rocket_booster import RocketBooster
 from tile_map import TileMap
 from custom_events import *
 import config
@@ -169,8 +170,19 @@ def level_4(space: pymunk.Space):
     ]
 
 def level_5(space: pymunk.Space):
+    rocket_booster = RocketBooster(pygame.Vector2(24, 12))
+
     # Spawn entities
     return [
         StarBackground(),
+        rocket_booster,
         TileMap(space, "assets/tilemaps/level5.tmx"),
+
+        # Invisable wall at the start of the level
+        InvisibleWall(space, pygame.Rect(-12, 76, 8, 24)),
+
+        Player(space, pygame.Vector2(0, 88)),
+
+        TimerEntity(rocket_booster.fix, 2000),
+        TimerEntity(rocket_booster.activate, 4000),
     ]

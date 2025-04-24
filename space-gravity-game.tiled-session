@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "assets/tilemaps/level2.tmx",
+    "activeFile": "assets/tilemaps/level5.tmx",
     "expandedProjectPaths": [
-        "assets/tilesets",
         "assets/electric_hazard",
+        "assets/tilesets",
         "assets/tilemaps",
-        "assets",
-        "."
+        ".",
+        "assets"
     ],
     "fileStates": {
         "assets/electric_hazard/electric_hazard.tsx": {
@@ -25,23 +25,23 @@
             "scale": 6.5478,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 24.20660374476924,
+                "x": 24.282965270777975,
                 "y": 85.06673997373164
             }
         },
         "assets/tilemaps/level2.tmx": {
-            "scale": 6.112,
+            "scale": 2.4468,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 187.17277486910996,
-                "y": 123.85471204188481
+                "x": 129.96566944580675,
+                "y": 90.3220532940984
             }
         },
         "assets/tilemaps/level3.tmx": {
             "scale": 5.71,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 142.20665499124343,
+                "x": 142.20665499124345,
                 "y": 106.12959719789842
             }
         },
@@ -49,16 +49,16 @@
             "scale": 3.9908,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 75.17289766462864,
-                "y": 78.93154254786008
+                "x": 31.071464368046502,
+                "y": 78.43038989676255
             }
         },
         "assets/tilemaps/level5.tmx": {
             "scale": 4.4583,
-            "selectedLayer": 0,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 51.58917076015521,
-                "y": 74.9164479734428
+                "x": 126.95422021846892,
+                "y": 67.06592198820178
             }
         },
         "assets/tilemaps/metal_plate_tileset.tsx": {
@@ -91,7 +91,7 @@
         },
         "assets/tilesets/furniture_tileset.tsx": {
             "scaleInDock": 2.9626,
-            "scaleInEditor": 8
+            "scaleInEditor": 3.15
         },
         "assets/tilesets/glass_tileset.tsx": {
             "scaleInDock": 6.0777,
@@ -125,25 +125,24 @@
     "map.tileWidth": 4,
     "map.width": 72,
     "openFiles": [
-        "assets/tilemaps/level1.tmx",
-        "assets/tilemaps/level2.tmx",
-        "assets/tilemaps/level3.tmx",
-        "assets/tilesets/metal_plate_tileset.tsx"
+        "assets/tilemaps/level4.tmx",
+        "assets/tilemaps/level5.tmx",
+        "assets/tilesets/furniture_tileset.tsx"
     ],
     "project": "space-gravity-game.tiled-project",
     "recentFiles": [
+        "assets/tilesets/furniture_tileset.tsx",
+        "assets/tilemaps/level4.tmx",
         "assets/tilemaps/level3.tmx",
         "assets/tilemaps/level2.tmx",
-        "assets/tilesets/metal_plate_tileset.tsx",
         "assets/tilemaps/level1.tmx",
+        "assets/tilemaps/level5.tmx",
+        "assets/tilesets/metal_plate_tileset.tsx",
         "assets/tilesets/glass_tileset.tsx",
         "assets/tilesets/pipe_tileset.tsx",
-        "assets/tilesets/furniture_tileset.tsx",
         "assets/tilesets/signs_tileset.tsx",
         "assets/tilemaps/glass_tileset.tsx",
-        "assets/tilesets/template_tileset.tsx",
-        "assets/tilemaps/pipe_tileset.tsx",
-        "assets/tilemaps/metal_plate_tileset.tsx"
+        "assets/tilesets/template_tileset.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
