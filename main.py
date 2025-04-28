@@ -8,6 +8,7 @@ import entitiy_bundles
 import utils
 from custom_events import *
 from entities.player import Player
+from entities.score_counter import ScoreCounter
 
 # Setup stuff
 pygame.init()
@@ -86,7 +87,7 @@ while running:
             pygame.event.post(load_level_event)
 
         elif event.type == INCREACE_SCORE_EVENT:
-            utils.find_score_counter(entities).score += event.dict.get("score")
+            utils.find_first_of_type(entities, ScoreCounter).score += event.dict.get("score")
 
         elif event.type == pygame.KEYDOWN:
             # Toggle debug mode
