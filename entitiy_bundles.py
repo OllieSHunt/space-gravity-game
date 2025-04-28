@@ -15,6 +15,7 @@ from entities.level_transition import LevelTransition
 from entities.hazzard_box import HazardBox
 from entities.rocket_booster import RocketBooster
 from entities.player_interact_point import PlayerInteractPoint
+from entities.item import Item
 from tile_map import TileMap
 from custom_events import *
 import config
@@ -28,6 +29,8 @@ def level_1(space: pymunk.Space):
         StarBackground(),
         TileMap(space, "assets/tilemaps/level1.tmx"),
         AutoPilotNPC(pygame.Vector2(49, 75)),
+
+        Item(space, pygame.Vector2(178, 103)),
 
         # Invisable walls before the start of the level
         InvisibleWall(space, pygame.Rect(152, -130, 8, 130)),
