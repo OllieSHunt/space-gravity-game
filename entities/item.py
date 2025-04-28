@@ -36,4 +36,9 @@ class Item(SensorEntity):
     def sensor_just_activated(self):
         # Delete this item
         delete_event = pygame.event.Event(DELETE_ENTITIES_EVENT, {"entities": [self]})
+
+        # Increace the score
+        score_event = pygame.event.Event(INCREACE_SCORE_EVENT, {"score": 10})
+
         pygame.event.post(delete_event)
+        pygame.event.post(score_event)

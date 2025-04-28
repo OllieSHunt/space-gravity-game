@@ -37,3 +37,12 @@ LOAD_LEVEL_EVENT = pygame.event.custom_type()
 
 # This event restarts the current level
 RESTART_LEVEL_EVENT = pygame.event.custom_type()
+
+# Add points to the score counter
+#
+# This event should always be created with an attribute called "score".
+#
+# Example:
+# my_event = pygame.event.Event(INCREACE_SCORE_EVENT, {"score": 10})
+# pygame.event.post(my_event)
+INCREACE_SCORE_EVENT = pygame.event.custom_type()

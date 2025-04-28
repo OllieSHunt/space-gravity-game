@@ -28,6 +28,9 @@ entities = []
 # A callback to the funcion that sets up the current level
 current_level = entitiy_bundles.level_1
 
+# Increaced by picking up items
+player_score = 0
+
 # Spawn entities required for level 1
 pygame.event.post(pygame.event.Event(RESTART_LEVEL_EVENT))
 
@@ -84,6 +87,9 @@ while running:
         elif event.type == RESTART_LEVEL_EVENT:
             load_level_event = pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": current_level})
             pygame.event.post(load_level_event)
+
+        elif event.type == INCREACE_SCORE_EVENT:
+            player_score += event.dict.get("score")
 
         elif event.type == pygame.KEYDOWN:
             # Toggle debug mode
