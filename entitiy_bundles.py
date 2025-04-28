@@ -16,16 +16,27 @@ from entities.hazzard_box import HazardBox
 from entities.rocket_booster import RocketBooster
 from entities.player_interact_point import PlayerInteractPoint
 from entities.item import Item
+from entities.score_counter import ScoreCounter
 from tile_map import TileMap
 from custom_events import *
 import config
 
+# Having the score counter entity be global is probalby not the best way of
+# doing this, but it works for now. This variable is initalised in the level_1
+# function.
+score_counter = None
+
 def level_1(space: pymunk.Space):
+    # Initalise the score counter
+    global score_counter
+    score_counter = ScoreCounter()
+
     # Set gravity
     space.gravity = (0, config.GRAVITY_STRENGTH)
 
     # Spawn entities
     return [
+        score_counter,
         StarBackground(),
         TileMap(space, "assets/tilemaps/level1.tmx"),
         AutoPilotNPC(pygame.Vector2(49, 75)),
@@ -97,6 +108,7 @@ def level_1(space: pymunk.Space):
 def level_2(space: pymunk.Space):
     # Spawn entities
     return [
+        score_counter,
         StarBackground(),
         TileMap(space, "assets/tilemaps/level2.tmx"),
 
@@ -111,6 +123,7 @@ def level_2(space: pymunk.Space):
 def level_3(space: pymunk.Space):
     # Spawn entities
     return [
+        score_counter,
         StarBackground(),
         TileMap(space, "assets/tilemaps/level3.tmx"),
 
@@ -145,6 +158,7 @@ def level_3(space: pymunk.Space):
 def level_4(space: pymunk.Space):
     # Spawn entities
     return [
+        score_counter,
         StarBackground(),
         TileMap(space, "assets/tilemaps/level4.tmx"),
 
@@ -179,6 +193,7 @@ def level_5(space: pymunk.Space):
 
     # Spawn entities
     return [
+        score_counter,
         background,
         rocket_booster,
         TileMap(space, "assets/tilemaps/level5.tmx"),
@@ -236,6 +251,15 @@ def level_5(space: pymunk.Space):
                                                 max_width=25,
                                                 pos=pygame.Vector2(150, 100),
                                             ),
+                                            TimerEntity(
+                                                lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                                                TextBox(
+                                                    "Your final score was: " + str(score_counter.score),
+                                                    config.font,
+                                                    max_width=20,
+                                                    pos=pygame.Vector2(170, 130),
+                                                ),
+                                            ]})), 1500),
                                         ]})), 1500),
                                 ]})), 3000),
                             ]})),

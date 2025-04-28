@@ -7,7 +7,16 @@ import math
 from typing import Any
 
 import config
+from entities.score_counter import ScoreCounter
 from collision_handlers import *
+
+# Find a the first score counter entity in a list of score counters
+def find_score_counter(entities: list[Any]) -> ScoreCounter | None:
+    for entity in entities:
+        if isinstance(entity, ScoreCounter):
+            return entity
+
+    return None
 
 # Creates a new pymunk Space and sets it up
 def new_pymunk_space() -> pymunk.Space:
