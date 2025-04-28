@@ -41,7 +41,9 @@ def level_1(space: pymunk.Space):
         TileMap(space, "assets/tilemaps/level1.tmx"),
         AutoPilotNPC(pygame.Vector2(49, 75)),
 
-        Item(space, pygame.Vector2(178, 103)),
+        Item(space, pygame.Vector2(246, 95)),
+        Item(space, pygame.Vector2(102, 69)),
+        Item(space, pygame.Vector2(256, 71)),
 
         # Invisable walls before the start of the level
         InvisibleWall(space, pygame.Rect(152, -130, 8, 130)),
@@ -112,6 +114,9 @@ def level_2(space: pymunk.Space):
         StarBackground(),
         TileMap(space, "assets/tilemaps/level2.tmx"),
 
+        Item(space, pygame.Vector2(76, 83)),
+        Item(space, pygame.Vector2(183, 83)),
+
         # Invisable wall at the start of the level
         InvisibleWall(space, pygame.Rect(-12, 56, 8, 24)),
 
@@ -126,6 +131,10 @@ def level_3(space: pymunk.Space):
         score_counter,
         StarBackground(),
         TileMap(space, "assets/tilemaps/level3.tmx"),
+
+        Item(space, pygame.Vector2(165, 29)),
+        Item(space, pygame.Vector2(163, 115)),
+        Item(space, pygame.Vector2(68, 67)),
 
         # Invisable walls before the start of the level
         InvisibleWall(space, pygame.Rect(224, -130, 8, 130)),
@@ -161,6 +170,11 @@ def level_4(space: pymunk.Space):
         score_counter,
         StarBackground(),
         TileMap(space, "assets/tilemaps/level4.tmx"),
+
+        Item(space, pygame.Vector2(165, 29)),
+        Item(space, pygame.Vector2(160, 86)),
+        Item(space, pygame.Vector2(120, 86)),
+        Item(space, pygame.Vector2(80, 86)),
 
         # Invisable walls before the start of the level
         InvisibleWall(space, pygame.Rect(24, -130, 8, 130)),
