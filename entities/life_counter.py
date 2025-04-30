@@ -1,12 +1,13 @@
 import pygame
 
 from entities.entity import Entity
+import config
 
 class LifeCounter(Entity):
     def __init__(self, font: pygame.font.Font, pos: pygame.Vector2=pygame.Vector2(0, 0)):
         self.font = font
 
-        self.lives = 3
+        self.lives = config.PLAYER_LIVES
         self.background_color = "white"
 
         self.last_blink_time = 0
