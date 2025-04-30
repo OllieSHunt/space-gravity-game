@@ -20,6 +20,9 @@ PLAYER_OBJECT_CATEGORY = 0b1
 # For player collisions with hazards
 def handle_player_hazard_collision(arbiter: pymunk.Arbiter, space: pymunk.Space, data):
     restart_event = pygame.event.Event(RESTART_LEVEL_EVENT)
+    player_life_event = pygame.event.Event(PLAYER_MINUS_LIFE)
+
     pygame.event.post(restart_event)
+    pygame.event.post(player_life_event)
 
     return True

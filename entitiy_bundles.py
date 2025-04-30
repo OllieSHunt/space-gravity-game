@@ -17,6 +17,7 @@ from entities.rocket_booster import RocketBooster
 from entities.player_interact_point import PlayerInteractPoint
 from entities.item import Item
 from entities.score_counter import ScoreCounter
+from entities.life_counter import LifeCounter
 from tile_map import TileMap
 from custom_events import *
 import config
@@ -26,17 +27,21 @@ import config
 # function.
 score_counter = None
 
+# See scrore_counter's comment
+life_counter = None
+
 def level_1(space: pymunk.Space):
-    # Initalise the score counter
+    # Initalise the score and life counter
     global score_counter
+    global life_counter
     score_counter = ScoreCounter()
+    life_counter = LifeCounter(config.font)
 
     # Set gravity
     space.gravity = (0, config.GRAVITY_STRENGTH)
 
     # Spawn entities
     return [
-        score_counter,
         StarBackground(),
         TileMap(space, "assets/tilemaps/level1.tmx"),
         AutoPilotNPC(pygame.Vector2(49, 75)),
@@ -105,12 +110,15 @@ def level_1(space: pymunk.Space):
                 ]})), 18000),
             ]})), 45000),
         ]})), 4000),
+
+        # UI entities go last so they render on top
+        score_counter,
+        life_counter,
     ]
 
 def level_2(space: pymunk.Space):
     # Spawn entities
     return [
-        score_counter,
         StarBackground(),
         TileMap(space, "assets/tilemaps/level2.tmx"),
 
@@ -123,12 +131,15 @@ def level_2(space: pymunk.Space):
         LevelTransition(level_3, space, pygame.Rect(0, 0, 20, 8), pygame.Vector2(228, config.CANVAS_SIZE_Y + 4)),
 
         Player(space, pygame.Vector2(0, 68)),
+
+        # UI entities go last so they render on top
+        score_counter,
+        life_counter,
     ]
 
 def level_3(space: pymunk.Space):
     # Spawn entities
     return [
-        score_counter,
         StarBackground(),
         TileMap(space, "assets/tilemaps/level3.tmx"),
 
@@ -162,12 +173,15 @@ def level_3(space: pymunk.Space):
         LevelTransition(level_4, space, pygame.Rect(0, 0, 32, 8), pygame.Vector2(32, config.CANVAS_SIZE_Y + 4)),
 
         Player(space, pygame.Vector2(231, -100)),
+
+        # UI entities go last so they render on top
+        score_counter,
+        life_counter,
     ]
 
 def level_4(space: pymunk.Space):
     # Spawn entities
     return [
-        score_counter,
         StarBackground(),
         TileMap(space, "assets/tilemaps/level4.tmx"),
 
@@ -199,6 +213,10 @@ def level_4(space: pymunk.Space):
         LevelTransition(level_5, space, pygame.Rect(0, 0, 8, 22), pygame.Vector2(config.CANVAS_SIZE_X + 4, 76)),
 
         Player(space, pygame.Vector2(40, -100)),
+
+        # UI entities go last so they render on top
+        score_counter,
+        life_counter,
     ]
 
 def level_5(space: pymunk.Space):
@@ -207,7 +225,7 @@ def level_5(space: pymunk.Space):
 
     # Spawn entities
     return [
-        score_counter,
+
         background,
         rocket_booster,
         TileMap(space, "assets/tilemaps/level5.tmx"),
@@ -285,4 +303,8 @@ def level_5(space: pymunk.Space):
             ]})),
             pygame.Vector2(44, 74)
         ),
+
+        # UI entities go last so they render on top
+        score_counter,
+        life_counter,
     ]

@@ -9,6 +9,7 @@ import utils
 from custom_events import *
 from entities.player import Player
 from entities.score_counter import ScoreCounter
+from entities.life_counter import LifeCounter
 
 # Setup stuff
 pygame.init()
@@ -83,11 +84,21 @@ while running:
             current_level = level_callback
 
         elif event.type == RESTART_LEVEL_EVENT:
+            # Send a LOAD_LEVEL_EVENT for the current level
             load_level_event = pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": current_level})
             pygame.event.post(load_level_event)
 
         elif event.type == INCREACE_SCORE_EVENT:
             utils.find_first_of_type(entities, ScoreCounter).score += event.dict.get("score")
+
+        elif event.type == PLAYER_MINUS_LIFE:
+            # Remove a life 
+            life_counter = utils.find_first_of_type(entities, LifeCounter)
+            life_counter.lives -= 1
+
+            if life_counter.lives <= 0:
+                load_level_event = pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.level_1})
+                pygame.event.post(load_level_event)
 
         elif event.type == pygame.KEYDOWN:
             # Toggle debug mode

@@ -34,9 +34,11 @@ DELETE_ENTITIES_EVENT = pygame.event.custom_type()
 # pygame.event.post(my_event)
 LOAD_LEVEL_EVENT = pygame.event.custom_type()
 
-
 # This event restarts the current level
 RESTART_LEVEL_EVENT = pygame.event.custom_type()
+
+# Subracts one life from the player
+PLAYER_MINUS_LIFE = pygame.event.custom_type()
 
 # Add points to the score counter
 #
