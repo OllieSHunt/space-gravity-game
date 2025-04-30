@@ -125,6 +125,8 @@ while running:
                 elif event.key == pygame.K_4:
                     pygame.event.post(pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.level_4}))
                 elif event.key == pygame.K_5:
+                    pygame.event.post(pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.timed_level}))
+                elif event.key == pygame.K_6:
                     pygame.event.post(pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.level_5}))
 
     # fill the screen with a color to wipe away anything from last frame

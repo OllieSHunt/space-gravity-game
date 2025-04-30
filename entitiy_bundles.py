@@ -210,9 +210,85 @@ def level_4(space: pymunk.Space):
         InvisibleWall(space, pygame.Rect(0, config.CANVAS_SIZE_Y, 32, 120)),
         InvisibleWall(space, pygame.Rect(216, config.CANVAS_SIZE_Y, 32, 120)),
 
-        LevelTransition(level_5, space, pygame.Rect(0, 0, 8, 22), pygame.Vector2(config.CANVAS_SIZE_X + 4, 76)),
+        LevelTransition(timed_level, space, pygame.Rect(0, 0, 8, 22), pygame.Vector2(config.CANVAS_SIZE_X + 4, 76)),
 
         Player(space, pygame.Vector2(40, -100)),
+
+        # UI entities go last so they render on top
+        score_counter,
+        life_counter,
+    ]
+
+def timed_level(space: pymunk.Space):
+    background = StarBackground()
+    rocket_booster = RocketBooster(pygame.Vector2(24, 12))
+
+    # Spawn entities
+    return [
+        background,
+        TileMap(space, "assets/tilemaps/timed_level.tmx"),
+
+        # Invisable wall at the start of the level
+        InvisibleWall(space, pygame.Rect(-12, 76, 8, 24)),
+
+        Item(space, pygame.Vector2(101, 37)),
+        Item(space, pygame.Vector2(115, 37)),
+        Item(space, pygame.Vector2(196, 103)),
+        Item(space, pygame.Vector2(212, 103)),
+
+        GravityButton(space, pygame.Vector2(84, 102), 270),
+        GravityButton(space, pygame.Vector2(123, 39), 180),
+        GravityButton(space, pygame.Vector2(176, 50), 270),
+
+        ElectricHazard(space, pygame.Vector2(216, 56), 180, pygame.Vector2(188, 64), 4700),
+        ElectricHazard(space, pygame.Vector2(188, 64), 0),
+
+        ElectricHazard(space, pygame.Vector2(79, 68), 90, pygame.Vector2(56, 105), 4500),
+        ElectricHazard(space, pygame.Vector2(56, 105), 270),
+
+        LevelTransition(level_5, space, pygame.Rect(0, 0, 8, 22), pygame.Vector2(config.CANVAS_SIZE_X + 4, 76)),
+
+        Player(space, pygame.Vector2(0, 88)),
+
+        # This count down until section colapse
+        TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+            TextBox([
+                "Anouncment!",
+                "This section is dangoursly unstable",
+                "Evacuate imidiatly!",
+            ], config.font, 3000, 30, (4, 44)),
+
+            # Nested timer to send another measage after delay
+            TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                TextBox("40 seconds untill colapse", config.font, 5000, 30, (4, 44)),
+                TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                    TextBox("30 seconds untill colapse", config.font, 5000, 30, (4, 44)),
+                    TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                        TextBox("20 seconds untill colapse", config.font, 5000, 30, (4, 44)),
+                        TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                            TextBox("10 seconds untill colapse", config.font, 5000, 30, (4, 44)),
+                            TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                                TextBox("5 seconds untill colapse", config.font, 5000, 30, (4, 44)),
+                                TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                                    TextBox("4 seconds untill colapse", config.font, 5000, 30, (4, 44)),
+                                    TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                                        TextBox("3 seconds untill colapse", config.font, 5000, 30, (4, 44)),
+                                        TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                                            TextBox("2 seconds untill colapse", config.font, 5000, 30, (4, 44)),
+                                            TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                                                TextBox("1 seconds untill colapse", config.font, 5000, 30, (4, 44)),
+                                                TimerEntity(lambda: pygame.event.post(pygame.event.Event(RESTART_LEVEL_EVENT)), 1000),
+                                                TimerEntity(lambda: pygame.event.post(pygame.event.Event(PLAYER_MINUS_LIFE)), 1000),
+                                            ]})), 1000),
+                                        ]})), 1000),
+                                    ]})), 1000),
+                                ]})), 1000),
+                            ]})), 5000),
+                        ]})), 10000),
+                    ]})), 10000),
+                ]})), 10000),
+            ]})), 11000),
+        ]})), 1000),
 
         # UI entities go last so they render on top
         score_counter,
@@ -225,7 +301,6 @@ def level_5(space: pymunk.Space):
 
     # Spawn entities
     return [
-
         background,
         rocket_booster,
         TileMap(space, "assets/tilemaps/level5.tmx"),
