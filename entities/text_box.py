@@ -9,13 +9,16 @@ import utils
 #
 # This can display some constant text, or switch texts after a delay. When
 # there is not more text to show, it will delete itself.
+#
+# This text can optoinaly flash red.
 class TextBox(Entity):
     def __init__(self,
                 text: list[str] | str,
                 font: pygame.font.Font,
                 delay: int=None,
                 max_width: int = 99999,
-                pos: pygame.Vector2 = pygame.Vector2(0, 0)
+                pos: pygame.Vector2 = pygame.Vector2(0, 0),
+                urgent: bool = False,
             ):
         self.border_size = 1
         self.padding = 1
@@ -26,6 +29,13 @@ class TextBox(Entity):
 
         self.delay = delay
         self.timer_last_tick = pygame.time.get_ticks()
+
+        # Variables related to the text flashing red when the "urgent" param is set to True
+        self.is_flashing = urgent
+        self.last_flash_time = pygame.time.get_ticks()
+        self.colour = pygame.Color("white")
+        self.last_colour = self.colour # This is used to tell if the colour has changed
+        self.flash_frequency = 250
 
         # all_texts will be set if this box should scroll between several texts
         self.all_texts = None
@@ -89,11 +99,23 @@ class TextBox(Entity):
                     delete_event = pygame.event.Event(DELETE_ENTITIES_EVENT, {"entities": [self]})
                     pygame.event.post(delete_event)
 
+        # If the text is flashing, and enough time cince the last flash as past
+        if self.is_flashing and pygame.time.get_ticks() - self.last_flash_time > self.flash_frequency:
+            self.last_flash_time = pygame.time.get_ticks()
+            
+            # Toggle the box's colour between red and white
+            if self.colour == pygame.Color("white"):
+                self.colour = pygame.Color("red")
+            elif self.colour == pygame.Color("red"):
+                self.colour = pygame.Color("white")
+
     # Inherated from the Entity class
     def draw(self, other_surface: pygame.Surface):
         # Only re-render the text when the text changes
-        if self.text != self.last_frame_text:
+        if self.text != self.last_frame_text or self.colour != self.last_colour:
             self.last_frame_text = self.text
+            self.last_colour = self.colour
+
             self.render_text_box()
 
         other_surface.blit(self.image, self.position)
@@ -108,7 +130,7 @@ class TextBox(Entity):
 
         # Text background and border
         self.image.fill(pygame.color.Color("black"))
-        self.image.fill(pygame.color.Color("white"), (
+        self.image.fill(self.colour, (
             (self.border_size, self.border_size),
             (self.width - (self.border_size * 2), self.height - (self.border_size * 2)),
         ))
