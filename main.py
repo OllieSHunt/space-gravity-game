@@ -19,7 +19,7 @@ clock = pygame.time.Clock()
 space = utils.new_pymunk_space()
 
 # Load fonts
-config.font = pygame.font.Font('assets/PoppkornRegular-MzKY.ttf', 8)
+config.font = pygame.font.Font('assets/DisposableDroidBB.ttf', 12)
 
 # This list will keep track of all things in the game. e.g. the player, etc...
 #

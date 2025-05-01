@@ -256,27 +256,27 @@ def timed_level(space: pymunk.Space):
                 "Announcement!",
                 "This section is dangerously unstable",
                 "Evacuate immediately!",
-            ], config.font, 3000, 30, (4, 44)),
+            ], config.font, 3000, 30, (4, 110)),
 
             # Nested timer to send another measage after delay
             TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
-                TextBox("40 seconds untill colapse", config.font, 5000, 30, (4, 44)),
+                TextBox("40 seconds untill colapse", config.font, 5000, 30, (4, 110)),
                 TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
-                    TextBox("30 seconds untill colapse", config.font, 5000, 30, (4, 44)),
+                    TextBox("30 seconds untill colapse", config.font, 5000, 30, (4, 110)),
                     TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
-                        TextBox("20 seconds untill colapse", config.font, 5000, 30, (4, 44)),
+                        TextBox("20 seconds untill colapse", config.font, 5000, 30, (4, 110)),
                         TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
-                            TextBox("10 seconds untill colapse", config.font, 5000, 30, (4, 44)),
+                            TextBox("10 seconds untill colapse", config.font, 5000, 30, (4, 110)),
                             TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
-                                TextBox("5 seconds untill colapse", config.font, 5000, 30, (4, 44)),
+                                TextBox("5 seconds untill colapse", config.font, 5000, 30, (4, 110)),
                                 TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
-                                    TextBox("4 seconds untill colapse", config.font, 5000, 30, (4, 44)),
+                                    TextBox("4 seconds untill colapse", config.font, 5000, 30, (4, 110)),
                                     TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
-                                        TextBox("3 seconds untill colapse", config.font, 5000, 30, (4, 44)),
+                                        TextBox("3 seconds untill colapse", config.font, 5000, 30, (4, 110)),
                                         TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
-                                            TextBox("2 seconds untill colapse", config.font, 5000, 30, (4, 44)),
+                                            TextBox("2 seconds untill colapse", config.font, 5000, 30, (4, 110)),
                                             TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
-                                                TextBox("1 seconds untill colapse", config.font, 5000, 30, (4, 44)),
+                                                TextBox("1 seconds untill colapse", config.font, 5000, 30, (4, 110)),
                                                 TimerEntity(lambda: pygame.event.post(pygame.event.Event(RESTART_LEVEL_EVENT)), 1000),
                                                 TimerEntity(lambda: pygame.event.post(pygame.event.Event(PLAYER_MINUS_LIFE)), 1000),
                                             ]})), 1000),
