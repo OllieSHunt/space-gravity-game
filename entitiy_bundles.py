@@ -74,7 +74,7 @@ def level_1(space: pymunk.Space):
                 "As you can see, we're moving rather slowly at the moment.",
                 "This is due to a malfunctioning thruster.",
                 "Do you think you could fix it for me?",
-                "Our pasengers are counting on you so please hurry.",
+                "Our passengers are counting on you so please hurry.",
                 "...",
             ], config.font, 5000, 30, (40, 110)),
 
@@ -82,8 +82,8 @@ def level_1(space: pymunk.Space):
             TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
                 TextBox([
                     "You may need to use these blue gravity buttons to assist you.",
-                    "I'm sure the pasengers won't mind a few switches in gravity...",
-                    "...as long as you don't do it too offten.",
+                    "I'm sure the passengers won't mind a few switches in gravity...",
+                    "...as long as you don't do it too often.",
                 ], config.font, 5000, 30, (40, 110)),
 
                 # Spawn arrow pointing at gravity button
@@ -93,7 +93,7 @@ def level_1(space: pymunk.Space):
                 TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
                     TextBox([
                         "Oh, and one more thing...",
-                        "Don't forget about your magnet atachment!",
+                        "Don't forget about your magnet attachment!",
                         "You can activate it by pressing [ENTER]",
                     ], config.font, 5000, 30, (40, 110)),
 
@@ -101,7 +101,7 @@ def level_1(space: pymunk.Space):
                     TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
                         TextBox([
                             "You're still here?",
-                            "Remember, our pasengers are counting on you!",
+                            "Remember, our passengers are counting on you!",
                             "You can use [ENTER] to toggle your magnet...",
                             "...and toggle gravity using these blue buttons.",
                             "Please hurry and fix the thruster.",
@@ -253,9 +253,9 @@ def timed_level(space: pymunk.Space):
         # This count down until section colapse
         TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
             TextBox([
-                "Anouncment!",
-                "This section is dangoursly unstable",
-                "Evacuate imidiatly!",
+                "Announcement!",
+                "This section is dangerously unstable",
+                "Evacuate immediately!",
             ], config.font, 3000, 30, (4, 44)),
 
             # Nested timer to send another measage after delay
@@ -361,7 +361,7 @@ def level_5(space: pymunk.Space):
                                             TimerEntity(
                                                 lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
                                                 TextBox(
-                                                    "Your final score was: " + str(score_counter.score),
+                                                    "Your final score is: " + str(score_counter.score),
                                                     config.font,
                                                     max_width=20,
                                                     pos=pygame.Vector2(170, 130),
