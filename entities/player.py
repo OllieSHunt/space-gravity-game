@@ -99,7 +99,7 @@ class Player(PhysicsEntity):
                     self.moving_left = True
                 elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                     self.moving_right = True
-                elif event.key == pygame.K_UP or event.key == pygame.K_SPACE or event.key == pygame.K_w:
+                elif event.key == pygame.K_SPACE:
                     self.starting_jump = True
                 elif event.key == pygame.K_e or event.key == pygame.K_RETURN:
                     self.magnet_active = not self.magnet_active
