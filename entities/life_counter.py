@@ -4,7 +4,7 @@ from entities.entity import Entity
 import config
 
 class LifeCounter(Entity):
-    def __init__(self, font: pygame.font.Font, pos: pygame.Vector2=pygame.Vector2(0, 0)):
+    def __init__(self, font: pygame.font.Font):
         self.font = font
 
         self.lives = config.PLAYER_LIVES
@@ -13,7 +13,7 @@ class LifeCounter(Entity):
         self.last_blink_time = 0
         self.blink_interval = 250
 
-        Entity.__init__(self, pos)
+        Entity.__init__(self, pygame.Vector2(242, 0))
     
     # Inherated from the Entity class
     def draw(self, other_surface: pygame.Surface):
@@ -31,5 +31,5 @@ class LifeCounter(Entity):
             else:
                 raise Error("Unexpected background color for LifeCounter")
 
-        text_surface = self.font.render("Lives: " + str(self.lives), False, "black", self.background_color)
-        other_surface.blit(text_surface, (0, 0))
+        text_surface = self.font.render("Lives: " + str(self.lives) + " ", False, "black", self.background_color)
+        other_surface.blit(text_surface, self.position)
