@@ -1,6 +1,6 @@
 import pygame
 
-# This class represents anything in the world like space invaders, or the
+# This class represents anything in the world like NPCs, or the
 # player. You can inherit it from another class to create a new type of
 # entity.
 class Entity(pygame.sprite.Sprite):
