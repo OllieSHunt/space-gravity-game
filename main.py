@@ -29,9 +29,9 @@ config.font = pygame.font.Font('assets/ByteBounce.ttf', 15)
 entities = []
 
 # A callback to the funcion that sets up the current level
-current_level = entitiy_bundles.level_1
+current_level = entitiy_bundles.main_menu
 
-# Spawn entities required for level 1
+# Spawn entities required for the main menu
 pygame.event.post(pygame.event.Event(RESTART_LEVEL_EVENT))
 
 # Debug mode enables the rendering of hitboxes and stuff
@@ -108,7 +108,7 @@ while running:
 
             # Enable additional keybinds when in debug mode
             if debug_mode:
-                if event.key == pygame.K_0:
+                if event.key == pygame.K_BACKSPACE:
                     # Teleport to the mouse cursor
                     pos = utils.screen_to_world(pygame.mouse.get_pos(), screen)
                     print(pos)
@@ -116,7 +116,9 @@ while running:
                     if player != None:
                         player.body.position = pymunk.Vec2d(pos.x, pos.y)
 
-                # Keys 1-9 take you to a specific level
+                # Keys 0-9 take you to a specific level
+                elif event.key == pygame.K_0:
+                    pygame.event.post(pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.main_menu}))
                 elif event.key == pygame.K_1:
                     pygame.event.post(pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.level_1}))
                 elif event.key == pygame.K_2:

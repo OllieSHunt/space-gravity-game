@@ -18,6 +18,7 @@ from entities.player_interact_point import PlayerInteractPoint
 from entities.item import Item
 from entities.score_counter import ScoreCounter
 from entities.life_counter import LifeCounter
+from entities.key_listener import KeyListener
 from tile_map import TileMap
 from custom_events import *
 import config
@@ -30,13 +31,29 @@ score_counter = None
 # See scrore_counter's comment
 life_counter = None
 
-def level_1(space: pymunk.Space):
+def main_menu(space: pymunk.Space):
     # Initalise the score and life counter
     global score_counter
     global life_counter
     score_counter = ScoreCounter()
     life_counter = LifeCounter(config.font)
 
+    # Set gravity
+    space.gravity = (0, config.GRAVITY_STRENGTH)
+
+    # Spawn entities
+    return [
+        StarBackground(),
+
+        TextBox("Press [SPACE] to start", config.font, pos=(78, 75)),
+
+        KeyListener(
+            pygame.K_SPACE,
+            lambda: pygame.event.post(pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": level_1}))
+        ),
+    ]
+
+def level_1(space: pymunk.Space):
     # Set gravity
     space.gravity = (0, config.GRAVITY_STRENGTH)
 
