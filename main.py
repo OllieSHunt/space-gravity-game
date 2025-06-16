@@ -145,9 +145,14 @@ while running:
     # Update physics
     space.step(1 / config.FPS_TARGET)
 
-    # Draw physics bodies
+    # Draw some things only when in debug mode
     if debug_mode:
+        # Draw physics bodies
         space.debug_draw(pymunk.pygame_util.DrawOptions(main_surface))
+
+        # Draw debug mode indicator
+        debug_font_surface = config.font.render("DEBUG MODE ENABLED", False, "red", "black")
+        main_surface.blit(debug_font_surface, (0, 0))
     
     # Scale the game screen
     scale_multiplyer = utils.get_screen_to_world_multiplyer(screen)
