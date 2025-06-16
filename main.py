@@ -13,7 +13,8 @@ from entities.life_counter import LifeCounter
 
 # Setup stuff
 pygame.init()
-screen = pygame.display.set_mode((700, 500), pygame.RESIZABLE)
+screen = pygame.display.set_mode((pygame.display.Info().current_w, pygame.display.Info().current_h), pygame.RESIZABLE | pygame.FULLSCREEN)
+# screen = pygame.display.set_mode((700, 500), pygame.RESIZABLE)
 main_surface = pygame.Surface((config.CANVAS_SIZE_X, config.CANVAS_SIZE_Y))
 clock = pygame.time.Clock()
 space = utils.new_pymunk_space()
