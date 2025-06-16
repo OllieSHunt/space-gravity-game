@@ -98,7 +98,7 @@ while running:
             life_counter.lives -= 1
 
             if life_counter.lives <= 0:
-                load_level_event = pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.level_1})
+                load_level_event = pygame.event.Event(LOAD_LEVEL_EVENT, {"level_callback": entitiy_bundles.main_menu})
                 pygame.event.post(load_level_event)
 
         elif event.type == pygame.KEYDOWN:
