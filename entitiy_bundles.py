@@ -32,7 +32,7 @@ score_counter = None
 life_counter = None
 
 def main_menu(space: pymunk.Space):
-    # Initalise the score and life counter
+    # Initialize the score and life counter
     global score_counter
     global life_counter
     score_counter = ScoreCounter()

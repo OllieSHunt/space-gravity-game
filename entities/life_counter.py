@@ -1,35 +1,33 @@
 import pygame
 
-from entities.entity import Entity
+from entities.text_box import TextBox
 import config
 
-class LifeCounter(Entity):
+class LifeCounter(TextBox):
     def __init__(self, font: pygame.font.Font):
-        self.font = font
-
         self.lives = config.PLAYER_LIVES
-        self.background_color = "white"
 
-        self.last_blink_time = 0
-        self.blink_interval = 250
+        # This keeps track of what the lives counter said last frame.
+        self.prev_lives = self.lives
 
-        Entity.__init__(self, pygame.Vector2(242, 0))
-    
+        # Parent's constructor
+        TextBox.__init__(self,
+            text = "Lives: " + str(self.lives) + " ",
+            font = font,
+            pos = pygame.Vector2(239, -2),
+        )    
+
     # Inherated from the Entity class
     def draw(self, other_surface: pygame.Surface):
-        # TODO: An icon for each life instead of just text.
+        # Only update text if something has changed
+        if self.lives != self.prev_lives:
+            self.text = "Lives: " + str(self.lives) + " "
 
-        # Blink red if on last life
-        if self.lives <= 1 and pygame.time.get_ticks() - self.last_blink_time > self.blink_interval:
-            self.last_blink_time = pygame.time.get_ticks()
+            # Flash red if only one life left
+            if self.lives <= 1:
+                self.is_flashing = True
 
-            # Switch between white and red
-            if self.background_color == "white":
-                self.background_color = "red"
-            elif self.background_color == "red":
-                self.background_color = "white"
-            else:
-                raise Error("Unexpected background color for LifeCounter")
+        self.prev_lives = self.lives
 
-        text_surface = self.font.render("Lives: " + str(self.lives) + " ", False, "black", self.background_color)
-        other_surface.blit(text_surface, self.position)
+        # Call this same function in the parent class
+        super().draw(other_surface)
