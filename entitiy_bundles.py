@@ -68,47 +68,53 @@ def level_1(space: pymunk.Space):
         TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
             TextBox([
                 "Oh!",
-                "Hello there robot 3742.",
-                "...",
-                "As you're here, could you do me a favour?",
-                "As you can see, we're moving rather slowly at the moment.",
-                "This is due to a malfunctioning thruster.",
-                "Do you think you could fix it for me?",
-                "Our passengers are counting on you so please hurry.",
-                "...",
-            ], config.font, 5000, 30, (40, 110)),
+            ], config.font, 4000, 30, (76, 80)),
 
             # Nested timer to add pauses
             TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
                 TextBox([
-                    "You may need to use these blue gravity buttons to assist you.",
-                    "I'm sure the passengers won't mind a few switches in gravity...",
-                    "...as long as you don't do it too often.",
+                    "Hello there robot 3742.",
+                    "...",
+                    "As you're here, could you do me a favour?",
+                    "As you can see, we're moving rather slowly at the moment.",
+                    "This is due to a malfunctioning thruster.",
+                    "Do you think you could fix it for me?",
+                    "Our passengers are counting on you so please hurry.",
+                    "...",
                 ], config.font, 5000, 30, (40, 110)),
-
-                # Spawn arrow pointing at gravity button
-                Arrow(pygame.Vector2(74, 86)),
 
                 # Nested timer to add pauses
                 TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
                     TextBox([
-                        "Oh, and one more thing...",
-                        "Don't forget about your magnet attachment!",
-                        "You can activate it by pressing [ENTER]",
+                        "You may need to use these blue gravity buttons to assist you.",
+                        "I'm sure the passengers won't mind a few switches in gravity...",
+                        "...as long as you don't do it too often.",
                     ], config.font, 5000, 30, (40, 110)),
 
-                    # Give the player another prompt if they are stuck
+                    # Spawn arrow pointing at gravity button
+                    Arrow(pygame.Vector2(74, 86)),
+
+                    # Nested timer to add pauses
                     TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
                         TextBox([
-                            "You're still here?",
-                            "Remember, our passengers are counting on you!",
-                            "You can use [ENTER] to toggle your magnet...",
-                            "...and toggle gravity using these blue buttons.",
-                            "Please hurry and fix the thruster.",
-                        ], config.font, 5000, 30, (40, 110))
-                    ]})), 120000),
-                ]})), 18000),
-            ]})), 45000),
+                            "Oh, and one more thing...",
+                            "Don't forget about your magnet attachment!",
+                            "You can activate it by pressing [ENTER]",
+                        ], config.font, 5000, 30, (40, 110)),
+
+                        # Give the player another prompt if they are stuck
+                        TimerEntity(lambda: pygame.event.post(pygame.event.Event(SPAWN_ENTITIES_EVENT, {"entities": [
+                            TextBox([
+                                "You're still here?",
+                                "Remember, our passengers are counting on you!",
+                                "You can use [ENTER] to toggle your magnet...",
+                                "...and toggle gravity using these blue buttons.",
+                                "Please hurry and fix the thruster.",
+                            ], config.font, 5000, 30, (40, 110))
+                        ]})), 120000),
+                    ]})), 18000),
+                ]})), 45000),
+            ]})), 4000),
         ]})), 4000),
 
         # UI entities go last so they render on top
