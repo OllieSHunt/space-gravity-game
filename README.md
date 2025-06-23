@@ -14,8 +14,8 @@ To run this project, just execute the `main.py` file after installing the necess
 - I did not use ChatGPT or other ai in this project
 
 # Dependencies
-- Python 3.10 minimum
-- Pygame
-- Pymunk
-- pytmx
-- shapely
+- Python - 3.10 minimum
+- Pygame - tested on 2.6.1
+- Pymunk - tested on 6.11.1, has issues running on newer versions
+- pytmx - tested on 3.32
+- shapely - tested on 2.0.7
